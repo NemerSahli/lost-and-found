@@ -3,8 +3,9 @@ import React from 'react';
 export default function Instrunctions() {
   return (
     <div>
+      <h1>Lost and found final year project</h1>
       <ol>
-        please follow the instructions:
+        please follow these instructions:
         <li>
           <p>clone this repository from master branch by:</p>
           <p>
