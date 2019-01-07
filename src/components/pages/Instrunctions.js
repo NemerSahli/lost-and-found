@@ -63,6 +63,32 @@ export default function Instrunctions() {
           </ul>
         </li>
       </ol>
+      <h1>More instrunctions</h1>
+      <ol>
+        <li>
+          <p>to know which branch you are :</p>
+          <p>git branch</p>
+        </li>
+        <li>
+          <p>to know branches on gitHub:</p> <p>git branch -a</p>
+        </li>
+        <li>
+          <p>please always work on your branch and push to it like this: </p>
+          <p>for example: git push origin Niko1.0</p>
+        </li>
+        <li>
+          <p>
+            please don't change to the branches development-branch or version1.0
+          </p>
+        </li>
+        <li>don't hesitate to ask me for more info.</li>
+        <h3>
+          Note when you follow these instructions we decrease the risks and
+          conflict while merging
+        </h3>
+        <h1>Big Thanks</h1>
+        <h1>Good Luck</h1>
+      </ol>
     </div>
   );
 }
