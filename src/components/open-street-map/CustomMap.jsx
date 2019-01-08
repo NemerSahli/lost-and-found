@@ -42,18 +42,18 @@ export default class CustomMap extends Component {
     lat: 52.520008,
 
     lng: 13.404954,
-    zoom: 10,
+    zoom: 12,
     markers: [
-      {
-        key: 'marker1',
-        position: [52.50856455, 13.410798],
-        children: 'Nemer 0'
-      },
-      {
-        key: 'marker2',
-        position: [52.54856455, 13.380798],
-        children: 'Nemer 1'
-      }
+      // {
+      //   key: 'marker1',
+      //   position: [52.50856455, 13.410798],
+      //   children: 'Nemer 0'
+      // },
+      // {
+      //   key: 'marker2',
+      //   position: [52.54856455, 13.380798],
+      //   children: 'Nemer 1'
+      // }
     ]
   };
 
@@ -100,15 +100,16 @@ export default class CustomMap extends Component {
           markers={this.state.markers}
           removeHandler={this.removeMarker}
         />
-        <CircleMarker
+        {/* <CircleMarker
           center={[52.55856455, 13.450798]}
           color="red"
           radius={15}
           opacity={0.5}
         >
           <Popup>I lost something here!!!</Popup>
-        </CircleMarker>
-        <Circle center={[52.55856455, 13.460798]} fillColor="blue" radius={200}>
+        </CircleMarker> */}
+
+        <Circle center={[52.520008, 13.404954]} fillColor="blue" radius={500}>
           <Popup>
             {' '}
             <button onClick={this.removeMarker}>x</button>I lost something here
