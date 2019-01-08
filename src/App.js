@@ -5,6 +5,8 @@ import About from './components/pages/About';
 import NotFound from './components/pages/NotFound';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Instructions from './components/pages/Instrunctions';
+import ItemDetails from './components/pages/ItemDetails';
+
 class App extends Component {
   render() {
     return (
@@ -12,6 +14,8 @@ class App extends Component {
         <div className="container">
           <Switch>
             <Route exact path="/" component={Instructions} />
+
+            <Route exact path="/itemdetails" component={ItemDetails} />
             <Route path="/about" component={About} />
             <Route component={NotFound} />
           </Switch>
