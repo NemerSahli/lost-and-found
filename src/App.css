@@ -1,0 +1,804 @@
+body {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+}
+
+.body-content {
+  max-width: 1000px;
+  /* margin: 0px auto; */
+  margin-top: 80px;
+}
+
+.header {
+  width: 100%;
+  border-bottom: 1px solid rgba(139, 137, 137, 0.274);
+  box-shadow: 0px 0px 0px 0px rgb(100, 100, 100);
+  background-color: #ffffff;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/*Ribo suggestions 1.0 start*/
+
+.firstPage {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  /* border: 2px solid blue; */
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  left: 0%;
+  /* transform:translate(-50%,-50%); */
+}
+
+.firstPageLeft {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #adadad;
+  top: 0%;
+  left: 0%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.firstPageRight {
+  display: flex;
+  position: absolute;
+  background-color: #999999;
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  left: 0%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.insertItem {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  /* border: 2px solid blue; */
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  left: 0%;
+  background-color: #e9e9e9;
+  /* transform:translate(-50%,-50%); */
+}
+/*Ribo suggestions 1.0 end ------------- */
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  /* border: 1px solid rgb(182, 179, 179); */
+}
+.item-details {
+  overflow: hidden;
+  height: 100%;
+}
+.item-details-map {
+  height: 500px;
+}
+.big-map {
+  height: 800px;
+}
+.search {
+  margin-bottom: 10px;
+}
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.navbar {
+  position: absolute;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: black;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.image-fit {
+  object-fit: cover;
+}
+
+.no-underline:hover,
+.no-underline {
+  text-decoration: none;
+  color: #0c0c0c;
+}
+
+@media only screen and (max-width: 900px) {
+  .filterMenu {
+    background-color: lightblue;
+  }
+}
+.fuburo-logo{
+  height: 45px;
+  width:auto;
+}
+@media only screen and (max-width: 600px) {
+  #send-message-body-id {
+    /* margin-top: 300px; */
+    z-index: 999;
+  }
+  .fuburo-logo{
+    height: 35px;
+    width: auto;
+  }
+  .footer {
+    display: none;
+  }
+}
+
+/* === PROFILE CSS STARTS by DAMIR === */
+/**
+* Panels
+*/
+/*** General styles ***/
+.panel {
+  box-shadow: none;
+}
+.panel-heading {
+  border-bottom: 0;
+}
+.panel-title {
+  font-size: 17px;
+  text-transform: uppercase;
+}
+
+.panel-title > small {
+  font-size: 0.75em;
+  color: #999999;
+}
+.panel-body *:first-child {
+  margin-top: 0;
+}
+.panel-footer {
+  border-top: 0;
+}
+
+.panel-default > .panel-heading {
+  color: #333333;
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+/**
+* Profile
+*/
+/*** Profile: Header  ***/
+
+.profile__avatar {
+  float: left;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 20px;
+  overflow: hidden;
+  /* position: relative; */
+}
+
+@media (min-width: 768px) {
+  .profile__avatar {
+    width: 100px;
+    height: 100px;
+    z-index: 2;
+    /* position: relative; */
+  }
+}
+.profile__avatar > img {
+  width: 100%;
+  height: auto;
+  z-index: 1;
+  /* position: relative; */
+}
+.profile__header {
+  overflow: hidden;
+}
+.profile__header p {
+  margin: 20px 0;
+}
+.profile__header small {
+  text-transform: lowercase;
+  font-size: 15px;
+  color: #999999;
+  position: relative;
+}
+/*** Profile: Table ***/
+@media (min-width: 992px) {
+  .profile__table tbody th {
+    width: 200px;
+  }
+}
+/*** Profile: Recent activity ***/
+.profile-comments__item {
+  position: relative;
+  padding: 15px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.profile-comments__item:last-child {
+  border-bottom: 0;
+}
+.profile-comments__item:hover,
+.profile-comments__item:focus {
+  background-color: #f5f5f5;
+}
+.profile-comments__item:hover .profile-comments__controls,
+.profile-comments__item:focus .profile-comments__controls {
+  visibility: visible;
+}
+
+/* Collapse HELP list start */
+.fa-arrow-down,
+.fa-arrow-up {
+  width: 100%;
+  text-align: center;
+  height: 50px;
+  vertical-align: baseline; /* never works! how?*/
+}
+
+.profile-collapse__item {
+  position: relative;
+  padding: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.profile-collapse__item:last-child {
+  border-bottom: 0;
+}
+.profile-collapse__item:hover,
+.profile-collapse__item:focus {
+  background-color: #f5f5f5;
+}
+.profile-collapse__item:hover .profile-collapse__controls,
+.profile-collapse__item:focus .profile-collapse__controls {
+  visibility: visible;
+}
+/* Collapse HELP list end */
+
+.profile-comments__controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  visibility: hidden;
+}
+.profile-comments__controls > a {
+  display: inline-block;
+  padding: 2px;
+  color: #999999;
+}
+.profile-comments__controls > a:hover,
+.profile-comments__controls > a:focus {
+  color: #333333;
+}
+.profile-comments__avatar {
+  display: block;
+  float: left;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile-comments__avatar > img {
+  width: 100%;
+  height: auto;
+}
+.profile__avatar_conversation {
+  float: right;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile__avatar_conversation > img {
+  width: 100%;
+  height: auto;
+}
+.profile-comments__body {
+  overflow: hidden;
+}
+.profile-comments__sender {
+  color: #333333;
+  font-weight: 500;
+  margin: 5px 0;
+}
+
+.profile-comments__sender > a {
+  color: rgb(202, 87, 79);
+}
+
+.profile-comments__sender > small {
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #999999;
+}
+@media (max-width: 767px) {
+  .profile-comments__sender > small {
+    display: block;
+    margin: 5px 0 10px;
+  }
+}
+.profile-comments__content {
+  color: #999999;
+}
+/*** Profile: Contact ***/
+.profile__contact-btn {
+  padding: 12px 20px;
+  margin-bottom: 20px;
+}
+
+.profile__contact-hr {
+  position: relative;
+  border-color: rgba(0, 0, 0, 0.1);
+  margin: 40px 0;
+}
+.profile__contact-hr:before {
+  content: 'OR';
+  display: block;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #f5f5f5;
+  color: #c6c6cc;
+}
+.profile__contact-info-item {
+  margin-bottom: 30px;
+}
+.profile__contact-info-item:before,
+.profile__contact-info-item:after {
+  content: ' ';
+  display: table;
+}
+.profile__contact-info-item:after {
+  clear: both;
+}
+.profile__contact-info-item:before,
+.profile__contact-info-item:after {
+  content: ' ';
+  display: table;
+}
+.profile__contact-info-item:after {
+  clear: both;
+}
+.profile__contact-info-icon {
+  float: left;
+  font-size: 18px;
+  color: #999999;
+}
+.profile__contact-info-body {
+  overflow: hidden;
+  padding-left: 20px;
+  color: #999999;
+}
+.profile__contact-info-body a {
+  color: #999999;
+}
+.profile__contact-info-body a:hover,
+.profile__contact-info-body a:focus {
+  color: #999999;
+  text-decoration: none;
+}
+.profile__contact-info-heading {
+  margin-top: 2px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #999999;
+}
+
+/***** Edit profile start *****/
+
+/* This part in css to round the image of the item and the article beside */
+.itemInversePair {
+  border: 1px solid rgb(216, 215, 215);
+  display: inline-block;
+  position: relative;
+  height: 100px;
+  text-align: center;
+
+  vertical-align: middle;
+}
+
+#item-image {
+  width: 100px;
+  border-radius: 50px;
+  background: grey;
+  z-index: 1;
+}
+
+/* === PROFILE CSS ENDS by DAMIR === */
+
+/* === FOOTER CSS START by DAMIR === */
+
+footer {
+  background-color: #dcdcdc;
+  padding: 20px 0px;
+  min-height: 250px;
+  margin-top: 250px;
+  position: relative;
+  /* bottom: 0;
+  left: 0; */
+  width: 100%;
+  clear: both;
+}
+
+footer .fa:hover {
+  color: #675f5f;
+}
+
+.adress span,
+.contact span,
+.social span,
+.header-form {
+  color: #675f5f;
+  font-weight: 800;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: block;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+
+.adress li p,
+.contact li a,
+.social li a {
+  color: #675f5f;
+  letter-spacing: 2px;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.adress,
+.contact,
+.social {
+  list-style: none;
+}
+
+.social li {
+  float: left;
+}
+
+.fa {
+  color: #9c9c9c;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+/* === FOOTER CSS END by DAMIR === */
+
+/* MAIN PAGE ITEMS TRY STARTS */
+.ion-minus {
+  padding: 0px 10px;
+}
+
+.blog .blog-column a {
+  color: #5db4c0;
+  text-decoration: none;
+}
+
+.blog span {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.blog .blog-detail {
+  margin-top: 10px;
+}
+
+.fa.fa-user,
+.fa.fa-clock-o {
+  padding-right: 10px;
+  color: #909090;
+  font-size: 11px;
+}
+/* ############################################################### */
+/* MAIN PAGE ITEMS TRY ENDS */
+#item-body {
+  width: 90%;
+  /* need to play with margin/padding adjustment
+     based on your desired "gap" */
+  padding-left: 30px;
+  margin-left: -27px;
+  /* real borders */
+  border-left: none;
+  -webkit-border-top-right-radius: 7px;
+  -webkit-border-bottom-right-radius: 7px;
+  -moz-border-radius-topright: 7px;
+  -moz-border-radius-bottomright: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  /* the inverse circle "cut" */
+  background-image: -moz-radial-gradient(
+    -23px 50%,
+    the -23px left position varies by your 'gap' circle closest-corner,
+    keep radius to half height transparent 0,
+    transparent at center transparent 55px,
+    transparent at edge of gap rgb(179, 179, 179) 56px,
+    start circle 'border' rgb(153, 152, 152) 57px end circle border and begin
+      color of rest of background
+  );
+  /* background-image: -webkit-radial-gradient(
+    -23px 50%,
+    circle closest-corner,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 55px,
+    black 56px,
+    grey 57px
+  ); */
+  /* background-image: -ms-radial-gradient(
+    -23px 50%,
+    circle closest-corner,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 55px,
+    black 56px,
+    grey 57px
+  ); */
+  /* background-image: -o-radial-gradient(
+    -23px 50%,
+    circle closest-corner,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 55px,
+    black 56px,
+    grey 57px
+  ); */
+  background-image: radial-gradient(
+    -23px 50%,
+    circle closest-corner,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 55px,
+    black 56px,
+    rgb(255, 255, 255) 57px
+  );
+}
+/* ################################################################### */
+.left-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -20px;
+  right: auto;
+  top: 10px;
+  bottom: auto;
+  border: 10px solid;
+  border-color: #f5f5f5 #f5f5f5 transparent transparent;
+}
+
+.right-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -20px;
+  top: 10px;
+  bottom: auto;
+  border: 10px solid;
+  border-color: #f5f5f5 transparent transparent #f5f5f5;
+}
+/* ################################################################## */
+
+/* Team Component by damir starts */
+
+.header-team {
+  margin-top: 120px;
+}
+
+.body-team i {
+  font-size: 25px;
+}
+.body-team i:hover {
+  transition: 300ms;
+  color: #d9534f;
+}
+
+.member-card {
+  margin: 0 0px 20px 0;
+}
+
+.member-image {
+  width: 150px;
+  height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  object-fit: cover;
+  margin-top: 15px;
+  filter: grayscale(100%);
+  filter: gray;
+  transition: 1500ms;
+  border-radius: 50%;
+  overflow: visible;
+}
+
+.member-image:hover {
+  transition: 400ms;
+  filter: grayscale(0%);
+  filter: gray;
+}
+
+@media (min-width: 768px) {
+  .member-image-2 {
+    width: 100px;
+    height: 100px;
+    z-index: 2;
+    /* position: relative; */
+  }
+}
+
+.member_info {
+  padding: 20px 0 10px 10px;
+  margin: 0px;
+  font-size: 25px;
+}
+
+.member-card small {
+  text-transform: uppercase;
+}
+
+/* Team Component by damir ends */
+
+/* to make login spinner */
+
+/* spinner-3 styles */
+
+.spinners {
+  margin-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.spinners .spinner-block {
+  width: 125px;
+  text-align: center;
+  margin-right: 83px;
+}
+.spinners .spinner-block:nth-child(5n) {
+  margin-right: 0px;
+}
+.spinners .spinner-block h2 {
+  font-family: 'Pacifico', cursive;
+  font-size: 17px;
+  color: #212121;
+  margin-bottom: 20px;
+}
+
+/* YOU NEED THESE STYLES */
+/* spinner style */
+.spinner {
+  position: relative;
+  width: 125px;
+  height: 125px;
+}
+.spinner:before,
+.spinner:after {
+  content: '';
+  display: block;
+  position: absolute;
+  border-width: 4px;
+  border-style: solid;
+  border-radius: 50%;
+}
+@-webkit-keyframes scale-2 {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+@keyframes scale-2 {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+.spinner.spinner-3:before {
+  width: 117px;
+  height: 117px;
+  border-color: #212121;
+  top: 0px;
+  left: 0px;
+  -webkit-animation: scale-2 2s linear 0s infinite;
+  animation: scale-2 2s linear 0s infinite;
+}
+.spinner.spinner-3:after {
+  width: 117px;
+  height: 117px;
+  border-color: #212121;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-animation: scale-2 2s linear 0.5s infinite;
+  animation: scale-2 2s linear 0.5s infinite;
+}
+.marker-spinner {
+  /* display: flex; */
+  position: relative;
+  top: -18px;
+  left: -5px;
+  z-index: 999;
+}
+.map_bg {
+  background-image: url('/images/berlin_bg.png');
+  background-size: cover;
+  /* background: red; */
+}
+/* end of login spiner */
