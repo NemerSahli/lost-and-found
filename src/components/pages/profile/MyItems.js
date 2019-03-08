@@ -22,34 +22,44 @@ class MyItems extends Component {
       <div>
         <h5 className="text-center">My Items History:</h5>
         <hr />
-
+        <Table striped>
+          <tr>
+            <td>
+              <b>Image</b>
+            </td>
+            <td>
+              <b>Title</b>
+            </td>
+            <td>
+              <b>Type</b>
+            </td>
+            <td>
+              <b>Time</b>
+            </td>
+            <td>
+              <b>Date</b>
+            </td>
+            <td>
+              <b>Active</b>
+            </td>
+          </tr>
+          <tbody>
+            {this.props.myItems &&
+              this.props.myItems.map((item, i) => {
+                if (i <=3) {
+                  return <ItemProfile key={item._id} item={item} />;
+                }
+              })}
+          </tbody>
+        </Table>
         <Collapse isOpen={this.state.collapse}>
           <Table striped>
-            <tr>
-              <td>
-                <b>Image</b>
-              </td>
-              <td>
-                <b>Title</b>
-              </td>
-              <td>
-                <b>Type</b>
-              </td>
-              <td>
-                <b>Time</b>
-              </td>
-              <td>
-                <b>Date</b>
-              </td>
-              <td>
-                <b>Active</b>
-              </td>
-            </tr>
-
             <tbody>
               {this.props.myItems &&
-                this.props.myItems.map(item => {
-                  return <ItemProfile key={item._id} item={item} />;
+                this.props.myItems.map((item, i) => {
+                  if (i > 3) {
+                    return <ItemProfile key={item._id} item={item} />;
+                  }
                 })}
             </tbody>
           </Table>

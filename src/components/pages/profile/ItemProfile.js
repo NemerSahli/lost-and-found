@@ -31,7 +31,12 @@ class ItemProfile extends Component {
           <i className="fas fa-check-circle text-success" />
         </td>
         <td>
-          <i class="far fa-stop-circle cursor-pointer" />
+          <i
+            class="far fa-stop-circle cursor-pointer"
+            onClick={() => {
+              alert('are you sure, want to stop this item');
+            }}
+          />
         </td>
       </tr>
     );
