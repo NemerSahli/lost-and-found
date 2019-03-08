@@ -31,7 +31,6 @@ class ItemProfile extends Component {
           <i className="fas fa-check-circle text-success" />
         </td>
         <td>
-          <i class="far fa-pause-circle mr-2 cursor-pointer" />
           <i class="far fa-stop-circle cursor-pointer" />
         </td>
       </tr>
