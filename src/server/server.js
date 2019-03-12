@@ -47,6 +47,22 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
+app.use(cors(corsOptions));
+let loggedInUser = '';
+
+// authentication function
+const auth = (req, res, next) => {
+  console.log(req.session.user);
+  console.log(req.session.admin);
+
+  if (req.session && req.session.user === loggedInUser && req.session.admin) {
+    console.log('wowww....');
+    return next();
+  } else {
+    return res.sendStatus(401);
+  }
+};
+
 // file upload middleware
 app.use(fileUpload());
 
