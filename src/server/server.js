@@ -8,7 +8,7 @@ const error = require('./error');
 const passport = require('passport');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
-const { ensureAutenticated } = require('./config/auth');
+// const { ensureAutenticated } = require('./config/auth');
 const cors = require('cors');
 const randomstring = require('randomstring');
 const ImageDataURI = require('image-data-uri');
@@ -27,7 +27,7 @@ if (config.mode === 'production') {
 }
 
 // Passport config
-require('./config/passport')(passport);
+// require('./config/passport')(passport);
 
 // Connect to Mongo
 mongoose
@@ -71,8 +71,16 @@ const auth = (req, res, next) => {
 app.use(fileUpload());
 
 // Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+app.use(
+  session({
+    secret: 'mySecretKey',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
 // Async Error Handle
 app.use(error);
