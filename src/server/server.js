@@ -15,6 +15,8 @@ const ImageDataURI = require('image-data-uri');
 const fileUpload = require('express-fileupload');
 var bodyParser = require('body-parser');
 const fs = require('fs');
+const cookieParser = require('cookie-parser');
+
 const config = require('../config');
 
 var path = '';
@@ -46,6 +48,8 @@ app.use(cors(corsOptions));
 // to extend the req.body limit size
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+app.use(cookieParser());
 
 app.use(cors(corsOptions));
 let loggedInUser = '';
