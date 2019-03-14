@@ -56,8 +56,8 @@ let loggedInUser = '';
 
 // authentication function
 const auth = (req, res, next) => {
-  console.log(req.session.user);
-  console.log(req.session.admin);
+  console.log(req.session);
+  console.log(req.session);
 
   if (req.session && req.session.user === loggedInUser && req.session.admin) {
     console.log('wowww....');
@@ -167,6 +167,10 @@ app.post('/login', (req, res, next) => {
     bcrypt.compare(password, user.password, (err, isMatch) => {
       if (err) throw err;
       if (isMatch) {
+        loggedInUser = email;
+        req.session.user = loggedInUser;
+        req.session.admin = true;
+
         return res.send({ error: 0, loggedInUser: user });
       } else {
         return res.send({ error: 1001, message: 'Incorrect password' });
