@@ -46,8 +46,8 @@ export const addItem = (newItem, routeTo) => dispatch => {
     data: newItem,
     headers: {
       'Content-Type': 'application/json'
-    }
-    // withCredentials: true
+    },
+    withCredentials: true
   })
     .then(response => {
       if (response.data.error === 0) {
