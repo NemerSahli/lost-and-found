@@ -42,12 +42,11 @@ export const addItem = (newItem, routeTo) => dispatch => {
   axios({
     method: 'post',
     url: window.lofoBackend + '/addItem',
-
     data: newItem,
+    withCredentials: true,
     headers: {
       'Content-Type': 'application/json'
-    },
-    withCredentials: true
+    }
   })
     .then(response => {
       if (response.data.error === 0) {

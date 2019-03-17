@@ -8,14 +8,13 @@ const error = require('./error');
 const passport = require('passport');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
-// const { ensureAutenticated } = require('./config/auth');
 const cors = require('cors');
 const randomstring = require('randomstring');
 const ImageDataURI = require('image-data-uri');
-const fileUpload = require('express-fileupload');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
+let loggedInUser = '';
 
 const config = require('../config');
 
@@ -25,9 +24,6 @@ if (config.mode === 'production') {
 } else {
   path = './public/images/';
 }
-
-// Passport config
-// require('./config/passport')(passport);
 
 // Connect to Mongo
 mongoose
@@ -42,6 +38,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
   credentials: true
 };
+
 // cors middleware
 app.use(cors(corsOptions));
 
@@ -50,29 +47,6 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(cookieParser());
-
-app.use(cors(corsOptions));
-let loggedInUser = '';
-
-// authentication function
-const auth = (req, res, next) => {
-  console.log(req.session);
-  console.log(req.session);
-
-  if (req.session && req.session.user === loggedInUser && req.session.admin) {
-    console.log('wowww....');
-    return next();
-  } else {
-    return res.sendStatus(401);
-  }
-};
-
-// file upload middleware
-app.use(fileUpload());
-
-// Passport middleware
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 app.use(
   session({
@@ -84,6 +58,19 @@ app.use(
 
 // Async Error Handle
 app.use(error);
+
+// authentication function
+const auth = (req, res, next) => {
+  console.log(req.session.user);
+  console.log(req.session.admin);
+
+  if (req.session && req.session.user === loggedInUser && req.session.admin) {
+    console.log('wowww....');
+    return next();
+  } else {
+    return res.sendStatus(401);
+  }
+};
 
 app.get('/', (req, res) => {
   res.json({ info: 'lost&found version1.0' });
@@ -154,10 +141,7 @@ app.post('/register', (req, res) => {
 // Login Handle
 app.post('/login', (req, res, next) => {
   const { email, password } = req.body;
-  // passport.authenticate('local', {
-  //   successRedirect: '/loginuser',
-  //   failureRedirect: '/'
-  // })(req, res, next);
+
   User.findOne({ email: email }).then(user => {
     if (!user) {
       return res.send({ error: 1000, message: 'That email is not registered' });
@@ -170,7 +154,6 @@ app.post('/login', (req, res, next) => {
         loggedInUser = email;
         req.session.user = loggedInUser;
         req.session.admin = true;
-
         return res.send({ error: 0, loggedInUser: user });
       } else {
         return res.send({ error: 1001, message: 'Incorrect password' });
