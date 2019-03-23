@@ -248,6 +248,7 @@ app.get('/items/:id', async (req, res) => {
   });
 });
 
+//update user need auth
 app.put('/updateuser/:id', async (req, res) => {
   const newData = req.body;
   let id = req.params.id;
