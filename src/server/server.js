@@ -169,7 +169,7 @@ app.get('/logout', (req, res) => {
 });
 
 // add item either its lost or fontLanguageOverride
-app.post('/addItem', async (req, res) => {
+app.post('/addItem', auth, async (req, res) => {
   var newItem = new Item(req.body);
   var imageData = req.body.image;
 

@@ -12,8 +12,8 @@ export const logIn = loginUser => async dispatch => {
   try {
     const result = await axios(window.lofoBackend + '/login', {
       method: 'post',
-      data: loginUser
-      // withCredentials: true
+      data: loginUser,
+      withCredentials: true
     });
     // console.log(result);
     if (result.data.error === 0) {
