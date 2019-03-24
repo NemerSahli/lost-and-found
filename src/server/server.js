@@ -164,7 +164,7 @@ app.post('/login', (req, res, next) => {
 
 // Logout Handle
 app.get('/logout', (req, res) => {
-  // req.logout();
+  req.session.destroy();
   res.send({ error: 0, message: 'You are loged out' });
 });
 
@@ -237,7 +237,7 @@ app.get('/itemList', async (req, res) => {
   });
 });
 
-app.get('/items/:id', async (req, res) => {
+app.get('/items/:id', auth, async (req, res) => {
   if (!req.params.id) {
     return res.send({ error: 1000, message: 'id is required!' });
   }
@@ -276,7 +276,7 @@ app.put('/updateuser/:id', auth, async (req, res) => {
 // sender, reciever and the item if there is
 // convesation opened then using the convesationPort
 // else create one by randomstring.generate
-app.post('/message',auth, async (req, res) => {
+app.post('/message', auth, async (req, res) => {
   let query = {
     //here the condition of both users and the item
     $or: [
@@ -323,7 +323,7 @@ app.post('/message',auth, async (req, res) => {
 // to get all last messages from different users to show them in
 // a list showing the sender, time, date and part of the message,
 //
-app.get('/conversationitems/:id', async (req, res) => {
+app.get('/conversationitems/:id', auth, async (req, res) => {
   await Message.aggregate([
     {
       $match: {
@@ -419,7 +419,7 @@ app.get('/conversationitems/:id', async (req, res) => {
 //==============================================
 // Loading all messages has been sent from one convesation port
 // get the sender name, reciever name and item name by populate.
-app.get('/load/dialogue/messages/:port', async (req, res) => {
+app.get('/load/dialogue/messages/:port', auth, async (req, res) => {
   await Message.findOne({ conversationPort: req.params.port })
     .populate('fromUserId', 'firstName')
     .populate('toUserId', 'firstName')

@@ -35,8 +35,8 @@ export const loadConversationItems = loggedInUserId => async dispatch => {
   try {
     const response = await axios({
       method: 'get',
-      url: window.lofoBackend + '/conversationitems/' + loggedInUserId
-      // withCredentials: true
+      url: window.lofoBackend + '/conversationitems/' + loggedInUserId,
+      withCredentials: true
     });
     if (response.data) {
       dispatch({
@@ -54,8 +54,8 @@ export const loadDialogueMessages = conversationPort => async dispatch => {
   try {
     const response = await axios({
       method: 'get',
-      url: window.lofoBackend + '/load/dialogue/messages/' + conversationPort
-      // withCredentials: true
+      url: window.lofoBackend + '/load/dialogue/messages/' + conversationPort,
+      withCredentials: true
     });
     if (response.data) {
       // console.log('response', response.data);
