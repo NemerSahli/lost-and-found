@@ -248,8 +248,8 @@ app.get('/items/:id', async (req, res) => {
   });
 });
 
-//update user need auth
-app.put('/updateuser/:id', async (req, res) => {
+//update user with auth authentication
+app.put('/updateuser/:id', auth, async (req, res) => {
   const newData = req.body;
   let id = req.params.id;
   let newUpdate;
@@ -276,7 +276,7 @@ app.put('/updateuser/:id', async (req, res) => {
 // sender, reciever and the item if there is
 // convesation opened then using the convesationPort
 // else create one by randomstring.generate
-app.post('/message', async (req, res) => {
+app.post('/message',auth, async (req, res) => {
   let query = {
     //here the condition of both users and the item
     $or: [

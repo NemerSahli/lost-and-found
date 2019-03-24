@@ -9,8 +9,8 @@ export const sendMessage = (
     const response = await axios({
       method: 'post',
       url: window.lofoBackend + '/message',
-      data: newMessage
-      // withCredentials: true
+      data: newMessage,
+      withCredentials: true
     });
     if (response.data.error === 0) {
       // console.log('response', response.data);

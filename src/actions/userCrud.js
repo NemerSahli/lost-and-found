@@ -5,8 +5,8 @@ export const updateProfile = (newDataUser, id, route) => dispatch => {
   axios({
     method: 'put',
     url: window.lofoBackend + '/updateuser/' + id,
-    data: newDataUser
-    // withCredentials: true
+    data: newDataUser,
+    withCredentials: true
   })
     .then(response => {
       if (response.data.error === 0) {
