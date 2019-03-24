@@ -13,7 +13,9 @@ const randomstring = require('randomstring');
 const ImageDataURI = require('image-data-uri');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+
 let loggedInUser = '';
 
 const config = require('../config');
@@ -55,6 +57,9 @@ app.use(
     saveUninitialized: true
   })
 );
+
+// file upload middleware
+app.use(fileUpload());
 
 // Async Error Handle
 app.use(error);

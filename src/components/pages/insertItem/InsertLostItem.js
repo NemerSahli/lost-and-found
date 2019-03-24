@@ -97,7 +97,7 @@ class InsertLostItem2 extends Component {
         this.state.pictures[0].name
       );
       data.append('newItem', JSON.stringify(newItem));
-
+      
       axios(window.lofoBackend + '/add/lost/item', {
         method: 'post',
         headers: {
