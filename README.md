@@ -1,13 +1,11 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#Fuburo: lost and found office online
 
-## Available Scripts
+![https://fuburo.de](https://fuburo.de)
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Web app to report lost or found items and locate them on map.
+- Designed and implemented web views used ReactJS components, HTML5, CSS3, leaflet.
+- Designed and implemented map view using OpenStreetMap and Leaflet.
+- Used redux thunk middleware to bind data returned by js middleware to the web views
+  components and Axios for JS middleware.
+- Designed and implemented CRUD REST API using ExpressJS routes on NodeJS and
+  Mongoose Schema and MongoDB.
