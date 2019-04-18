@@ -1,4 +1,4 @@
-#Fuburo: lost and found office online
+# Fuburo: lost and found office online
 
 [https://fuburo.de](https://fuburo.de)
 
