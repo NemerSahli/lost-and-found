@@ -20,6 +20,7 @@
     "fs": "0.0.1-security",
     "image-data-uri": "^2.0.0",
     "leaflet": "^1.4.0",
+    "lodash": "^4.17.11",
     "mdbreact": "^4.8.7",
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.3",
