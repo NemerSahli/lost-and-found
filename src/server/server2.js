@@ -4,6 +4,7 @@ const config = require('config');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const users = require('./routes/users');
+const items = require('./routes/items');
 
 const app = express();
 
@@ -20,16 +21,16 @@ const corsOptions = {
 };
 
 mongoose
-  .connect('mongodb://localhost/registick', { useNewUrlParser: true })
+  .connect('mongodb://localhost/item_list', { useNewUrlParser: true })
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...'));
 
 // cors middleware
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use('/users', users);
-app.use('/items', items);
-app.use('/messages', messages);
+app.use('/api/user', users);
+app.use('/api/items', items);
+// app.use('/messages', messages);
 
 const port = config.PORT || 8000;
 app.listen(port, () => {

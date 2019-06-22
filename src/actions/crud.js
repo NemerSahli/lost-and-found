@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const loadItems = () => async dispatch => {
   try {
-    const result = await axios(window.lofoBackend + '/itemList', {
+    const result = await axios(window.lofoBackend + '/api/items/itemList', {
       method: 'get'
       // withCredentials: true
     });

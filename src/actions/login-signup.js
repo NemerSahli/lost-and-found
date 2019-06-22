@@ -10,7 +10,7 @@ export const closeLoginSignUpModal = () => dispatch => {
 
 export const logIn = loginUser => async dispatch => {
   try {
-    const result = await axios(window.lofoBackend + '/login', {
+    const result = await axios(window.lofoBackend + '/api/user/login', {
       method: 'post',
       data: loginUser,
       withCredentials: true
@@ -32,7 +32,7 @@ export const logIn = loginUser => async dispatch => {
 export const logOut = () => async dispatch => {
   try {
     dispatch({ type: 'LOGOUT' });
-    const res = await axios(window.lofoBackend + '/logout', {
+    const res = await axios(window.lofoBackend + '/api/user/logout', {
       method: 'get'
       // withCredentials: true
     });
@@ -48,7 +48,7 @@ export const logOut = () => async dispatch => {
 
 export const signUp = (signUpUser, routeTo) => async dispatch => {
   try {
-    const result = await axios(window.lofoBackend + '/register', {
+    const result = await axios(window.lofoBackend + '/api/user/register', {
       method: 'post',
       data: signUpUser,
       withCredentials: true
@@ -70,7 +70,7 @@ export const displaySignUpSuccess = () => dispatch => {
 
 export const forgetPassword = (forgetPassUser, routeTo) => async dispatch => {
   try {
-    const result = await axios(window.lofoBackend + '/forgetpass', {
+    const result = await axios(window.lofoBackend + '/api/user/forgetpass', {
       method: 'post',
       data: forgetPassUser,
       withCredentials: true
@@ -89,7 +89,7 @@ export const forgetPassword = (forgetPassUser, routeTo) => async dispatch => {
 
 export const resetPassword = (forgetPassUser, routeTo) => async dispatch => {
   try {
-    const result = await axios(window.lofoBackend + '/resetpass', {
+    const result = await axios(window.lofoBackend + '/api/user/resetpass', {
       method: 'post',
       data: forgetPassUser,
       withCredentials: true
