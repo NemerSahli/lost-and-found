@@ -10,16 +10,18 @@ export const closeLoginSignUpModal = () => dispatch => {
 
 export const logIn = loginUser => async dispatch => {
   try {
-    const result = await axios(window.lofoBackend + '/api/user/login', {
+    const response = await axios(window.lofoBackend + '/api/user/login', {
       method: 'post',
       data: loginUser,
       withCredentials: true
     });
-    // console.log(result);
-    if (result.data.error === 0) {
-      dispatch({ type: 'LOGIN', payload: result.data.loggedInUser });
+    // console.log(response);
+    if (response.data.error === 0) {
+      dispatch({ type: 'LOGIN', payload: response.data.loggedInUser });
+      localStorage.setItem('token', response.data.tokenId);
+      localStorage.setItem('userId', response.data.loggedInUser._id);
     } else {
-      dispatch({ type: 'LOGIN_FAILD', error: result.data.message });
+      dispatch({ type: 'LOGIN_FAILD', error: response.data.message });
     }
   } catch (e) {
     dispatch({

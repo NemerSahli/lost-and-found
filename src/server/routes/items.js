@@ -37,7 +37,7 @@ router.post('/addItem', auth, async (req, res) => {
   });
 });
 
-router.get('/my/items/:id', async (req, res) => {
+router.get('/my/items/:id',auth, async (req, res) => {
   if (!req.params.id) {
     return res.send({ error: 1000, message: 'id is required!' });
   }

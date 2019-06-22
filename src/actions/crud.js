@@ -22,10 +22,20 @@ export const loadItems = () => async dispatch => {
 
 export const loadMyItems = id => async dispatch => {
   try {
-    const result = await axios(window.lofoBackend + '/api/items/my/items/' + id, {
-      method: 'get',
-      withCredentials: true
-    });
+    let token = localStorage.getItem('token');
+    alert(token);
+    console.log(token);
+    const result = await axios(
+      window.lofoBackend + '/api/items/my/items/' + id,
+      {
+        method: 'get',
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': token
+        }
+      }
+    );
 
     if (result.data) {
       dispatch({
