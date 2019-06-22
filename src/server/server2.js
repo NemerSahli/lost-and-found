@@ -2,6 +2,7 @@ const express = require('express');
 const appConfig = require('../config');
 const config = require('config');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const users = require('./routes/users');
 const items = require('./routes/items');
@@ -27,6 +28,11 @@ mongoose
 
 // cors middleware
 app.use(cors(corsOptions));
+
+// to extend the req.body limit size
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 app.use(express.json());
 app.use('/api/user', users);
 app.use('/api/items', items);

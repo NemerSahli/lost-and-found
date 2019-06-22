@@ -48,13 +48,15 @@ export const loadMyItems = id => async dispatch => {
 };
 
 export const addItem = (newItem, routeTo) => dispatch => {
+  let token = localStorage.getItem('token');
   axios({
     method: 'post',
-    url: window.lofoBackend + '/addItem',
+    url: window.lofoBackend + '/api/items/addItem',
     data: newItem,
     withCredentials: true,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-auth-token': token
     }
   })
     .then(response => {
@@ -76,7 +78,7 @@ export const loadImage = (imgDataUri, route) => dispatch => {
 export const updateUser = newUser => dispatch => {
   axios({
     method: 'put',
-    url: window.lofoBackend + '/updateuser',
+    url: window.lofoBackend + '/api/user/updateuser',
     data: newUser,
     withCredentials: true
   })
@@ -92,7 +94,7 @@ export const updateUser = newUser => dispatch => {
 };
 
 export const deleteUser = userId => dispatch => {
-  axios(window.lofoBackend + '/deleteuser/' + userId, {
+  axios(window.lofoBackend + '/api/user/deleteuser/' + userId, {
     method: 'delete',
     withCredentials: true
   })

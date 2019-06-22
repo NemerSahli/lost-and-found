@@ -8,7 +8,7 @@ import { addItem } from '../../../actions/crud';
 import ImageUploader from 'react-images-upload';
 import SelectCategory from './SelectCategory';
 
-class InsertLostItem2 extends Component {
+class InsertLostItem extends Component {
   state = {
     name: '', //required
     location: '', //required
@@ -90,6 +90,7 @@ class InsertLostItem2 extends Component {
 
     if (this.state.pictures.length > 0) {
       const data = new FormData();
+
       if (this.state.pictures.length === 0) return;
       data.append(
         'imageFile',
@@ -97,8 +98,9 @@ class InsertLostItem2 extends Component {
         this.state.pictures[0].name
       );
       data.append('newItem', JSON.stringify(newItem));
-      
-      axios(window.lofoBackend + '/add/lost/item', {
+      alert('data' );
+      console.log(JSON.stringify(data));
+      axios(window.lofoBackend + '/api/items/add/lost/item', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
@@ -350,4 +352,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { addItem }
-)(InsertLostItem2);
+)(InsertLostItem);

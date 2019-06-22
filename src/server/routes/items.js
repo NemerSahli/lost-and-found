@@ -1,8 +1,21 @@
 const express = require('express');
+const randomstring = require('randomstring');
+const ImageDataURI = require('image-data-uri');
+const fs = require('fs');
+const fileUpload = require('express-fileupload');
 const Item = require('../schemaModel/itemModel');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const router = express.Router();
+
+const config = require('../../config');
+
+var path = '';
+if (config.mode === 'production') {
+  path = '../../public/images/';
+} else {
+  path = './public/images/';
+}
 
 router.get('/', [auth, admin], (req, res) => {
   res.send({
@@ -35,6 +48,46 @@ router.post('/addItem', auth, async (req, res) => {
     if (err) return res.send(err);
     res.send({ error: 0, item: newItem });
   });
+});
+
+router.post('/add/lost/item', async (req, res) => {
+  console.log(req.body);
+  console.log(req.files);
+
+  var imageUrl = '';
+  if (Object.keys(req.files).length == 0) {
+    imageUrl = 'No_Image_Available.jpg';
+    // console.log('if default', imageUrl);
+  } else {
+    let newImage = req.files.imageFile;
+    if (
+      newImage.mimetype !== 'image/png' &&
+      newImage.mimetype !== 'image/jpeg' &&
+      newImage.mimetype !== 'image/gif'
+    ) {
+      return res.send({ error: 'only files with extention: png, gif, jpeg' });
+    }
+    let imageName = newImage.name.split('.');
+    let imageExtention = imageName[imageName.length - 1];
+    imageUrl = randomstring.generate(10) + '.' + imageExtention;
+
+    fs.writeFileSync(path + imageUrl, newImage.data, err => {
+      if (err) return res.status(500).send(err);
+    });
+  }
+
+  var newItem = new Item(JSON.parse(req.body.newItem));
+
+  newItem.imageUrl = imageUrl;
+  // console.log('imageUrl', newItem.imageUrl);
+  await newItem.save(err => {
+    if (err) return res.send(err);
+    return res.send({ error: 0, item: newItem });
+  });
+  // newImage.mv('./public/images/' + newImage.name, function(err) {
+  //   if (err) return res.status(500).send(err);
+  //   return res.send({ message: 'thank you for your image' });
+  // });
 });
 
 router.get('/my/items/:id',auth, async (req, res) => {
