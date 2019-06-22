@@ -22,7 +22,7 @@ export const loadItems = () => async dispatch => {
 
 export const loadMyItems = id => async dispatch => {
   try {
-    const result = await axios(window.lofoBackend + '/items/' + id, {
+    const result = await axios(window.lofoBackend + '/api/items/my/items/' + id, {
       method: 'get',
       withCredentials: true
     });

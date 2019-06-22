@@ -37,4 +37,16 @@ router.post('/addItem', auth, async (req, res) => {
   });
 });
 
+router.get('/my/items/:id', async (req, res) => {
+  if (!req.params.id) {
+    return res.send({ error: 1000, message: 'id is required!' });
+  }
+
+  await Item.find({ userId: req.params.id }, (err, docs) => {
+    if (err) return res.send(err);
+    return res.send({ items: docs });
+  });
+});
+
+
 module.exports = router;
