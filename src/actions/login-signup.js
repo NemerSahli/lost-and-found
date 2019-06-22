@@ -31,6 +31,32 @@ export const logIn = loginUser => async dispatch => {
   }
 };
 
+export const checkUserAuthenticated = (tokenId, userId) => async dispatch => {
+  try {
+    const response = await axios(
+      window.lofoBackend + '/api/user/login/auth',
+      {
+        method: 'post',
+        withCredentials: true,
+        data: { userId },
+        headers: { 'x-auth-token': tokenId }
+      }
+    );
+    console.log(response);
+    if (response.data.error === 0) {
+      dispatch({ type: 'LOGIN', payload: response.data.loggedInUser });
+    } else {
+      dispatch({ type: 'LOGIN_FAILD', error: response.data.message });
+    }
+  } catch (e) {
+    dispatch({
+      type: 'LOGIN_FAILD',
+      error: 'Error during login, check your connection and try again later'
+    });
+  }
+};
+
+
 export const logOut = () => async dispatch => {
   try {
     dispatch({ type: 'LOGOUT' });
@@ -39,8 +65,9 @@ export const logOut = () => async dispatch => {
       // withCredentials: true
     });
 
-    // console.log(res);
     if (res.data.error === 0) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
       dispatch({ type: 'LOGOUT' });
     }
   } catch (e) {

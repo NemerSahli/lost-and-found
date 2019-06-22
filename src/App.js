@@ -17,6 +17,7 @@ import OpenMap from './components/pages/open-street-map/OpenMap';
 import LoginSingUpModal from './components/pages/login-signup/LoginSingUpModal';
 import Team from './components/layout/Team';
 import { connect } from 'react-redux';
+import { checkUserAuthenticated } from './actions/login-signup';
 import config from './config.json';
 
 class App extends Component {
@@ -24,6 +25,14 @@ class App extends Component {
     super(props);
     window.lofoBackend = config.backend;
     window.lofoHost = config.host;
+  }
+
+  componentDidMount() {
+    let token = localStorage.getItem('token');
+    let userId = localStorage.getItem('userId');
+    if (token && userId) {
+      this.props.checkUserAuthenticated(token, userId);
+    }
   }
 
   render() {
@@ -68,5 +77,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  null
+  {checkUserAuthenticated}
 )(App);

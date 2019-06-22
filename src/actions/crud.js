@@ -23,7 +23,6 @@ export const loadItems = () => async dispatch => {
 export const loadMyItems = id => async dispatch => {
   try {
     let token = localStorage.getItem('token');
-    alert(token);
     console.log(token);
     const result = await axios(
       window.lofoBackend + '/api/items/my/items/' + id,
