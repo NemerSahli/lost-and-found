@@ -6,14 +6,18 @@ export const sendMessage = (
   routeTo
 ) => async dispatch => {
   try {
+    let token = localStorage.getItem('token');
     const response = await axios({
       method: 'post',
       url: window.lofoBackend + '/message',
       data: newMessage,
-      withCredentials: true
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': token
+      }
     });
     if (response.data.error === 0) {
-      // console.log('response', response.data);
       if (messageSource === 'dialogue') {
         dispatch({
           type: 'ADD_NEW_MESSAGE',
@@ -33,10 +37,16 @@ export const sendMessage = (
 
 export const loadConversationItems = loggedInUserId => async dispatch => {
   try {
+    let token = localStorage.getItem('token');
+
     const response = await axios({
       method: 'get',
       url: window.lofoBackend + '/conversationitems/' + loggedInUserId,
-      withCredentials: true
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': token
+      }
     });
     if (response.data) {
       dispatch({
@@ -52,10 +62,15 @@ export const loadConversationItems = loggedInUserId => async dispatch => {
 
 export const loadDialogueMessages = conversationPort => async dispatch => {
   try {
+    let token = localStorage.getItem('token');
     const response = await axios({
       method: 'get',
       url: window.lofoBackend + '/load/dialogue/messages/' + conversationPort,
-      withCredentials: true
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': token
+      }
     });
     if (response.data) {
       // console.log('response', response.data);
