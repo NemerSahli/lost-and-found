@@ -9,6 +9,8 @@ const items = require('./routes/items');
 const fileUpload = require('express-fileupload');
 const app = express();
 
+// check if jwtPrivateKey exported
+// if you get an error please export your jwtPrivateKey
 if (!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.');
   process.exit(1);
