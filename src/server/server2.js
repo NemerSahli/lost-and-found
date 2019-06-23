@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const users = require('./routes/users');
 const items = require('./routes/items');
-
+const fileUpload = require('express-fileupload');
 const app = express();
 
 if (!config.get('jwtPrivateKey')) {
@@ -32,6 +32,9 @@ app.use(cors(corsOptions));
 // to extend the req.body limit size
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+// file upload middleware
+app.use(fileUpload());
 
 app.use(express.json());
 app.use('/api/user', users);

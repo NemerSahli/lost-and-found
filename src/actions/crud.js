@@ -51,7 +51,7 @@ export const addItem = (newItem, routeTo) => dispatch => {
   let token = localStorage.getItem('token');
   axios({
     method: 'post',
-    url: window.lofoBackend + '/api/items/addItem',
+    url: window.lofoBackend + '/api/items/add/item',
     data: newItem,
     withCredentials: true,
     headers: {

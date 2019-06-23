@@ -2,7 +2,6 @@ const express = require('express');
 const randomstring = require('randomstring');
 const ImageDataURI = require('image-data-uri');
 const fs = require('fs');
-const fileUpload = require('express-fileupload');
 const Item = require('../schemaModel/itemModel');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
@@ -32,7 +31,7 @@ router.get('/itemList', (req, res) => {
 });
 
 // add item either its lost or fontLanguageOverride
-router.post('/addItem', auth, async (req, res) => {
+router.post('/add/item', auth, async (req, res) => {
   var newItem = new Item(req.body);
   var imageData = req.body.image;
 
@@ -51,8 +50,8 @@ router.post('/addItem', auth, async (req, res) => {
 });
 
 router.post('/add/lost/item', async (req, res) => {
-  console.log(req.body);
-  console.log(req.files);
+  // console.log(req.files);
+  // console.log(req.body);
 
   var imageUrl = '';
   if (Object.keys(req.files).length == 0) {
@@ -76,7 +75,7 @@ router.post('/add/lost/item', async (req, res) => {
     });
   }
 
-  var newItem = new Item(JSON.parse(req.body.newItem));
+  var newItem = new Item(JSON.parse(req.body.newItem[0]));
 
   newItem.imageUrl = imageUrl;
   // console.log('imageUrl', newItem.imageUrl);
@@ -90,7 +89,7 @@ router.post('/add/lost/item', async (req, res) => {
   // });
 });
 
-router.get('/my/items/:id',auth, async (req, res) => {
+router.get('/my/items/:id', auth, async (req, res) => {
   if (!req.params.id) {
     return res.send({ error: 1000, message: 'id is required!' });
   }
@@ -100,6 +99,5 @@ router.get('/my/items/:id',auth, async (req, res) => {
     return res.send({ items: docs });
   });
 });
-
 
 module.exports = router;
