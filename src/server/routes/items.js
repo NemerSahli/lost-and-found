@@ -30,7 +30,7 @@ router.get('/itemList', (req, res) => {
   });
 });
 
-// add item either its lost or fontLanguageOverride
+// add found item or lost if no image
 router.post('/add/item', auth, async (req, res) => {
   var newItem = new Item(req.body);
   var imageData = req.body.image;
@@ -49,14 +49,11 @@ router.post('/add/item', auth, async (req, res) => {
   });
 });
 
-router.post('/add/lost/item', async (req, res) => {
-  // console.log(req.files);
-  // console.log(req.body);
-
+// add lost item
+router.post('/add/lost/item', auth, async (req, res) => {
   var imageUrl = '';
   if (Object.keys(req.files).length == 0) {
     imageUrl = 'No_Image_Available.jpg';
-    // console.log('if default', imageUrl);
   } else {
     let newImage = req.files.imageFile;
     if (
@@ -75,10 +72,9 @@ router.post('/add/lost/item', async (req, res) => {
     });
   }
 
-  var newItem = new Item(JSON.parse(req.body.newItem[0]));
+  var newItem = new Item(JSON.parse(req.body.newItem));
 
   newItem.imageUrl = imageUrl;
-  // console.log('imageUrl', newItem.imageUrl);
   await newItem.save(err => {
     if (err) return res.send(err);
     return res.send({ error: 0, item: newItem });
@@ -89,6 +85,7 @@ router.post('/add/lost/item', async (req, res) => {
   // });
 });
 
+// get my items
 router.get('/my/items/:id', auth, async (req, res) => {
   if (!req.params.id) {
     return res.send({ error: 1000, message: 'id is required!' });

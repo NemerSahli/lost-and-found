@@ -98,14 +98,15 @@ class InsertLostItem extends Component {
         this.state.pictures[0].name
       );
       data.append('newItem', JSON.stringify(newItem));
-
+      let token = localStorage.getItem('token');
       axios(window.lofoBackend + '/api/items/add/lost/item', {
         method: 'post',
+        data,
+        withCredentials: true,
         headers: {
-          'Content-Type': 'application/json'
-        },
-        data
-        // withCredentials: true
+          'Content-Type': 'application/json',
+          'x-auth-token': token
+        }
       })
         .then(result => {
           if (result.data) {
