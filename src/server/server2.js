@@ -40,9 +40,10 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(fileUpload());
 
 app.use(express.json());
+
 app.use('/api/user', users);
 app.use('/api/items', items);
-app.use('/messages', messages);
+app.use('/api/messages', messages);
 
 const port = config.PORT || 8000;
 app.listen(port, () => {

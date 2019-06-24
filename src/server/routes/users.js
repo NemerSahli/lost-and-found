@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const _ = require('lodash');
 const router = express.Router();
 const auth = require('../middleware/auth');
+
 router.get('/', (req, res) => {
   res.send({
     message: 'Users API success in Registick App'
@@ -104,6 +105,29 @@ router.post('/login/auth', auth, (req, res) => {
       error: 0,
       loggedInUser: user,
       message: 'this user authenticated'
+    });
+  });
+});
+
+//update user with auth authentication
+router.put('/updateuser/:id', async (req, res) => {
+  const newData = req.body;
+  let id = req.params.id;
+  let newUpdate;
+  await User.findById({ _id: id }, (err, user) => {
+    if (err) throw err;
+    user.firstName = newData.firstName;
+    user.lastName = newData.lastName;
+    user.about = newData.about;
+    user.country = newData.country;
+    user.city = newData.city;
+    user.zip = newData.zip;
+    user.phone = newData.phone;
+    // console.log(user);
+    user.save((err, doc) => {
+      // console.log('updated user', doc);
+      if (err) throw err;
+      res.send({ error: 0, message: 'successfuly update', newData: doc });
     });
   });
 });

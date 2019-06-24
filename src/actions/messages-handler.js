@@ -9,7 +9,7 @@ export const sendMessage = (
     let token = localStorage.getItem('token');
     const response = await axios({
       method: 'post',
-      url: window.lofoBackend + '/message',
+      url: window.lofoBackend + '/api/messages/message',
       data: newMessage,
       withCredentials: true,
       headers: {
@@ -41,7 +41,10 @@ export const loadConversationItems = loggedInUserId => async dispatch => {
 
     const response = await axios({
       method: 'get',
-      url: window.lofoBackend + '/conversationitems/' + loggedInUserId,
+      url:
+        window.lofoBackend +
+        '/api/messages/conversationitems/' +
+        loggedInUserId,
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +68,8 @@ export const loadDialogueMessages = conversationPort => async dispatch => {
     let token = localStorage.getItem('token');
     const response = await axios({
       method: 'get',
-      url: window.lofoBackend + '/load/dialogue/messages/' + conversationPort,
+      url:
+        window.lofoBackend + '/api/messages/load/dialogue/' + conversationPort,
       withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
