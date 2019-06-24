@@ -6,7 +6,7 @@ export const searchForItems = searchingKeys => async dispatch => {
       method: 'get',
       url:
         window.lofoBackend +
-        '/search?p=' +
+        '/api/items/search?p=' +
         searchingKeys.place +
         '&k=' +
         searchingKeys.keyword

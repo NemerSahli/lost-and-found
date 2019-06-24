@@ -110,7 +110,6 @@ router.post('/login/auth', auth, (req, res) => {
 
 // Logout Handle
 router.get('/logout', (req, res) => {
-  req.session.destroy();
   res.send({ error: 0, message: 'You are loged out' });
 });
 

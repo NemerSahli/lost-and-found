@@ -97,4 +97,60 @@ router.get('/my/items/:id', auth, async (req, res) => {
   });
 });
 
+//==============================================
+// search for either place, keywords or together
+// defined queries to path them into
+// mongoose schema find method
+router.get('/search', async (req, res) => {
+  //looking for
+  if (req.query.p) {
+    var location = req.query.p;
+  }
+  if (req.query.k) {
+    var keyWord = req.query.k;
+  }
+
+  if (!location && !keyWord) {
+    return res.send({ error: 1, message: 'Your search result is: 0 items' });
+  }
+
+  if (location && !keyWord) {
+    var query = { location: new RegExp(location, 'i') };
+    // console.log('only location=', location);
+  } else if (!location && keyWord) {
+    var query = {
+      $or: [
+        { name: new RegExp(keyWord, 'i') },
+        { tags: new RegExp(keyWord, 'i') },
+        { comment: new RegExp(keyWord, 'i') },
+        { category: new RegExp(keyWord, 'i') }
+      ]
+    };
+    // console.log('only keyWord=', keyWord);
+  } else if (location && keyWord) {
+    // console.log('location=', location, '\n', 'keyWord', keyWord);
+    var query = {
+      $and: [
+        { location: new RegExp(req.query.p, 'i') },
+        {
+          $or: [
+            { name: new RegExp(keyWord, 'i') },
+            { comment: new RegExp(keyWord, 'i') },
+            { category: new RegExp(keyWord, 'i') }
+          ]
+        }
+      ]
+    };
+  }
+
+  await Item.find(query, (err, documents) => {
+    if (err) return res.send(err);
+    if (documents.length > 0) {
+      return res.send({ error: 0, documents: documents });
+    } else {
+      return res.send({ error: 1, message: 'Your search result is: 0 items' });
+    }
+  });
+});
+
 module.exports = router;
