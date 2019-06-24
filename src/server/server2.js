@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const users = require('./routes/users');
 const items = require('./routes/items');
+const messages = require('./routes/messages');
 const fileUpload = require('express-fileupload');
 const app = express();
 
@@ -41,7 +42,7 @@ app.use(fileUpload());
 app.use(express.json());
 app.use('/api/user', users);
 app.use('/api/items', items);
-// app.use('/messages', messages);
+app.use('/messages', messages);
 
 const port = config.PORT || 8000;
 app.listen(port, () => {
