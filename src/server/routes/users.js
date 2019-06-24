@@ -110,7 +110,7 @@ router.post('/login/auth', auth, (req, res) => {
 });
 
 //update user with auth authentication
-router.put('/updateuser/:id', async (req, res) => {
+router.put('/updateuser/:id', auth, async (req, res) => {
   const newData = req.body;
   let id = req.params.id;
   let newUpdate;
