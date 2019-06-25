@@ -9,6 +9,8 @@ const router = express.Router();
 
 const config = require('../../config');
 
+// to define the proper path of the images
+// will be either in develpment or production
 var path = '';
 if (config.mode === 'production') {
   path = '../../public/images/';
@@ -16,12 +18,14 @@ if (config.mode === 'production') {
   path = './public/images/';
 }
 
+// this end point only to test auth and admin
 router.get('/', [auth, admin], (req, res) => {
   res.send({
     message: 'Items API success in Fuburo App'
   });
 });
 
+// to get all items list
 router.get('/itemList', (req, res) => {
   Item.find({}, (err, items) => {
     if (err)

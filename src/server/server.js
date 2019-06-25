@@ -244,7 +244,7 @@ app.get('/itemList', async (req, res) => {
 
 app.get('/items/:id', auth, async (req, res) => {
   if (!req.params.id) {
-    return res.send({ error: 1000, message: 'id is required!' });
+    return res.status(400).send({ message: 'id is required!' });
   }
 
   await Item.find({ userId: req.params.id }, (err, docs) => {

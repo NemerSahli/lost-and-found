@@ -41,6 +41,7 @@ app.use(fileUpload());
 
 app.use(express.json());
 
+// routes middlewares
 app.use('/api/user', users);
 app.use('/api/items', items);
 app.use('/api/messages', messages);

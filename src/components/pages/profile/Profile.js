@@ -37,10 +37,10 @@ class Profile extends Component {
                     <i className="fas fa-star" />
 
                     <p className="text-muted">
-                      <p>
+                     
                         {this.props.loggedInUser &&
                           this.props.loggedInUser.about}
-                      </p>
+                     
                     </p>
                   </div>
                 </div>
