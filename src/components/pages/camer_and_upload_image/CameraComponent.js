@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Camera, { FACING_MODES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import { connect } from 'react-redux';
-import { loadImage } from '../../../actions/crud';
+import { loadImage } from '../../../actions/itemCrud';
 class CameraComponent extends Component {
   onTakePhoto(imgDataUri) {
     // console.log(imgDataUri.length);

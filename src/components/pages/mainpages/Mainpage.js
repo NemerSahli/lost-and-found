@@ -4,7 +4,7 @@ import Items from './Items';
 import SearchBar from './SearchBar';
 import Filter from './Filter';
 import { connect } from 'react-redux';
-import { loadItems } from '../../../actions/crud';
+import { loadItems } from '../../../actions/itemCrud';
 class Mainpage extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);

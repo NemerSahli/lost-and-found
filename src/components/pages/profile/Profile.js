@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadItems } from '../../../actions/crud';
+import { loadItems } from '../../../actions/itemCrud';
 import { updateProfile } from '../../../actions/userCrud';
 
 class Profile extends Component {

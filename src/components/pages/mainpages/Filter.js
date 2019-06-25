@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Categories from './Categories';
 import { Collapse } from 'reactstrap';
 import { connect } from 'react-redux';
-import { loadItems } from '../../../actions/crud';
+import { loadItems } from '../../../actions/itemCrud';
 
 class Filter extends Component {
   state = {

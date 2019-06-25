@@ -1,13 +1,15 @@
 import React from 'react';
+import Team from './Team';
 export default function About() {
   window.scrollTo(0, 0);
 
   return (
     <div className="container header-team">
-      <h3>Fubaro - Das Online Fundbüro</h3>
-      <hr className="my-2" />
-      <div className="lead">
+      <Team />
+      <div className="lead mt-4 p-3">
         <div>
+          <h3>Fubaro - Das Online Fundbüro</h3>
+          <hr className="my-2" />
           <p>
             Fuburo - Das Online Fundbüro is a web application which gives you
             the opportunity to help others by inserting their property on our
@@ -25,13 +27,15 @@ export default function About() {
             a contact with the person who needs it.
           </p>
         </div>
-      
-          <p>For this school project, the following technologies were used: </p>
+
+        <p>For this school project, the following technologies were used: </p>
         <ul>
           <li>- ReactJS with the Redux.</li>
           <li>- JavaScript including HTML and CSS</li>
-          <li>- NodeJs and a Mongoose Schema to interacting with the MongoDB
-                database</li>
+          <li>
+            - NodeJs and a Mongoose Schema to interacting with the MongoDB
+            database
+          </li>
           <li>- CRUD RESTful API with NodeJS Express</li>
           <li>- Thunk middleware</li>
           <li>- Router and Switch to switch between components</li>

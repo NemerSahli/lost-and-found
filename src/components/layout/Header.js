@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { openLoginSignUpModal } from '../../actions/login-signup';
 import { logOut } from '../../actions/login-signup';
-import { loadItems } from '../../actions/crud';
+import { loadItems } from '../../actions/itemCrud';
 
 class Header extends React.Component {
   state = {
@@ -146,16 +146,6 @@ class Header extends React.Component {
               >
                 <i className="fas fa-book mr-1" />
                 About
-              </Link>
-            </NavItem>
-            <NavItem className="mr-2">
-              <Link
-                onClick={this.toggle}
-                to="/team"
-                className="text-dark no-underline navbar-brand"
-              >
-                <i className="fas fa-users mr-1" />
-                Team
               </Link>
             </NavItem>
 

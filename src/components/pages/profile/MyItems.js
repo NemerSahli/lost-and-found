@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Collapse } from 'reactstrap';
 import ItemProfile from './ItemProfile';
 import { connect } from 'react-redux';
-import { loadMyItems } from '../../../actions/crud';
+import { loadMyItems } from '../../../actions/itemCrud';
 
 class MyItems extends Component {
   state = {

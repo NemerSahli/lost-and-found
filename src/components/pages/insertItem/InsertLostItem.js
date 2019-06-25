@@ -4,7 +4,7 @@ import AlgoliaPlaces from 'algolia-places-react';
 import axios from 'axios';
 import { Col, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem } from '../../../actions/crud';
+import { addItem } from '../../../actions/itemCrud';
 import ImageUploader from 'react-images-upload';
 import SelectCategory from './SelectCategory';
 

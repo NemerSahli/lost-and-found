@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import CustomMap from './CustomMap';
 import { Jumbotron } from 'reactstrap';
 import SearchBar from '../mainpages/SearchBar';
-import { loadItems } from '../../../actions/crud';
-import { generateMarkers } from '../../../actions/crud';
+import { loadItems ,generateMarkers } from '../../../actions/itemCrud';
 
 class OpenMap extends Component {
   state = {

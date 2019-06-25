@@ -3,7 +3,7 @@ import Item from './Item';
 import { connect } from 'react-redux';
 import { Table, Jumbotron } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { loadItems } from '../../../actions/crud';
+import { loadItems } from '../../../actions/itemCrud';
 class Items extends Component {
   render() {
     return (

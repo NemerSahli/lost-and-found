@@ -12,8 +12,6 @@ export const loadItems = () => async dispatch => {
         type: 'LOAD_ITEMS',
         payload: result.data.items.reverse() // display the last item in array on top
       });
-
-      // console.log('items', result.data);
     }
   } catch (e) {
     console.log('error in loading items:' + e);
@@ -23,7 +21,7 @@ export const loadItems = () => async dispatch => {
 export const loadMyItems = id => async dispatch => {
   try {
     let token = localStorage.getItem('token');
-    console.log(token);
+
     const result = await axios(
       window.lofoBackend + '/api/items/my/items/' + id,
       {

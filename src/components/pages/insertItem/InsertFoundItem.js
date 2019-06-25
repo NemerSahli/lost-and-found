@@ -12,7 +12,7 @@ import {
   FormFeedback
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem } from './../../../actions/crud';
+import { addItem } from './../../../actions/itemCrud';
 import CameraComponent from '../camer_and_upload_image/CameraComponent';
 
 class InsertFoundItem extends Component {
