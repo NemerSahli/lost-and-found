@@ -33,16 +33,13 @@ export const logIn = loginUser => async dispatch => {
 
 export const checkUserAuthenticated = (tokenId, userId) => async dispatch => {
   try {
-    const response = await axios(
-      window.lofoBackend + '/api/user/login/auth',
-      {
-        method: 'post',
-        withCredentials: true,
-        data: { userId },
-        headers: { 'x-auth-token': tokenId }
-      }
-    );
-    console.log(response);
+    const response = await axios(window.lofoBackend + '/api/user/login/auth', {
+      method: 'post',
+      withCredentials: true,
+      data: { userId },
+      headers: { 'x-auth-token': tokenId }
+    });
+
     if (response.data.error === 0) {
       dispatch({ type: 'LOGIN', payload: response.data.loggedInUser });
     } else {
@@ -55,7 +52,6 @@ export const checkUserAuthenticated = (tokenId, userId) => async dispatch => {
     });
   }
 };
-
 
 export const logOut = () => async dispatch => {
   try {

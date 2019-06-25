@@ -9,7 +9,7 @@ const router = express.Router();
 // sender, reciever and the item if there is
 // conversation opened then using the conversationPort
 // else create one by randomstring.generate
-router.post('/message', async (req, res) => {
+router.post('/message', auth, async (req, res) => {
   let query = {
     //here the condition of both users and the item
     $or: [
@@ -56,7 +56,7 @@ router.post('/message', async (req, res) => {
 // to get all last messages from different users to show them in
 // a list showing the sender, time, date and part of the message,
 
-router.get('/conversationitems/:id', async (req, res) => {
+router.get('/conversationitems/:id', auth, async (req, res) => {
   await Message.aggregate([
     {
       $match: {
@@ -152,7 +152,7 @@ router.get('/conversationitems/:id', async (req, res) => {
 //==============================================
 // Loading all messages has been sent from one conversation port
 // get the sender name, reciever name and item name by populate.
-router.get('/load/dialogue/:port', async (req, res) => {
+router.get('/load/dialogue/:port', auth, async (req, res) => {
   await Message.findOne({ conversationPort: req.params.port })
     .populate('fromUserId', 'firstName')
     .populate('toUserId', 'firstName')
