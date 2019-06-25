@@ -15,7 +15,6 @@ import MyAccount from './components/pages/profile/MyAccount';
 import ItemDetails from './components/pages/itemDetails/ItemDetails';
 import OpenMap from './components/pages/open-street-map/OpenMap';
 import LoginSingUpModal from './components/pages/login-signup/LoginSingUpModal';
-import Team from './components/layout/Team';
 import { connect } from 'react-redux';
 import { checkUserAuthenticated } from './actions/login-signup';
 import config from './config.json';
@@ -49,7 +48,6 @@ class App extends Component {
               <Route exact path="/myaccount/edit" component={EditProfile} />
               <Route exact path="/itemdetails/:id" component={ItemDetails} />
               <Route path="/showmap" component={OpenMap} />
-              <Route path="/team" component={Team} />
               <Route path="/about" component={About} />
               {this.props.loggedIn ? (
                 <Fragment>
@@ -77,5 +75,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  {checkUserAuthenticated}
+  { checkUserAuthenticated }
 )(App);
