@@ -106,12 +106,10 @@ router.post('/login/auth', auth, (req, res) => {
   });
 });
 
-//update user with auth authentication
+//update user by passing id as params in request
 router.put('/updateuser/:id', auth, async (req, res) => {
   const newData = req.body;
-  let id = req.params.id;
-  let newUpdate;
-  await User.findById({ _id: id }, (err, user) => {
+  await User.findById({ _id: req.params.id }, (err, user) => {
     if (err) throw err;
     user.firstName = newData.firstName;
     user.lastName = newData.lastName;
@@ -120,9 +118,7 @@ router.put('/updateuser/:id', auth, async (req, res) => {
     user.city = newData.city;
     user.zip = newData.zip;
     user.phone = newData.phone;
-    // console.log(user);
     user.save((err, doc) => {
-      // console.log('updated user', doc);
       if (err) throw err;
       res.send({ error: 0, message: 'successfuly update', newData: doc });
     });
