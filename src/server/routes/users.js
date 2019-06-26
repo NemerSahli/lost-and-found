@@ -16,24 +16,21 @@ router.post('/register', (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   // Check required fields
   if (!firstName || !lastName || !email || !password) {
-    res.send({
-      error: 400,
+    res.status(400).send({
       message: 'All information are requiered'
     });
   }
 
   // Check password length
   if (password.length < 6) {
-    res.send({
-      error: 400,
+    res.status(400).send({
       message: 'Password should be at least 6 characters'
     });
   } else {
     User.findOne({ email: email }).then(user => {
       if (user) {
         // User exists
-        res.send({
-          error: 400,
+        res.status(400).send({
           message: 'Email is already registered'
         });
       } else {
@@ -59,7 +56,7 @@ router.post('/register', (req, res) => {
             newUser.password = hash;
             // Save user
             newUser.save().then(user => {
-              res.send({
+              res.status(200).send({
                 error: 0,
                 loggedInUser: user,
                 message: 'You are now registered and can log in'
@@ -78,7 +75,7 @@ router.post('/login', (req, res) => {
 
   User.findOne({ email: email }).then(user => {
     if (!user) {
-      return res.send({ error: 400, message: 'Email is not registered' });
+      return res.status(400).send({ message: 'Email is not registered' });
     }
 
     // Match password
@@ -91,7 +88,7 @@ router.post('/login', (req, res) => {
           .header('x-auth-token', token)
           .send({ error: 0, loggedInUser: user, tokenId: token });
       } else {
-        return res.send({ error: 400, message: 'Incorrect password' });
+        return res.status(400).send({ message: 'Incorrect password' });
       }
     });
   });
@@ -100,7 +97,7 @@ router.post('/login', (req, res) => {
 // Login by token
 router.post('/login/auth', auth, (req, res) => {
   User.findById(req.body.userId).then(user => {
-    if (!user) return res.send({ error: 400, message: 'No user logged In!' });
+    if (!user) return res.statas(400).send({ message: 'No user logged In!' });
     res.send({
       error: 0,
       loggedInUser: user,
