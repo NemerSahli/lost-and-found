@@ -8,6 +8,7 @@ const users = require('./routes/users');
 const items = require('./routes/items');
 const messages = require('./routes/messages');
 const fileUpload = require('express-fileupload');
+const error = require('./error');
 const app = express();
 
 // check if jwtPrivateKey exported
@@ -40,6 +41,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(fileUpload());
 
 app.use(express.json());
+
+// error handler
+app.use(error);
 
 // routes middlewares
 app.use('/api/user', users);
