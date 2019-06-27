@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const _ = require('lodash');
 const router = express.Router();
 const auth = require('../middleware/auth');
+const randomString = require('randomstring');
+const config = require('../../config.json');
 
 router.get('/', (req, res) => {
   res.send({
@@ -123,6 +125,34 @@ router.put('/updateuser/:id', auth, async (req, res) => {
       res.send({ error: 0, message: 'successfuly update', newData: doc });
     });
   });
+});
+
+router.post('/forget/password/', async (req, res) => {
+  if (!req.body.eamil)
+    return res
+      .status(400)
+      .send({ message: 'Email is required to reset password!' });
+
+  let user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(400).send({ message: 'Email not found!' });
+  let resetPasswordKey = randomString.generate(25);
+  user.resetPasswordKey = resetPasswordKey;
+
+  await user.save();
+  res.status(200).send({ message: 'resetPasswordKey saved in DB' });
+
+  // let mailBody = `<h3>Fuburo Das online lost and found</h3>
+  //                 <p></p> ;
+  //                 <a href="${
+  //                   config.backend
+  //                 }/resetpass?q=${resetPasswordKey}">Reset password</a>`;
+
+  // await mailSender.sendMail(
+  //   req.body.email,
+  //   'no reply, Fuburo Reset Password',
+  //   mailBody,
+  //   res
+  // );
 });
 
 // Logout Handle
