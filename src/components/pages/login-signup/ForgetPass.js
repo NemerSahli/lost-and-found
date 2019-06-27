@@ -15,10 +15,8 @@ class ForgetPass extends Component {
       this.setState({ errors: { userEmail: 'Email is required' } });
       return;
     }
-    let forgetPassUser = {
-      userEmail: userEmail
-    };
-    this.props.forgetPassword(forgetPassUser, this.props.history);
+
+    this.props.forgetPassword(userEmail, this.props.history);
     this.setState({ errors: {} });
   };
 
@@ -76,7 +74,7 @@ class ForgetPass extends Component {
             </Link>
           </Form>
 
-          {!this.props.forgetPassFailedMessage === '' ? (
+          {this.props.forgetPassFailedMessage !== '' ? (
             <div className="invalid-feedback d-block">
               {this.props.forgetPassFailedMessage}{' '}
             </div>
@@ -88,8 +86,7 @@ class ForgetPass extends Component {
 }
 
 const mapStateToProps = state => ({
-  // loggedIn: state.reducer1.loggedIn,
-  // forgetPassFailedMessage: state.reducer1.forgetPassFailedMessage
+  forgetPassFailedMessage: state.userReducer.forgetPassFailedMessage
 });
 
 export default connect(
