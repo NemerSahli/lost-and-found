@@ -92,7 +92,10 @@ export default function(state = intialState, action) {
     case 'CLOSE_LOGIN_SIGNUP_MODAL':
       return {
         ...state,
-        modalIsOpen: false
+        modalIsOpen: false,
+        loginFailedMessage: '',
+        forgetPassFailedMessage: '',
+        signUpFailedMessage: ''
       };
     default:
       return state;

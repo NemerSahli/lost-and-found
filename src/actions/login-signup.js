@@ -106,7 +106,6 @@ export const forgetPassword = (email, routeTo) => async dispatch => {
 
     if (response.status === 200) {
       dispatch({ type: 'RESET_FAILD_MESSAGES' });
-      routeTo.push('/');
     } else {
       dispatch({ type: 'FORGET_PASS_FAILD', error: response.data.message });
     }
