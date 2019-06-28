@@ -24,7 +24,9 @@ class ResetPass extends Component {
     this.state.resetPasswordKey = window.location.href.split('q=')[1];
   }
 
-  resetPass = () => {
+  resetPass = event => {
+    event.preventDefault();
+
     const { password, confirmPass } = this.state;
 
     if (password === '') {
