@@ -40,6 +40,7 @@ class ResetPass extends Component {
       return;
     }
     if (password === '' || confirmPass === '') {
+      alert('something wrong');
       return;
     } else {
       if (this.state.password === this.state.confirmPass) {
@@ -69,7 +70,7 @@ class ResetPass extends Component {
           <h5 className="pl-4">Reset Password</h5>
           <hr />
 
-          <Form onSubmit={this.submitSignUp} className="p-4">
+          <Form onSubmit={this.resetPass} className="p-4">
             <Row form>
               <Col md={6}>
                 <FormGroup>
@@ -118,7 +119,7 @@ class ResetPass extends Component {
             </FormGroup>
             <FormGroup check>
               <Button
-                className="float-right pr-0 mr-0"
+                className="float-right mr-0"
                 color="danger"
                 style={{
                   borderRadius: '25px',

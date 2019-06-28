@@ -113,6 +113,7 @@ export const forgetPassword = (email, routeTo) => async dispatch => {
 };
 
 export const resetPassword = (forgetPassUser, routeTo) => async dispatch => {
+  alert('reset pass from action');
   try {
     const result = await axios(window.lofoBackend + '/api/user/resetpass', {
       method: 'post',
