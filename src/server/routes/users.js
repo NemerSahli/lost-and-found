@@ -130,9 +130,7 @@ router.put('/updateuser/:id', auth, async (req, res) => {
 
 router.post('/forget/password/', async (req, res) => {
   if (!req.body.email)
-    return res
-      .status(400)
-      .send({ message: 'Email is required!' });
+    return res.status(400).send({ message: 'Email is required!' });
 
   let userEmail = await User.findOne({ email: req.body.email });
   if (!userEmail) return res.status(400).send({ message: 'Email not found!' });
@@ -141,11 +139,12 @@ router.post('/forget/password/', async (req, res) => {
 
   await userEmail.save();
 
-  let mailBody = `<h3>Fuburo Das online lost and found</h3>
-                  <p></p> ;
-                  <a href="${
-                    config.backend
-                  }/resetpass?q=${resetPasswordKey}">Reset password</a>`;
+  let mailBody = `<h3 style="color:blue; text-align:center">Fuburo Das online lost and found</h3>
+                  <p>You recieved this email to reset your password</p> 
+                  <p>please click on the link</p>
+                  <a href="${config.host}/resetpass?q=${resetPasswordKey}">
+                    ${config.host}/resetpass?q=${resetPasswordKey}
+                  </a>`;
 
   await mailSender.sendMail(
     req.body.email,

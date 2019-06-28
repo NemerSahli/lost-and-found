@@ -14,7 +14,7 @@ function sendMail(recipientAddress, subject, body, res) {
   var transporter = nodemailer.createTransport(smtpConfig);
 
   var mailOptions = {
-    from: ' "Mieter Engel" <mieter.engel24@gmail.com>',
+    from: ' "fuburo online" <mieter.engel24@gmail.com>',
     to: recipientAddress,
     subject: subject,
     text: 'Hello World',

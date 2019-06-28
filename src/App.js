@@ -43,7 +43,10 @@ class App extends Component {
           <LoginSingUpModal />
           <div className="body-content container">
             <Switch>
-              <Route exact path="/" component={Mainpage} />
+            <Route exact path="/" component={Mainpage} />
+              <Route exact path="/resetpass" component={Mainpage} />
+              
+
               <Route exact path="/mainpage" component={Mainpage} />
               <Route exact path="/myaccount/edit" component={EditProfile} />
               <Route exact path="/itemdetails/:id" component={ItemDetails} />

@@ -96,7 +96,10 @@ class ForgetPass extends Component {
                   minWidth: '100px',
                   maxWidth: '200px'
                 }}
-                onClick={this.props.closeLoginSignUpModal}
+                onClick={() => {
+                  this.props.displayLoginHandler();
+                  this.props.closeLoginSignUpModal();
+                }}
               >
                 Ok
               </Button>
