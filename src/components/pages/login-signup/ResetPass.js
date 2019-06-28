@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Row,
+  Col,
+  FormFeedback
+} from 'reactstrap';
 import { connect } from 'react-redux';
 import { resetPassword } from '../../../actions/login-signup';
 import { Link } from 'react-router-dom';
@@ -53,71 +62,75 @@ class ResetPass extends Component {
 
   render() {
     return (
-      <div className="mt-5 row justify-content-center">
-        <div className="w-75">
-          <div className="col-12">
-            <h5 className="">Forget Password</h5>
-            <hr />
-          </div>
-          <Form>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-              <Label for="password" className="mr-sm-2">
-                Enter new password:
-              </Label>
-              <Input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="********"
-                autoComplete="true"
-                onChange={this.onChangeHandler}
-              />
-              {this.state.errors && (
-                <div className="invalid-feedback d-block">
-                  {' '}
-                  {this.state.errors.password}{' '}
-                </div>
-              )}
-            </FormGroup>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-              <Label for="password" className="mr-sm-2">
-                Confirm Password:
-              </Label>
-              <Input
-                type="password"
-                name="confirmPass"
-                id="confirmPass"
-                placeholder="********"
-                autoComplete="true"
-                onChange={this.onChangeHandler}
-              />
-              {this.state.errors && (
-                <div className="invalid-feedback d-block">
-                  {' '}
-                  {this.state.errors.confirmPass}{' '}
-                </div>
-              )}
-            </FormGroup>
+      <div className="row justify-content-center">
+        <div>
+          <h5 className="pl-4">Reset Password</h5>
+          <hr />
 
-            <Button
-              className="mt-3 ml-2"
-              color="primary"
-              onClick={this.resetPass}
-            >
-              submit
-            </Button>
-            <Link
-              to="#"
-              onClick={this.props.displayLoginHandler}
-              className="float-right mt-3 mr-2"
-            >
-              back
-            </Link>
+          <Form onSubmit={this.submitSignUp} className="p-4">
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="password" className="mr-sm-2">
+                    Enter new password:
+                  </Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="********"
+                    autoComplete="true"
+                    invalid={this.state.errors}
+                    onChange={this.onChangeHandler}
+                  />
+                  <FormFeedback>New password is required!</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="password" className="mr-sm-2">
+                    Confirm Password:
+                  </Label>
+                  <Input
+                    type="password"
+                    name="confirmPass"
+                    id="confirmPass"
+                    placeholder="********"
+                    autoComplete="true"
+                    invalid={this.state.errors}
+                    onChange={this.onChangeHandler}
+                  />
+                  <FormFeedback>Confirm password is required!</FormFeedback>
+                </FormGroup>
+              </Col>
+            </Row>
+
+            <FormGroup>
+              <Link
+                to="#"
+                onClick={this.props.displayLoginHandler}
+                className=""
+              >
+                Back
+              </Link>
+            </FormGroup>
+            <FormGroup check>
+              <Button
+                className="float-right pr-0 mr-0"
+                color="danger"
+                style={{
+                  borderRadius: '25px',
+                  minWidth: '100px',
+                  maxWidth: '200px'
+                }}
+              >
+                Submit
+              </Button>
+            </FormGroup>
           </Form>
-
-          {!this.props.resetPassFailedMessage === '' ? (
+          {this.props.resetPassFailedMessage !== '' ? (
             <div className="invalid-feedback d-block">
-              {this.props.signUpFailedMessage}{' '}
+              {this.props.resetPassFailedMessage}
             </div>
           ) : null}
         </div>
