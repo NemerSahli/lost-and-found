@@ -17,14 +17,26 @@ class LoginSingUpModal extends Component {
     errors: {}
   };
   componentDidMount() {
-    this.setState({
-      loginDisplay: true,
-      signUpDisplay: false,
-      forgetPassDisplay: false,
-      resetPassDisplay: false,
-      signUpSuccessfull: false,
-      errors: {}
-    });
+    let splitedUrl = window.location.href.split('q=');
+    if (splitedUrl && splitedUrl.length === 2) {
+      this.setState({
+        loginDisplay: false,
+        signUpDisplay: false,
+        forgetPassDisplay: false,
+        resetPassDisplay: true,
+        signUpSuccessfull: false,
+        errors: {}
+      });
+    } else {
+      this.setState({
+        loginDisplay: true,
+        signUpDisplay: false,
+        forgetPassDisplay: false,
+        resetPassDisplay: false,
+        signUpSuccessfull: false,
+        errors: {}
+      });
+    }
   }
   displaySignUp = () => {
     this.setState({
@@ -102,7 +114,7 @@ class LoginSingUpModal extends Component {
             <ForgetPass displayLoginHandler={this.displayLogin} />
           )}
 
-          {!this.state.resetPassDisplay && (
+          {this.state.resetPassDisplay && (
             <ResetPass displayLoginHandler={this.displayLogin} />
           )}
         </ModalBody>

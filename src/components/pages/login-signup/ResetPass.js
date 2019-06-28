@@ -56,9 +56,10 @@ class ResetPass extends Component {
       <div className="mt-5 row justify-content-center">
         <div className="w-75">
           <div className="col-12">
-            <h5 className="text-center">Users List</h5>
+            <h5 className="">Forget Password</h5>
+            <hr />
           </div>
-          <Form className="border p-3 rounded">
+          <Form>
             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
               <Label for="password" className="mr-sm-2">
                 Enter new password:
