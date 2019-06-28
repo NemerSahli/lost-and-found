@@ -1,6 +1,6 @@
 var nodemailer = require('nodemailer');
 
-function sendMail(recipientAddress, subject, body, pdfFileName, res) {
+function sendMail(recipientAddress, subject, body, res) {
   var smtpConfig = {
     host: 'smtp.gmail.com',
     port: 465,
@@ -28,7 +28,7 @@ function sendMail(recipientAddress, subject, body, pdfFileName, res) {
         message: 'Error: not able to send you email!'
       });
     res.status(200).send({
-      message: 'Your document has been sent! Thank you!'
+      message: 'Please check your email! Thank you!'
     });
   });
 }

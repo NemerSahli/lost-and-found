@@ -1,9 +1,9 @@
 const intialState = {
   loggedIn: false,
   modalIsOpen: false,
-
   loggedInUser: null,
   signUpSuccessful: false,
+  forgetPasswordSuccessful: false,
   loginFailedMessage: '',
   forgetPassFailedMessage: '',
   signUpFailedMessage: ''
@@ -53,6 +53,11 @@ export default function(state = intialState, action) {
         ...state,
         forgetPassFailedMessage: action.error
       };
+    case 'FORGET_PASS_SUCCESS':
+      return {
+        ...state,
+        forgetPasswordSuccessful: true
+      };
 
     case 'SIGN_UP_FAILD':
       return {
@@ -93,6 +98,7 @@ export default function(state = intialState, action) {
       return {
         ...state,
         modalIsOpen: false,
+        forgetPasswordSuccessful: false,
         loginFailedMessage: '',
         forgetPassFailedMessage: '',
         signUpFailedMessage: ''

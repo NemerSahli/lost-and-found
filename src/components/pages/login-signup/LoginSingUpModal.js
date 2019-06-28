@@ -16,6 +16,16 @@ class LoginSingUpModal extends Component {
     signUpSuccessfull: false,
     errors: {}
   };
+  componentDidMount() {
+    this.setState({
+      loginDisplay: true,
+      signUpDisplay: false,
+      forgetPassDisplay: false,
+      resetPassDisplay: false,
+      signUpSuccessfull: false,
+      errors: {}
+    });
+  }
   displaySignUp = () => {
     this.setState({
       loginDisplay: false,

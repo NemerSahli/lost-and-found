@@ -89,29 +89,27 @@ export const signUp = (signUpUser, routeTo) => async dispatch => {
     dispatch({ type: 'SIGN_UP_FAILD', error: 'Error in network!' });
   }
 };
+
 export const displaySignUpSuccess = () => dispatch => {
   dispatch({ type: 'SIGN_UP_SUCCESS' });
 };
 
 export const forgetPassword = (email, routeTo) => async dispatch => {
-  try {
-    const response = await axios(
-      window.lofoBackend + '/api/user/forget/password/',
-      {
-        method: 'post',
-        data: { email }
-        // withCredentials: true
+  await axios(window.lofoBackend + '/api/user/forget/password/', {
+    method: 'post',
+    data: { email },
+    withCredentials: true
+  })
+    .then(response => {
+      if (response.status === 200) {
+        dispatch({ type: 'FORGET_PASS_SUCCESS' });
+      } else {
+        dispatch({ type: 'FORGET_PASS_FAILD', error: response.data.message });
       }
-    );
-
-    if (response.status === 200) {
-      dispatch({ type: 'RESET_FAILD_MESSAGES' });
-    } else {
-      dispatch({ type: 'FORGET_PASS_FAILD', error: response.data.message });
-    }
-  } catch (e) {
-    dispatch({ type: 'FORGET_PASS_FAILD', error: 'Error in network!' });
-  }
+    })
+    .catch(error => {
+      dispatch({ type: 'FORGET_PASS_FAILD', error: 'Email not found!' });
+    });
 };
 
 export const resetPassword = (forgetPassUser, routeTo) => async dispatch => {
