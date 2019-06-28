@@ -102,7 +102,9 @@ class LoginSingUpModal extends Component {
             <ForgetPass displayLoginHandler={this.displayLogin} />
           )}
 
-          {this.state.resetPassDisplay && <ResetPass />}
+          {!this.state.resetPassDisplay && (
+            <ResetPass displayLoginHandler={this.displayLogin} />
+          )}
         </ModalBody>
       </Modal>
     );

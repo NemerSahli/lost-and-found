@@ -6,6 +6,7 @@ const intialState = {
   forgetPasswordSuccessful: false,
   loginFailedMessage: '',
   forgetPassFailedMessage: '',
+  resetPassFailedMessage: '',
   signUpFailedMessage: ''
 };
 
@@ -19,6 +20,7 @@ export default function(state = intialState, action) {
         loggedInUser: action.payload,
         loginFailedMessage: '',
         forgetPassFailedMessage: '',
+        resetPassFailedMessage:'',
         signUpFailedMessage: ''
       };
     case 'SIGNUP':

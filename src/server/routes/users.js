@@ -139,7 +139,7 @@ router.post('/forget/password/', async (req, res) => {
 
   await userEmail.save();
 
-  let mailBody = `<h3 style="color:blue; text-align:center">Fuburo Das online lost and found</h3>
+  let mailBody = `<h3>Fuburo Das online lost and found</h3>
                   <p>You recieved this email to reset your password</p> 
                   <p>please click on the link</p>
                   <a href="${config.host}/resetpass?q=${resetPasswordKey}">

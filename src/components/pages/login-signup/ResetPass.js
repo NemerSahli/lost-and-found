@@ -5,14 +5,14 @@ import { resetPassword } from '../../../actions/login-signup';
 import { Link } from 'react-router-dom';
 class ResetPass extends Component {
   state = {
-    activationKey: '',
+    resetPasswordKey: '',
     password: '',
     confirmPass: '',
     errors: null
   };
   constructor() {
     super();
-    this.state.activationKey = window.location.href.split('q=')[1];
+    this.state.resetPasswordKey = window.location.href.split('q=')[1];
   }
 
   resetPass = () => {
@@ -33,7 +33,7 @@ class ResetPass extends Component {
     } else {
       if (this.state.password === this.state.confirmPass) {
         let resetPassEmail = {
-          activationKey: this.state.activationKey,
+          resetPasswordKey: this.state.resetPasswordKey,
           password: this.state.password
         };
 
@@ -114,7 +114,7 @@ class ResetPass extends Component {
             </Link>
           </Form>
 
-          {!this.props.signUpFailedMessage === '' ? (
+          {!this.props.resetPassFailedMessage === '' ? (
             <div className="invalid-feedback d-block">
               {this.props.signUpFailedMessage}{' '}
             </div>
@@ -126,8 +126,7 @@ class ResetPass extends Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.reducer1.loggedIn,
-  signUpFailedMessage: state.reducer1.signUpFailedMessage
+  resetPassFailedMessage: state.userReducer.resetPassFailedMessage
 });
 
 export default connect(
