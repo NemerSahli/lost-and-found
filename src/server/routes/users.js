@@ -159,4 +159,37 @@ router.get('/logout', (req, res) => {
   res.send({ error: 0, message: 'You are loged out' });
 });
 
+router.post('/resetpass', async (req, res) => {
+  if (!req.body.resetPasswordKey && !req.body.password)
+    return res.send({
+      error: 400,
+      message:
+        'password and the password key form the link in your email are required!'
+    });
+  let user = await User.findOne({
+    resetPasswordKey: req.body.resetPasswordKey
+  });
+  if (!user)
+    return res.send({
+      error: 400,
+      message: 'not able to get this user wrong link from your email!'
+    });
+
+  // Hash Password
+  bcrypt.genSalt(10, (err, salt) =>
+    bcrypt.hash(req.body.password, salt, (err, hash) => {
+      if (err) throw err;
+      // Set password to hashed
+      user.password = hash;
+      // Save user
+      user.save().then(user => {
+        res.status(200).send({
+          error: 0,
+          message: 'Your password has been reseted successfuly!'
+        });
+      });
+    })
+  );
+});
+
 module.exports = router;

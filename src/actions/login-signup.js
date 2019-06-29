@@ -112,20 +112,18 @@ export const forgetPassword = (email, routeTo) => async dispatch => {
     });
 };
 
-export const resetPassword = (forgetPassUser, routeTo) => async dispatch => {
+export const resetPassword = (resetPassEmail) => async dispatch => {
   alert('reset pass from action');
   try {
     const result = await axios(window.lofoBackend + '/api/user/resetpass', {
       method: 'post',
-      data: forgetPassUser,
-      withCredentials: true
+      data: resetPassEmail,
     });
     // console.log(result);
     if (result.data.error === 0) {
       dispatch({ type: 'RESET_FAILD_MESSAGES' });
-      routeTo.push('/');
     } else {
-      dispatch({ type: 'FORGET_PASS_FAILD', error: result.data.message });
+      dispatch({ type: 'RESET_PASS_FAILD', error: result.data.message });
     }
   } catch (e) {
     console.log('error:' + e);

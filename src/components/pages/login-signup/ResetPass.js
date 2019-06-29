@@ -14,15 +14,10 @@ import { resetPassword } from '../../../actions/login-signup';
 import { Link } from 'react-router-dom';
 class ResetPass extends Component {
   state = {
-    resetPasswordKey: '',
     password: '',
     confirmPass: '',
     errors: null
   };
-  constructor() {
-    super();
-    this.state.resetPasswordKey = window.location.href.split('q=')[1];
-  }
 
   resetPass = event => {
     event.preventDefault();
@@ -45,12 +40,11 @@ class ResetPass extends Component {
     } else {
       if (this.state.password === this.state.confirmPass) {
         let resetPassEmail = {
-          resetPasswordKey: this.state.resetPasswordKey,
+          resetPasswordKey: this.props.resetPasswordKey,
           password: this.state.password
         };
 
-        this.props.resetPassword(resetPassEmail, this.props.history);
-        this.setState({ errors: {} });
+        this.props.resetPassword(resetPassEmail);
       } else {
         this.setState({ errors: { confirmPass: 'wrong confirmation' } });
       }
@@ -59,7 +53,8 @@ class ResetPass extends Component {
 
   onChangeHandler = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      errors: null
     });
   };
 
@@ -83,7 +78,7 @@ class ResetPass extends Component {
                     id="password"
                     placeholder="********"
                     autoComplete="true"
-                    invalid={this.state.errors}
+                    invalid={this.state.errors && this.state.errors.password}
                     onChange={this.onChangeHandler}
                   />
                   <FormFeedback>New password is required!</FormFeedback>
@@ -100,10 +95,12 @@ class ResetPass extends Component {
                     id="confirmPass"
                     placeholder="********"
                     autoComplete="true"
-                    invalid={this.state.errors}
+                    invalid={this.state.errors && this.state.errors.confirmPass}
                     onChange={this.onChangeHandler}
                   />
-                  <FormFeedback>Confirm password is required!</FormFeedback>
+                  <FormFeedback>
+                    {this.state.errors && this.state.errors.confirmPass}
+                  </FormFeedback>
                 </FormGroup>
               </Col>
             </Row>

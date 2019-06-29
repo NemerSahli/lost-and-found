@@ -6,7 +6,10 @@ import Login from './Login';
 import ResetPass from './ResetPass';
 import ForgetPass from './ForgetPass';
 import SignUpSuccess from './SingUpSuccess';
-import { closeLoginSignUpModal } from '../../../actions/login-signup';
+import {
+  openLoginSignUpModal,
+  closeLoginSignUpModal
+} from '../../../actions/login-signup';
 class LoginSingUpModal extends Component {
   state = {
     loginDisplay: true,
@@ -17,9 +20,11 @@ class LoginSingUpModal extends Component {
     errors: {}
   };
   componentDidMount() {
-    let splitedUrl = window.location.href.split('q=');
+    let splitedUrl = window.location.href.split('resetpass?q=');
     if (splitedUrl && splitedUrl.length === 2) {
+      this.props.openLoginSignUpModal();
       this.setState({
+        resetPasswordKey: splitedUrl[1],
         loginDisplay: false,
         signUpDisplay: false,
         forgetPassDisplay: false,
@@ -115,7 +120,10 @@ class LoginSingUpModal extends Component {
           )}
 
           {this.state.resetPassDisplay && (
-            <ResetPass displayLoginHandler={this.displayLogin} />
+            <ResetPass
+              displayLoginHandler={this.displayLogin}
+              resetPasswordKey={this.state.resetPasswordKey}
+            />
           )}
         </ModalBody>
       </Modal>
@@ -129,5 +137,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { closeLoginSignUpModal }
+  { openLoginSignUpModal, closeLoginSignUpModal }
 )(LoginSingUpModal);
