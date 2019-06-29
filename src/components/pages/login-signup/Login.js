@@ -152,7 +152,7 @@ class Login extends Component {
               </div>
             </Form>
 
-            {!this.props.loginFailedMessage === '' ? (
+            {this.props.loginFailedMessage !== '' ? (
               <div className="invalid-feedback d-block mt-2">
                 {this.props.loginFailedMessage}
               </div>

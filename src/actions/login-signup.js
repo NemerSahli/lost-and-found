@@ -9,12 +9,14 @@ export const closeLoginSignUpModal = () => dispatch => {
 };
 
 export const logIn = loginUser => async dispatch => {
+  let error = '';
   try {
     const response = await axios(window.lofoBackend + '/api/user/login', {
       method: 'post',
       data: loginUser,
       withCredentials: true
     });
+    error = response.data.message;
     // console.log(response);
     if (response.data.error === 0) {
       dispatch({ type: 'LOGIN', payload: response.data.loggedInUser });
@@ -26,7 +28,7 @@ export const logIn = loginUser => async dispatch => {
   } catch (e) {
     dispatch({
       type: 'LOGIN_FAILD',
-      error: 'Error during login, check your connection and try again later'
+      error: 'Either wrong email or passowds'
     });
   }
 };
@@ -112,12 +114,11 @@ export const forgetPassword = (email, routeTo) => async dispatch => {
     });
 };
 
-export const resetPassword = (resetPassEmail) => async dispatch => {
-  alert('reset pass from action');
+export const resetPassword = resetPassEmail => async dispatch => {
   try {
     const result = await axios(window.lofoBackend + '/api/user/resetpass', {
       method: 'post',
-      data: resetPassEmail,
+      data: resetPassEmail
     });
     // console.log(result);
     if (result.data.error === 0) {
