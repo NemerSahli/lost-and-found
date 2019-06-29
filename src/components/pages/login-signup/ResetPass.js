@@ -110,7 +110,7 @@ class ResetPass extends Component {
 
             <FormGroup>
               <Link
-                to="#"
+                to="/"
                 onClick={this.props.displayLoginHandler}
                 className=""
               >

@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": "fuburo_jwtPrivateKey"
+  "jwtPrivateKey": "fuburo_jwtPrivateKey",
+  "passwordMailSender": "fuburo_passwordMailSender"
 }

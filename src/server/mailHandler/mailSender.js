@@ -1,13 +1,15 @@
 var nodemailer = require('nodemailer');
+const config = require('config');
 
-function sendMail(recipientAddress, subject, body, res) {
+function sendMail(recipientAddress, subject, htmlBody, res) {
+  let passwordMailSender = config.get('passwordMailSender');
   var smtpConfig = {
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
       user: 'mieter.engel24@gmail.com',
-      pass: 'Engel2019'
+      pass: passwordMailSender
     }
   };
 
@@ -18,7 +20,7 @@ function sendMail(recipientAddress, subject, body, res) {
     to: recipientAddress,
     subject: subject,
     text: 'Hello World',
-    html: body
+    html: htmlBody
   };
 
   transporter.sendMail(mailOptions, (err, info) => {

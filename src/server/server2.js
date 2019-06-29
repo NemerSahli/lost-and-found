@@ -12,9 +12,13 @@ const error = require('./error');
 const app = express();
 
 // check if jwtPrivateKey exported
-// if you get an error please export your jwtPrivateKey
 if (!config.get('jwtPrivateKey')) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.');
+  process.exit(1);
+}
+// check if passwordMailSender exported
+if (!config.get('passwordMailSender')) {
+  console.error('FATAL ERROR: passwordMailSender is not defined.');
   process.exit(1);
 }
 
