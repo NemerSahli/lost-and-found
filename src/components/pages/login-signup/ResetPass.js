@@ -62,7 +62,7 @@ class ResetPass extends Component {
     return (
       <div className="row justify-content-center">
         <div>
-          <h5 className="pl-2">Reset Password</h5>
+          <h5 className="pl-3">Reset Password</h5>
           <hr />
 
           {!this.props.resetPasswordSuccessful ? (
@@ -130,7 +130,7 @@ class ResetPass extends Component {
                       maxWidth: '200px'
                     }}
                   >
-                    Submit
+                    CONFIRM
                   </Button>
                 </FormGroup>
               </Form>
@@ -141,23 +141,25 @@ class ResetPass extends Component {
               ) : null}
             </Fragment>
           ) : (
-            <div>
+            <Fragment>
               <h5>Your Password has been successfuly changed!</h5>
-              <Button
-                className="float-right"
-                color="danger"
-                style={{
-                  borderRadius: '25px',
-                  minWidth: '100px',
-                  maxWidth: '200px'
-                }}
-                onClick={() => {
-                  this.props.displayLoginHandler();
-                }}
-              >
-                Ok
-              </Button>
-            </div>
+              <Link to="/">
+                <Button
+                  className="mt-5 float-right"
+                  color="danger"
+                  style={{
+                    borderRadius: '25px',
+                    minWidth: '100px',
+                    maxWidth: '200px'
+                  }}
+                  onClick={() => {
+                    this.props.displayLoginHandler();
+                  }}
+                >
+                  Ok
+                </Button>
+              </Link>
+            </Fragment>
           )}
         </div>
       </div>
