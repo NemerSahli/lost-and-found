@@ -164,14 +164,20 @@ router.post('/resetpass', async (req, res) => {
     return res.send({
       error: 400,
       message:
-        'password and the password key form the link in your email are required!'
+        'password and the password key from the link in your email are required!'
     });
+
+  if (req.body.password.length < 6)
+    return res
+      .status(400)
+      .send({ message: 'The password should be at least 6 characters' });
+
   let user = await User.findOne({
     resetPasswordKey: req.body.resetPasswordKey
   });
+
   if (!user)
-    return res.send({
-      error: 400,
+    return res.status(400).send({
       message: 'not able to get this user wrong link from your email!'
     });
 

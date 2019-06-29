@@ -4,6 +4,7 @@ const intialState = {
   loggedInUser: null,
   signUpSuccessful: false,
   forgetPasswordSuccessful: false,
+  resetPasswordSuccessful: false,
   loginFailedMessage: '',
   forgetPassFailedMessage: '',
   resetPassFailedMessage: '',
@@ -20,28 +21,7 @@ export default function(state = intialState, action) {
         loggedInUser: action.payload,
         loginFailedMessage: '',
         forgetPassFailedMessage: '',
-        resetPassFailedMessage:'',
-        signUpFailedMessage: ''
-      };
-    case 'SIGNUP':
-      return {
-        ...state,
-        signUpSuccessful: true,
-        loginFailedMessage: '',
-        forgetPassFailedMessage: '',
-        signUpFailedMessage: ''
-      };
-    case 'SIGN_UP_SUCCESS':
-      return {
-        ...state,
-        signUpSuccessful: false
-      };
-
-    case 'RESET_FAILD_MESSAGES':
-      return {
-        ...state,
-        loginFailedMessage: '',
-        forgetPassFailedMessage: '',
+        resetPassFailedMessage: '',
         signUpFailedMessage: ''
       };
     case 'LOGIN_FAILD':
@@ -50,15 +30,19 @@ export default function(state = intialState, action) {
         loginFailedMessage: action.error
       };
 
-    case 'FORGET_PASS_FAILD':
+    case 'SIGNUP':
       return {
         ...state,
-        forgetPassFailedMessage: action.error
+        signUpSuccessful: true,
+        loginFailedMessage: '',
+        forgetPassFailedMessage: '',
+        signUpFailedMessage: ''
       };
-    case 'FORGET_PASS_SUCCESS':
+
+    case 'SIGN_UP_SUCCESS':
       return {
         ...state,
-        forgetPasswordSuccessful: true
+        signUpSuccessful: false
       };
 
     case 'SIGN_UP_FAILD':
@@ -66,6 +50,42 @@ export default function(state = intialState, action) {
         ...state,
         signUpFailedMessage: action.error
       };
+
+    case 'RESET_FAILD_MESSAGES':
+      return {
+        ...state,
+        loginFailedMessage: '',
+        forgetPassFailedMessage: '',
+        signUpFailedMessage: '',
+        resetPassFailedMessage: ''
+      };
+
+    case 'FORGET_PASS_FAILD':
+      return {
+        ...state,
+        forgetPassFailedMessage: action.error
+      };
+
+    case 'RESET_PASS_SUCCESS':
+      return {
+        ...state,
+        resetPasswordSuccessful: true,
+        resetPassFailedMessage: ''
+      };
+
+    case 'RESET_PASS_FAILED':
+      alert(action.error);
+      return {
+        ...state,
+        resetPassFailedMessage: action.error
+      };
+
+    case 'FORGET_PASS_SUCCESS':
+      return {
+        ...state,
+        forgetPasswordSuccessful: true
+      };
+
     case 'LOGOUT':
       return {
         ...state,

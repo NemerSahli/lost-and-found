@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   Button,
   Form,
@@ -62,77 +62,103 @@ class ResetPass extends Component {
     return (
       <div className="row justify-content-center">
         <div>
-          <h5 className="pl-4">Reset Password</h5>
+          <h5 className="pl-2">Reset Password</h5>
           <hr />
 
-          <Form onSubmit={this.resetPass} className="p-4">
-            <Row form>
-              <Col md={6}>
-                <FormGroup>
-                  <Label for="password" className="mr-sm-2">
-                    Enter new password:
-                  </Label>
-                  <Input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="********"
-                    autoComplete="true"
-                    invalid={this.state.errors && this.state.errors.password}
-                    onChange={this.onChangeHandler}
-                  />
-                  <FormFeedback>New password is required!</FormFeedback>
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label for="password" className="mr-sm-2">
-                    Confirm Password:
-                  </Label>
-                  <Input
-                    type="password"
-                    name="confirmPass"
-                    id="confirmPass"
-                    placeholder="********"
-                    autoComplete="true"
-                    invalid={this.state.errors && this.state.errors.confirmPass}
-                    onChange={this.onChangeHandler}
-                  />
-                  <FormFeedback>
-                    {this.state.errors && this.state.errors.confirmPass}
-                  </FormFeedback>
-                </FormGroup>
-              </Col>
-            </Row>
+          {!this.props.resetPasswordSuccessful ? (
+            <Fragment>
+              <Form onSubmit={this.resetPass} className="p-4">
+                <Row form>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label for="password" className="mr-sm-2">
+                        Enter new password:
+                      </Label>
+                      <Input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="********"
+                        autoComplete="true"
+                        invalid={
+                          this.state.errors && this.state.errors.password
+                        }
+                        onChange={this.onChangeHandler}
+                      />
+                      <FormFeedback>New password is required!</FormFeedback>
+                    </FormGroup>
+                  </Col>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label for="password" className="mr-sm-2">
+                        Confirm Password:
+                      </Label>
+                      <Input
+                        type="password"
+                        name="confirmPass"
+                        id="confirmPass"
+                        placeholder="********"
+                        autoComplete="true"
+                        invalid={
+                          this.state.errors && this.state.errors.confirmPass
+                        }
+                        onChange={this.onChangeHandler}
+                      />
+                      <FormFeedback>
+                        {this.state.errors && this.state.errors.confirmPass}
+                      </FormFeedback>
+                    </FormGroup>
+                  </Col>
+                </Row>
 
-            <FormGroup>
-              <Link
-                to="/"
-                onClick={this.props.displayLoginHandler}
-                className=""
-              >
-                Back
-              </Link>
-            </FormGroup>
-            <FormGroup check>
+                <FormGroup>
+                  <Link
+                    to="/"
+                    onClick={this.props.displayLoginHandler}
+                    className=""
+                  >
+                    Back
+                  </Link>
+                </FormGroup>
+                <FormGroup check>
+                  <Button
+                    className="float-right mr-0"
+                    color="danger"
+                    style={{
+                      borderRadius: '25px',
+                      minWidth: '100px',
+                      maxWidth: '200px'
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </FormGroup>
+              </Form>
+              {this.props.resetPassFailedMessage !== '' ? (
+                <div className="invalid-feedback d-block">
+                  {this.props.resetPassFailedMessage}
+                </div>
+              ) : null}
+            </Fragment>
+          ) : (
+            <div>
+              <h5>Your Password has been successfuly changed!</h5>
               <Button
-                className="float-right mr-0"
+                className="float-right"
                 color="danger"
                 style={{
                   borderRadius: '25px',
                   minWidth: '100px',
                   maxWidth: '200px'
                 }}
+                onClick={() => {
+                  this.props.displayLoginHandler();
+                }}
               >
-                Submit
+                Ok
               </Button>
-            </FormGroup>
-          </Form>
-          {this.props.resetPassFailedMessage !== '' ? (
-            <div className="invalid-feedback d-block">
-              {this.props.resetPassFailedMessage}
             </div>
-          ) : null}
+          )}
         </div>
       </div>
     );
@@ -140,6 +166,7 @@ class ResetPass extends Component {
 }
 
 const mapStateToProps = state => ({
+  resetPasswordSuccessful: state.userReducer.resetPasswordSuccessful,
   resetPassFailedMessage: state.userReducer.resetPassFailedMessage
 });
 

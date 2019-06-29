@@ -33,15 +33,13 @@ class ForgetPass extends Component {
     return (
       <div className="row justify-content-center">
         <div className="w-75">
-          <h5 className="">Forget Password</h5>
+          <h5>Forget Password</h5>
           <hr />
           {!this.props.forgetPasswordSuccessful ? (
             <Fragment>
               <Form className="mt-4">
                 <FormGroup className="mb-2 mt-3">
-                  <Label for="userEmail" className="">
-                    Please enter your email
-                  </Label>
+                  <Label for="userEmail">Please enter your email</Label>
                   <Input
                     type="email"
                     name="userEmail"
