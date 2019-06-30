@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import Spinner from '../../layout/Spinner';
 import {
   Button,
   Form,
@@ -10,7 +11,10 @@ import {
   FormFeedback
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { resetPassword } from '../../../actions/login-signup';
+import {
+  resetPassword,
+  startLoadingSpinner
+} from '../../../actions/login-signup';
 import { Link } from 'react-router-dom';
 class ResetPass extends Component {
   state = {
@@ -44,7 +48,10 @@ class ResetPass extends Component {
           password: this.state.password
         };
 
-        this.props.resetPassword(resetPassEmail);
+        this.props.startLoadingSpinner();
+        setTimeout(() => {
+          this.props.resetPassword(resetPassEmail);
+        }, 1000);
       } else {
         this.setState({ errors: { confirmPass: 'wrong confirmation' } });
       }
@@ -64,101 +71,106 @@ class ResetPass extends Component {
         <div>
           <h5 className="pl-3">Reset Password</h5>
           <hr />
-
-          {!this.props.resetPasswordSuccessful ? (
-            <Fragment>
-              <Form onSubmit={this.resetPass} className="p-4">
-                <Row form>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="password" className="mr-sm-2">
-                        Enter new password:
-                      </Label>
-                      <Input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="********"
-                        autoComplete="true"
-                        invalid={
-                          this.state.errors && this.state.errors.password
-                        }
-                        onChange={this.onChangeHandler}
-                      />
-                      <FormFeedback>New password is required!</FormFeedback>
-                    </FormGroup>
-                  </Col>
-                  <Col md={6}>
-                    <FormGroup>
-                      <Label for="password" className="mr-sm-2">
-                        Confirm Password:
-                      </Label>
-                      <Input
-                        type="password"
-                        name="confirmPass"
-                        id="confirmPass"
-                        placeholder="********"
-                        autoComplete="true"
-                        invalid={
-                          this.state.errors && this.state.errors.confirmPass
-                        }
-                        onChange={this.onChangeHandler}
-                      />
-                      <FormFeedback>
-                        {this.state.errors && this.state.errors.confirmPass}
-                      </FormFeedback>
-                    </FormGroup>
-                  </Col>
-                </Row>
-
-                <FormGroup>
-                  <Link
-                    to="/"
-                    onClick={this.props.displayLoginHandler}
-                    className=""
-                  >
-                    Back
-                  </Link>
-                </FormGroup>
-                <FormGroup check>
-                  <Button
-                    className="float-right mr-0"
-                    color="danger"
-                    style={{
-                      borderRadius: '25px',
-                      minWidth: '100px',
-                      maxWidth: '200px'
-                    }}
-                  >
-                    CONFIRM
-                  </Button>
-                </FormGroup>
-              </Form>
-              {this.props.resetPassFailedMessage !== '' ? (
-                <div className="invalid-feedback d-block">
-                  {this.props.resetPassFailedMessage}
-                </div>
-              ) : null}
-            </Fragment>
+          {this.props.loadingSpinner && !this.props.resetPasswordSuccessful ? (
+            <Spinner />
           ) : (
             <Fragment>
-              <h5>Your Password has been successfuly changed!</h5>
-              <Link to="/">
-                <Button
-                  className="mt-5 float-right"
-                  color="danger"
-                  style={{
-                    borderRadius: '25px',
-                    minWidth: '100px',
-                    maxWidth: '200px'
-                  }}
-                  onClick={() => {
-                    this.props.displayLoginHandler();
-                  }}
-                >
-                  Ok
-                </Button>
-              </Link>
+              {!this.props.resetPasswordSuccessful ? (
+                <Fragment>
+                  <Form onSubmit={this.resetPass} className="p-4">
+                    <Row form>
+                      <Col md={6}>
+                        <FormGroup>
+                          <Label for="password" className="mr-sm-2">
+                            Enter new password:
+                          </Label>
+                          <Input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="********"
+                            autoComplete="true"
+                            invalid={
+                              this.state.errors && this.state.errors.password
+                            }
+                            onChange={this.onChangeHandler}
+                          />
+                          <FormFeedback>New password is required!</FormFeedback>
+                        </FormGroup>
+                      </Col>
+                      <Col md={6}>
+                        <FormGroup>
+                          <Label for="password" className="mr-sm-2">
+                            Confirm Password:
+                          </Label>
+                          <Input
+                            type="password"
+                            name="confirmPass"
+                            id="confirmPass"
+                            placeholder="********"
+                            autoComplete="true"
+                            invalid={
+                              this.state.errors && this.state.errors.confirmPass
+                            }
+                            onChange={this.onChangeHandler}
+                          />
+                          <FormFeedback>
+                            {this.state.errors && this.state.errors.confirmPass}
+                          </FormFeedback>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <FormGroup>
+                      <Link
+                        to="/"
+                        onClick={this.props.displayLoginHandler}
+                        className=""
+                      >
+                        Back
+                      </Link>
+                    </FormGroup>
+                    <FormGroup check>
+                      <Button
+                        className="float-right mr-0"
+                        color="danger"
+                        style={{
+                          borderRadius: '25px',
+                          minWidth: '100px',
+                          maxWidth: '200px'
+                        }}
+                      >
+                        CONFIRM
+                      </Button>
+                    </FormGroup>
+                  </Form>
+                  {this.props.resetPassFailedMessage !== '' ? (
+                    <div className="invalid-feedback d-block">
+                      {this.props.resetPassFailedMessage}
+                    </div>
+                  ) : null}
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <h5>Your Password has been successfuly changed!</h5>
+                  <Link to="/">
+                    <Button
+                      className="mt-5 float-right"
+                      color="danger"
+                      style={{
+                        borderRadius: '25px',
+                        minWidth: '100px',
+                        maxWidth: '200px'
+                      }}
+                      onClick={() => {
+                        this.props.displayLoginHandler();
+                      }}
+                    >
+                      Ok
+                    </Button>
+                  </Link>
+                </Fragment>
+              )}
             </Fragment>
           )}
         </div>
@@ -168,11 +180,12 @@ class ResetPass extends Component {
 }
 
 const mapStateToProps = state => ({
+  loadingSpinner: state.userReducer.loadingSpinner,
   resetPasswordSuccessful: state.userReducer.resetPasswordSuccessful,
   resetPassFailedMessage: state.userReducer.resetPassFailedMessage
 });
 
 export default connect(
   mapStateToProps,
-  { resetPassword }
+  { resetPassword, startLoadingSpinner }
 )(ResetPass);

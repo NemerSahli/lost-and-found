@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadItems } from '../../../actions/itemCrud';
 import { updateProfile } from '../../../actions/userCrud';
@@ -10,7 +10,6 @@ class Profile extends Component {
   }
 
   render() {
- 
     return (
       <div>
         <div className="container">
@@ -37,10 +36,7 @@ class Profile extends Component {
                     <i className="fas fa-star" />
 
                     <p className="text-muted">
-                     
-                        {this.props.loggedInUser &&
-                          this.props.loggedInUser.about}
-                     
+                      {this.props.loggedInUser && this.props.loggedInUser.about}
                     </p>
                   </div>
                 </div>
@@ -186,6 +182,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadItems, updateProfile },
-  null
+  { loadItems, updateProfile }
 )(Profile);

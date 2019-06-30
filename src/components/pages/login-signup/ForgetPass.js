@@ -3,9 +3,11 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import {
   forgetPassword,
+  startLoadingSpinner,
   closeLoginSignUpModal
 } from '../../../actions/login-signup';
 import { Link } from 'react-router-dom';
+import Spinner from '../../layout/Spinner';
 class ForgetPass extends Component {
   state = {
     userEmail: '',
@@ -18,7 +20,7 @@ class ForgetPass extends Component {
       this.setState({ errors: { userEmail: 'Email is required' } });
       return;
     }
-
+    this.props.startLoadingSpinner();
     this.props.forgetPassword(userEmail, this.props.history);
     this.setState({ errors: {} });
   };
@@ -34,74 +36,81 @@ class ForgetPass extends Component {
       <div className="row justify-content-center">
         <div className="w-75">
           <h5>Forget Password</h5>
+
           <hr />
-          {!this.props.forgetPasswordSuccessful ? (
-            <Fragment>
-              <Form className="mt-4">
-                <FormGroup className="mb-2 mt-3">
-                  <Label for="userEmail">Please enter your email</Label>
-                  <Input
-                    type="email"
-                    name="userEmail"
-                    id="email"
-                    placeholder="example@example.com"
-                    autoComplete="true"
-                    onChange={this.onChangeHandler}
-                  />
-                  {this.state.errors && (
-                    <div className="invalid-feedback d-block">
-                      {' '}
-                      {this.state.errors.userEmail}{' '}
-                    </div>
-                  )}
-                </FormGroup>
-
-                <Button
-                  className="float-right"
-                  color="danger"
-                  style={{
-                    borderRadius: '25px',
-                    minWidth: '100px',
-                    maxWidth: '200px'
-                  }}
-                  onClick={this.forgetPassword}
-                >
-                  send
-                </Button>
-                <Link
-                  to="#"
-                  className="float-left mt-3 mr-2"
-                  onClick={this.props.displayLoginHandler}
-                >
-                  Back
-                </Link>
-              </Form>
-
-              {this.props.forgetPassFailedMessage !== '' ? (
-                <div className="invalid-feedback d-block">
-                  {this.props.forgetPassFailedMessage}{' '}
-                </div>
-              ) : null}
-            </Fragment>
+          {this.props.loadingSpinner && !this.props.forgetPasswordSuccessful ? (
+            <Spinner />
           ) : (
-            <div>
-              <h5>Please check your email to reset your password!</h5>
-              <Button
-                className="float-right"
-                color="danger"
-                style={{
-                  borderRadius: '25px',
-                  minWidth: '100px',
-                  maxWidth: '200px'
-                }}
-                onClick={() => {
-                  this.props.displayLoginHandler();
-                  this.props.closeLoginSignUpModal();
-                }}
-              >
-                Ok
-              </Button>
-            </div>
+            <Fragment>
+              {!this.props.forgetPasswordSuccessful ? (
+                <Fragment>
+                  <Form className="mt-4">
+                    <FormGroup className="mb-2 mt-3">
+                      <Label for="userEmail">Please enter your email</Label>
+                      <Input
+                        type="email"
+                        name="userEmail"
+                        id="email"
+                        placeholder="example@example.com"
+                        autoComplete="true"
+                        onChange={this.onChangeHandler}
+                      />
+                      {this.state.errors && (
+                        <div className="invalid-feedback d-block">
+                          {' '}
+                          {this.state.errors.userEmail}{' '}
+                        </div>
+                      )}
+                    </FormGroup>
+
+                    <Button
+                      className="float-right"
+                      color="danger"
+                      style={{
+                        borderRadius: '25px',
+                        minWidth: '100px',
+                        maxWidth: '200px'
+                      }}
+                      onClick={this.forgetPassword}
+                    >
+                      send
+                    </Button>
+                    <Link
+                      to="#"
+                      className="float-left mt-3 mr-2"
+                      onClick={this.props.displayLoginHandler}
+                    >
+                      Back
+                    </Link>
+                  </Form>
+
+                  {this.props.forgetPassFailedMessage !== '' ? (
+                    <div className="invalid-feedback  d-block">
+                      {this.props.forgetPassFailedMessage}
+                    </div>
+                  ) : null}
+                </Fragment>
+              ) : (
+                <div>
+                  <h5>Please check your email to reset your password!</h5>
+                  <Button
+                    className="float-right"
+                    color="danger"
+                    style={{
+                      borderRadius: '25px',
+                      minWidth: '100px',
+                      maxWidth: '200px'
+                    }}
+                    onClick={() => {
+                      this.props.displayLoginHandler();
+                      this.props.closeLoginSignUpModal();
+                    }}
+                  >
+                    Ok
+                  </Button>
+                </div>
+              )}
+            </Fragment>
           )}
         </div>
       </div>
@@ -111,10 +120,11 @@ class ForgetPass extends Component {
 
 const mapStateToProps = state => ({
   forgetPasswordSuccessful: state.userReducer.forgetPasswordSuccessful,
-  forgetPassFailedMessage: state.userReducer.forgetPassFailedMessage
+  forgetPassFailedMessage: state.userReducer.forgetPassFailedMessage,
+  loadingSpinner: state.userReducer.loadingSpinner
 });
 
 export default connect(
   mapStateToProps,
-  { forgetPassword, closeLoginSignUpModal }
+  { forgetPassword, closeLoginSignUpModal, startLoadingSpinner }
 )(ForgetPass);

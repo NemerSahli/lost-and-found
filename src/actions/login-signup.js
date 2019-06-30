@@ -81,13 +81,12 @@ export const signUp = (signUpUser, routeTo) => async dispatch => {
     });
     // console.log(result);
     if (result.data.error === 0) {
-      // dispatch({ type: 'LOGIN', payload: result.data.loggedInUser });
       dispatch({ type: 'SIGNUP' });
     } else {
       dispatch({ type: 'SIGN_UP_FAILD', error: result.data.message });
     }
   } catch (e) {
-    dispatch({ type: 'SIGN_UP_FAILD', error: 'Error in network!' });
+    dispatch({ type: 'SIGN_UP_FAILD', error: 'Internal error!' });
   }
 };
 
@@ -138,4 +137,12 @@ export const resetPassword = resetPassEmail => async dispatch => {
       });
     console.log('error:' + JSON.stringify(error.response.data));
   }
+};
+
+export const startLoadingSpinner = () => dispatch => {
+  dispatch({ type: 'START_LOADING_SPINNER' });
+};
+
+export const stopLoadingSpinner = () => dispatch => {
+  dispatch({ type: 'STOP_LOADING_SPINNER' });
 };

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import Spinner from '../../layout/Spinner';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { logIn } from '../../../actions/login-signup';
 import { Link } from 'react-router-dom';
+
 class Login extends Component {
   // defined state to save the value of
   // email, password and the errors
@@ -37,6 +39,7 @@ class Login extends Component {
     this.setState({
       logInSpinner: true
     });
+    
     setTimeout(() => {
       this.props.logIn(loginUser);
       setTimeout(() => {
@@ -65,19 +68,7 @@ class Login extends Component {
         }
       >
         {this.state.logInSpinner ? (
-          <div className="spinner-block ">
-            <div className="spinner spinner-3 row justify-content-center">
-              <img
-                className="marker-spinner image-fit"
-                src="/images/redMarker.png"
-                alt=""
-                style={{
-                  width: '200px',
-                  height: '120px'
-                }}
-              />
-            </div>
-          </div>
+          <Spinner />
         ) : (
           <div className="w-75">
             <h5 className="">Please Sign In</h5>
