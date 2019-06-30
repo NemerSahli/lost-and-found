@@ -5,7 +5,6 @@ import SignUp from './SignUp';
 import Login from './Login';
 import ResetPass from './ResetPass';
 import ForgetPass from './ForgetPass';
-import SignUpSuccess from './SingUpSuccess';
 import {
   openLoginSignUpModal,
   closeLoginSignUpModal
@@ -16,7 +15,6 @@ class LoginSingUpModal extends Component {
     signUpDisplay: false,
     forgetPassDisplay: false,
     resetPassDisplay: false,
-    signUpSuccessfull: false,
     errors: {}
   };
   componentDidMount() {
@@ -29,7 +27,6 @@ class LoginSingUpModal extends Component {
         signUpDisplay: false,
         forgetPassDisplay: false,
         resetPassDisplay: true,
-        signUpSuccessfull: false,
         errors: {}
       });
     } else {
@@ -38,7 +35,6 @@ class LoginSingUpModal extends Component {
         signUpDisplay: false,
         forgetPassDisplay: false,
         resetPassDisplay: false,
-        signUpSuccessfull: false,
         errors: {}
       });
     }
@@ -107,13 +103,9 @@ class LoginSingUpModal extends Component {
             />
           )}
 
-          {this.state.signUpDisplay ? (
-            this.props.signUpSuccessful ? (
-              <SignUpSuccess displayLoginHandler={this.displayLogin} />
-            ) : (
-              <SignUp displayLoginHandler={this.displayLogin} />
-            )
-          ) : null}
+          {this.state.signUpDisplay && (
+            <SignUp displayLoginHandler={this.displayLogin} />
+          )}
 
           {this.state.forgetPassDisplay && (
             <ForgetPass displayLoginHandler={this.displayLogin} />
@@ -132,8 +124,7 @@ class LoginSingUpModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  modalIsOpen: state.userReducer.modalIsOpen,
-  signUpSuccessful: state.userReducer.signUpSuccessful
+  modalIsOpen: state.userReducer.modalIsOpen
 });
 export default connect(
   mapStateToProps,
