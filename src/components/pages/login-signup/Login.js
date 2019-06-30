@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Spinner from '../../layout/Spinner';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { logIn } from '../../../actions/login-signup';
+import { logIn , startLoadingSpinner} from '../../../actions/login-signup';
 import { Link } from 'react-router-dom';
 
 class Login extends Component {
@@ -12,15 +12,13 @@ class Login extends Component {
     email: '',
     password: '',
     errors: null,
-    // errorAnimated: false,
-    logInSpinner: false
+
   };
 
   //login function first read if there is no
   // entry values and show the errors by
   // changing the errors in the state
   logIn = () => {
-    // this.state.errorAnimated = true;
     const { email, password } = this.state;
     if (email === '') {
       this.setState({ errors: { email: 'Email is required' } });
@@ -36,18 +34,11 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    this.setState({
-      logInSpinner: true
-    });
-    
+  
+    this.props.startLoadingSpinner();
     setTimeout(() => {
       this.props.logIn(loginUser);
-      setTimeout(() => {
-        this.setState({
-          logInSpinner: false
-        });
-      }, 700);
-    }, 2000);
+    }, 1000);
   };
 
   // this function save all inputs into state
@@ -62,12 +53,12 @@ class Login extends Component {
     return (
       <div
         className={
-          this.state.logInSpinner
+          this.props.loadingSpinner
             ? 'row justify-content-center mb-2  map_bg'
             : 'row justify-content-center mb-2'
         }
       >
-        {this.state.logInSpinner ? (
+        {this.props.loadingSpinner &&  !this.props.loggedInUser? (
           <Spinner />
         ) : (
           <div className="w-75">
@@ -156,11 +147,12 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  // loggedIn: state.reducer1.loggedIn,
+  loadingSpinner: state.userReducer.loadingSpinner,
+  loggedInUser: state.userReducer.loggedInUser,
   loginFailedMessage: state.userReducer.loginFailedMessage
 });
 
 export default connect(
   mapStateToProps,
-  { logIn }
+  { logIn, startLoadingSpinner }
 )(Login);
