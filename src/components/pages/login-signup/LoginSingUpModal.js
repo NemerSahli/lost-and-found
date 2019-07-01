@@ -14,8 +14,7 @@ class LoginSingUpModal extends Component {
     loginDisplay: true,
     signUpDisplay: false,
     forgetPassDisplay: false,
-    resetPassDisplay: false,
-    errors: {}
+    resetPassDisplay: false
   };
   componentDidMount() {
     let splitedUrl = window.location.href.split('resetpass?q=');
@@ -26,16 +25,14 @@ class LoginSingUpModal extends Component {
         loginDisplay: false,
         signUpDisplay: false,
         forgetPassDisplay: false,
-        resetPassDisplay: true,
-        errors: {}
+        resetPassDisplay: true
       });
     } else {
       this.setState({
         loginDisplay: true,
         signUpDisplay: false,
         forgetPassDisplay: false,
-        resetPassDisplay: false,
-        errors: {}
+        resetPassDisplay: false
       });
     }
   }
