@@ -18,52 +18,55 @@ class MyItems extends Component {
   }
 
   render() {
+    let tableBodyLess =
+      this.props.myItems &&
+      this.props.myItems.map((item, i) => {
+        if (i <= 3) {
+          return <ItemProfile key={item._id} item={item} />;
+        }
+      });
+    let tableBodyMore =
+      this.props.myItems &&
+      this.props.myItems.map(item => {
+        return <ItemProfile key={item._id} item={item} />;
+      });
+
     return (
       <div>
         <h5 className="text-center">My Items History:</h5>
         <hr />
+
         <Table striped>
           <tr>
-            <td>
+            <th>
               <b>Image</b>
-            </td>
-            <td>
+            </th>
+            <th>
               <b>Title</b>
-            </td>
-            <td>
+            </th>
+            <th>
               <b>Type</b>
-            </td>
-            <td>
+            </th>
+            <th>
               <b>Time</b>
-            </td>
-            <td>
+            </th>
+            <th>
               <b>Date</b>
-            </td>
-            <td>
-              <b>Active</b>
-            </td>
+            </th>
+            <th>
+              <b>Status</b>
+            </th>
+            <th>
+              <b>Stop</b>
+            </th>
           </tr>
-          <tbody>
-            {this.props.myItems &&
-              this.props.myItems.map((item, i) => {
-                if (i <=3) {
-                  return <ItemProfile key={item._id} item={item} />;
-                }
-              })}
-          </tbody>
+
+          {!this.state.collapse ? (
+            <tbody>{tableBodyLess}</tbody>
+          ) : (
+            <tbody>{tableBodyMore}</tbody>
+          )}
         </Table>
-        <Collapse isOpen={this.state.collapse}>
-          <Table striped>
-            <tbody>
-              {this.props.myItems &&
-                this.props.myItems.map((item, i) => {
-                  if (i > 3) {
-                    return <ItemProfile key={item._id} item={item} />;
-                  }
-                })}
-            </tbody>
-          </Table>
-        </Collapse>
 
         {this.state.collapse ? (
           <div className="profile-collapse__item">
@@ -84,7 +87,7 @@ class MyItems extends Component {
               style={{ cursor: 'pointer' }}
             >
               {' '}
-              Show Items
+              Show more ...
             </i>
           </div>
         )}

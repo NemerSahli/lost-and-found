@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { deactivateItem } from './../../../actions/itemCrud';
+import { connect } from 'react-redux';
 class ItemProfile extends Component {
   render() {
+    const { item } = this.props;
     return (
       <tr>
         <td>
           {' '}
           <img
             className="image-fit"
-            src={'/images/' + this.props.item.imageUrl}
+            src={'/images/' + item.imageUrl}
             alt=""
             style={{
               width: '50px',
@@ -18,29 +21,45 @@ class ItemProfile extends Component {
         </td>
         <td>
           {' '}
-          <h5>{this.props.item.name}</h5>
+          <h5>{item.name}</h5>
         </td>
-        <td>{this.props.item.type}</td>
+        <td>{item.type}</td>
         <td>
           {' '}
-          <small>{this.props.item.time}</small>
+          <small>{item.time}</small>
         </td>
-        <td>{this.props.item.date.slice(0, 10)}</td>
+        <td>{item.date.slice(0, 10)}</td>
 
-        <td>
-          <i className="fas fa-check-circle text-success" />
-        </td>
-        <td>
-          <i
-            class="far fa-stop-circle cursor-pointer"
-            onClick={() => {
-              alert('are you sure, want to stop this item');
-            }}
-          />
-        </td>
+        {!item.active ? (
+          <Fragment>
+            <td>
+              <i className="fas fa-check-circle text-success">Active</i>
+            </td>
+            <td>
+              <i
+                class="far fa-stop-circle cursor-pointer"
+                onClick={() => {
+                  this.props.deactivateItem(item._id);
+                }}
+              />
+            </td>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <td>
+              <i className="fas fa-minus-circle text-danger">Deactivated</i>
+            </td>
+            <td>
+              <i className="fas fa-ban text-danger" />
+            </td>
+          </Fragment>
+        )}
       </tr>
     );
   }
 }
 
-export default ItemProfile;
+export default connect(
+  null,
+  { deactivateItem }
+)(ItemProfile);

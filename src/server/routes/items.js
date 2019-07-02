@@ -158,16 +158,17 @@ router.get('/search', async (req, res) => {
 });
 
 //==============================================
-// stop item from the dashboard list view also 
+// stop item from the dashboard list view also
 // stop messages for this item and my items list
 
-router.post('/stop/:id', async(req, res)=>{
+router.post('/stop/:id', async (req, res) => {
   console.log(req.params.it);
   let item = await Item.findOne();
-  if (!item) return res.status(400).send({message:'no item found by this id'});
-
-  
-})
+  if (!item)
+    return res.status(400).send({ message: 'no item found by this id' });
+  item.active = false;
+  await item.save();
+  res.status(200).send({ message: 'your item has been deactivated!' });
+});
 
 module.exports = router;
-
