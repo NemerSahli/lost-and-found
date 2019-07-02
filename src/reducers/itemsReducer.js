@@ -21,7 +21,7 @@ const intialState = {
 };
 var averageLat = 0;
 var averageLng = 0;
-var markers=[];
+var markers = [];
 
 export default function(state = intialState, action) {
   switch (action.type) {
@@ -35,12 +35,16 @@ export default function(state = intialState, action) {
         ...state,
         myItems: action.payload
       };
+    case 'DEACTIVATE_ITEM':
+      return {
+        ...state
+      };
 
     case 'GENERATE_MARKERS':
       averageLat = 0;
       averageLng = 0;
       if (state.items) {
-         markers = state.items.map(item => {
+        markers = state.items.map(item => {
           let lnglat = item.lnglat.split(',');
           var color = '';
           item.type === 'lost' ? (color = 'red') : (color = 'green');
