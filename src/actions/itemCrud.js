@@ -68,6 +68,22 @@ export const addItem = (newItem, routeTo) => dispatch => {
     });
 };
 
+export const deactivateItem = id => dispatch => {
+  axios({
+    method: 'put',
+    url: window.lofoBackend + '/api/items/deactivate/' + id
+    // withCredentials: true
+  })
+    .then(response => {
+      if (response.data.error === 0) {
+        alert('deactivated');
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
 export const loadImage = (imgDataUri, route) => dispatch => {
   dispatch({ type: 'LOAD_IMAGE', payload: imgDataUri });
   route.push('/insertFoundItem');

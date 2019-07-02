@@ -30,7 +30,7 @@ class ItemProfile extends Component {
         </td>
         <td>{item.date.slice(0, 10)}</td>
 
-        {!item.active ? (
+        {item.active ? (
           <Fragment>
             <td>
               <i className="fas fa-check-circle text-success">Active</i>
