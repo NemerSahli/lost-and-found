@@ -75,7 +75,7 @@ export const deactivateItem = id => dispatch => {
     // withCredentials: true
   })
     .then(response => {
-      if (response.data.error === 0) {
+      if (response.status === 200) {
         alert('deactivated');
       }
     })
