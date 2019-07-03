@@ -31,7 +31,6 @@ export default function(state = intialState, action) {
         loggedIn: true,
         modalIsOpen: false,
         loadingSpinner: false,
-        loadingSpinner: false,
         loggedInUser: action.payload,
         loginFailedMessage: '',
         forgetPassFailedMessage: '',
