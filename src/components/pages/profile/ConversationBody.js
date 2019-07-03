@@ -59,18 +59,20 @@ class ConversationBody extends Component {
           {this.props.conversationUsers ? (
             this.props.conversationUsers ? (
               <div>
-                <img
-                  src={
-                    '/images/' + this.props.conversationUsers.itemId.imageUrl
-                  }
-                  className="image-fit"
-                  alt="..."
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%'
-                  }}
-                />
+                <div className="deactivated">
+                  <img
+                    src={
+                      '/images/' + this.props.conversationUsers.itemId.imageUrl
+                    }
+                    className="image-fit"
+                    alt="..."
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%'
+                    }}
+                  />
+                </div>
                 {this.props.conversationUsers.itemId.name}
               </div>
             ) : null
