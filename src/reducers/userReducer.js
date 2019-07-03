@@ -122,19 +122,6 @@ export default function(state = intialState, action) {
         modalIsOpen: true
       };
     case 'UPDATE_PROFILE':
-      // const newDataUser = {
-      //   firstName: action.payload.firstName,
-      //   lastName: action.payload.lastName,
-      //   email: state.loggedInUser.email,
-      //   password: state.loggedInUser.password,
-      //   country: action.payload.country,
-      //   city: action.payload.city,
-      //   location: action.payload.location,
-      //   zip: action.payload.zip,
-      //   phone: action.payload.phone,
-      //   about: action.payload.about,
-      //   registrationDate: state.loggedInUser.registrationDate
-      // };
       return {
         ...state,
         loggedInUser: action.payload
