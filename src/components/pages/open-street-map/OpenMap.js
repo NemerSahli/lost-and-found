@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CustomMap from './CustomMap';
 import { Jumbotron } from 'reactstrap';
 import SearchBar from '../mainpages/SearchBar';
-import { loadItems ,generateMarkers } from '../../../actions/itemCrud';
+import { loadItems, generateMarkers } from '../../../actions/itemCrud';
 
 class OpenMap extends Component {
   state = {
@@ -64,7 +64,7 @@ class OpenMap extends Component {
               style={{ borderRadius: '25px', minWidth: '100px' }}
             >
               all
-            </button>{' '}
+            </button>
           </div>
           <div className="col-12 col-md-7 ">
             <SearchBar />

@@ -128,7 +128,7 @@ class SignUp extends Component {
                 {!this.props.signUpFailedMessage === '' ? (
                   <Row>
                     <Alert color="danger" className="col-12">
-                      {this.props.signUpFailedMessage}{' '}
+                      {this.props.signUpFailedMessage}
                     </Alert>
                   </Row>
                 ) : null}

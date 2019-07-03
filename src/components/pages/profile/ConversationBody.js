@@ -27,7 +27,8 @@ class ConversationBody extends Component {
         var toUserId = '';
         // to find userId sender and userId reciever the message
         if (
-          this.props.loggedInUser._id === this.props.dialogueMessages[0].toUserId
+          this.props.loggedInUser._id ===
+          this.props.dialogueMessages[0].toUserId
         ) {
           toUserId = this.props.dialogueMessages[0].fromUserId;
         } else {
@@ -78,7 +79,7 @@ class ConversationBody extends Component {
         <ConversationMessages />
         <FormGroup className="mt-3">
           <Label for="exampleText">
-            Message to{' '}
+            Message to
             {this.props.conversationUsers
               ? this.props.conversationUsers.fromUserId._id ===
                 this.props.loggedInUser._id

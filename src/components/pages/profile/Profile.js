@@ -27,7 +27,7 @@ class Profile extends Component {
                   <div className="profile__header">
                     <h3>
                       {this.props.loggedInUser &&
-                        this.props.loggedInUser.firstName}{' '}
+                        this.props.loggedInUser.firstName}
                       <small>Helping soul</small>
                     </h3>
 
@@ -53,7 +53,7 @@ class Profile extends Component {
                         <th>
                           <strong>Name</strong>
                         </th>
-                        <td>{this.props.loggedInUser.firstName}</td>{' '}
+                        <td>{this.props.loggedInUser.firstName}</td>
                         <td>{this.props.loggedInUser.lastName}</td>
                       </tr>
                       <tr>
@@ -161,8 +161,7 @@ class Profile extends Component {
                         fontSize: '15px'
                       }}
                     >
-                      {' '}
-                      Edit{' '}
+                      Edit
                     </i>
                   </button>
                 </Link>

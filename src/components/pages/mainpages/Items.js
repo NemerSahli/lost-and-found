@@ -14,13 +14,13 @@ class Items extends Component {
           <Table className="m-0 striped">
             <tbody>
               {this.props.items.map(item => {
-                return (
+                return item.active ? (
                   <tr key={item._id} className="animated fadeIn">
                     <td>
                       <Item key={item._id} item={item} />
                     </td>
                   </tr>
-                );
+                ) : null;
               })}
             </tbody>
           </Table>

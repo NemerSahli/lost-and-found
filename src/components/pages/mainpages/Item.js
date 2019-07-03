@@ -33,7 +33,7 @@ class Item extends Component {
             <div className="col-12 col-md-8">
               <p className="lead text-dark">{comment}</p>
               <p className="mt-4 text-dark">
-                <strong>Location:</strong> {location}{' '}
+                <strong>Location:</strong> {location}
               </p>
               <p className="">
                 <strong>Date:</strong> {date.slice(0, 10)}

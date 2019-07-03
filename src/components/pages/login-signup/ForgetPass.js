@@ -57,8 +57,7 @@ class ForgetPass extends Component {
                       />
                       {this.state.errors && (
                         <div className="invalid-feedback d-block">
-                          {' '}
-                          {this.state.errors.userEmail}{' '}
+                          {this.state.errors.userEmail}
                         </div>
                       )}
                     </FormGroup>

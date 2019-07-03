@@ -2,13 +2,7 @@
 
 import React, { Component } from 'react';
 import { Input, Form } from 'reactstrap';
-import {
- 
-  Modal,
-  ModalHeader,
-  ModalBody,
-  
-} from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { updateProfile } from '../../../actions/userCrud';
 
@@ -75,7 +69,7 @@ class EditProfile extends Component {
                     <h3>
                       {this.props.loggedInUser &&
                         this.props.loggedInUser.firstName}
-                      <small>Helping soul</small>{' '}
+                      <small>Helping soul</small>
                     </h3>
 
                     <i className="fas fa-star" />
@@ -117,7 +111,7 @@ class EditProfile extends Component {
                               this.props.loggedInUser.firstName
                             }
                           />
-                        </div>{' '}
+                        </div>
                         <div className="col-6">
                           <Input
                             name="lastName"
@@ -212,8 +206,8 @@ class EditProfile extends Component {
                                 <div className="row justify-content-center">
                                   <header>
                                     Please check your e-mail inbox to enter
-                                    below the confirmation key we sent you.{' '}
-                                  </header>{' '}
+                                    below the confirmation key we sent you.
+                                  </header>
                                   <br />
                                   <div className="align-self-center w-50 m-3">
                                     Enter new password:
@@ -303,7 +297,7 @@ class EditProfile extends Component {
                 <div className="profile__contact-info-item">
                   <div className="profile__contact-info-icon">
                     <i className="fa fa-phone" />
-                  </div>{' '}
+                  </div>
                   <div className="profile__contact-info-body">
                     <h5 className="profile__contact-info-heading">
                       Mobile number
@@ -343,8 +337,7 @@ class EditProfile extends Component {
                       fontSize: '15px'
                     }}
                   >
-                    {' '}
-                    Save{' '}
+                    Save
                   </i>
                 </button>
               </div>

@@ -27,7 +27,7 @@ class Filter extends Component {
             style={{ borderRadius: '25px', minWidth: '100px' }}
           >
             all
-          </button>{' '}
+          </button>
           <button
             onClick={this.toggleCollapse}
             className="btn btn-danger"

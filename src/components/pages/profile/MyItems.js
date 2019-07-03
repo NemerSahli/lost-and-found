@@ -1,70 +1,82 @@
 import React, { Component } from 'react';
-import { Table, Collapse } from 'reactstrap';
+import { Table } from 'reactstrap';
 import ItemProfile from './ItemProfile';
 import { connect } from 'react-redux';
 import { loadMyItems } from '../../../actions/itemCrud';
 
 class MyItems extends Component {
   state = {
-    collapse: false,
-    visible: true
+    collapse: false
   };
 
   toggle = () => {
     this.setState({ collapse: !this.state.collapse });
   };
-  componentDidMount() {
-    this.props.loadMyItems(this.props.loggedInUser._id);
+  async componentDidMount() {
+    await this.props.loadMyItems(this.props.loggedInUser._id);
   }
 
   render() {
-    let tableBodyLess =
-      this.props.myItems &&
-      this.props.myItems.map((item, i) => {
-        if (i <= 3) {
-          return <ItemProfile key={item._id} item={item} />;
-        }
-      });
-    let tableBodyMore =
-      this.props.myItems &&
-      this.props.myItems.map(item => {
-        return <ItemProfile key={item._id} item={item} />;
-      });
-
     return (
       <div>
         <h5 className="text-center">My Items History:</h5>
-        <hr />
+        <hr className="mb-3" />
 
         <Table striped>
-          <tr>
-            <th>
-              <b>Image</b>
-            </th>
-            <th>
-              <b>Title</b>
-            </th>
-            <th>
-              <b>Type</b>
-            </th>
-            <th>
-              <b>Time</b>
-            </th>
-            <th>
-              <b>Date</b>
-            </th>
-            <th>
-              <b>Status</b>
-            </th>
-            <th>
-              <b>Stop</b>
-            </th>
-          </tr>
+          <thead className="mb-3">
+            <tr>
+              <th>
+                <b>Image</b>
+              </th>
+              <th>
+                <b>Title</b>
+              </th>
+              <th>
+                <b>Type</b>
+              </th>
+              <th>
+                <b>Time</b>
+              </th>
+              <th>
+                <b>Date</b>
+              </th>
+              <th>
+                <b>Status</b>
+              </th>
+              <th>
+                <b>Stop</b>
+              </th>
+            </tr>
+          </thead>
 
           {!this.state.collapse ? (
-            <tbody>{tableBodyLess}</tbody>
+            <tbody>
+              {this.props.myItems &&
+                this.props.myItems.map((item, i) => {
+                  if (i <= 3) {
+                    return (
+                      <ItemProfile
+                        key={item._id}
+                        item={item}
+                        active={item.active}
+                      />
+                    );
+                  }
+                })}
+            </tbody>
           ) : (
-            <tbody>{tableBodyMore}</tbody>
+            <tbody>
+              {this.props.myItems &&
+                this.props.myItems.map(item => {
+                  return (
+                    <ItemProfile
+                      key={item._id}
+                      item={item}
+                      active={item.active}
+                    />
+                  );
+                })}
+            </tbody>
           )}
         </Table>
 
@@ -75,7 +87,6 @@ class MyItems extends Component {
               onClick={this.toggle}
               style={{ cursor: 'pointer' }}
             >
-              {' '}
               Show less
             </i>
           </div>
@@ -86,7 +97,6 @@ class MyItems extends Component {
               onClick={this.toggle}
               style={{ cursor: 'pointer' }}
             >
-              {' '}
               Show more ...
             </i>
           </div>

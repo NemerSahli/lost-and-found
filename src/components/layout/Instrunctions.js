@@ -78,9 +78,7 @@ export default function Instrunctions() {
               <p>to know branches on gitHub:</p> <p>git branch -a</p>
             </li>
             <li>
-              <p>
-                please always work on your branch and push to it like this:{' '}
-              </p>
+              <p>please always work on your branch and push to it like this:</p>
               <p>for example: git push origin Niko1.0</p>
             </li>
             <li>
@@ -159,7 +157,7 @@ export default function Instrunctions() {
             </li>
             <li>
               <p>
-                please always work on your branch and push to it like this:{' '}
+                please always work on your branch and push to it like this:
               </p>
               <p>for example: git push origin Niko2.0</p>
             </li>

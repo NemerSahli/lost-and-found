@@ -76,7 +76,7 @@ export const deactivateItem = id => dispatch => {
   })
     .then(response => {
       if (response.status === 200) {
-        dispatch({ type: 'DEACTIVATE_ITEM', itemID: id });
+        dispatch({ type: 'DEACTIVATE_ITEM', itemId: id });
       }
     })
     .catch(error => {

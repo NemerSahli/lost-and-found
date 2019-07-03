@@ -36,7 +36,7 @@ class ConversationMessages extends Component {
                   {message.messageContent}
                   <small className="float-right">
                     {message.date.split('T')[1].slice(0, 5)}
-                  </small>{' '}
+                  </small>
                 </p>
               );
             })}

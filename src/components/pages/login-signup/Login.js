@@ -96,8 +96,7 @@ class Login extends Component {
                 />
                 {this.state.errors && (
                   <div className="invalid-feedback d-block">
-                    {' '}
-                    {this.state.errors.password}{' '}
+                    {this.state.errors.password}
                   </div>
                 )}
               </FormGroup>

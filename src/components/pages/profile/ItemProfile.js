@@ -7,7 +7,6 @@ class ItemProfile extends Component {
     return (
       <tr>
         <td>
-          {' '}
           <img
             className="image-fit"
             src={'/images/' + item.imageUrl}
@@ -20,26 +19,28 @@ class ItemProfile extends Component {
           />
         </td>
         <td>
-          {' '}
           <h5>{item.name}</h5>
         </td>
         <td>{item.type}</td>
         <td>
-          {' '}
           <small>{item.time}</small>
         </td>
         <td>{item.date.slice(0, 10)}</td>
-
-        {item.active ? (
+        {this.props.active ? (
           <Fragment>
             <td>
               <i className="fas fa-check-circle text-success">Active</i>
             </td>
             <td>
               <i
-                class="far fa-stop-circle cursor-pointer"
+                className="far fa-stop-circle cursor-pointer"
                 onClick={() => {
-                  this.props.deactivateItem(item._id);
+                  if (
+                    window.confirm(
+                      'Warning: Are you sure you wish to stop this item? you are not able to active it again!'
+                    )
+                  )
+                    this.props.deactivateItem(item._id);
                 }}
               />
             </td>

@@ -26,9 +26,9 @@ class App extends Component {
     window.lofoHost = config.host;
   }
 
-  componentDidMount() {
-    let token = localStorage.getItem('token');
-    let userId = localStorage.getItem('userId');
+  async componentDidMount() {
+    let token = await localStorage.getItem('token');
+    let userId = await localStorage.getItem('userId');
     if (token && userId) {
       this.props.checkUserAuthenticated(token, userId);
     }
@@ -43,9 +43,8 @@ class App extends Component {
           <LoginSingUpModal />
           <div className="body-content container">
             <Switch>
-            <Route exact path="/" component={Mainpage} />
+              <Route exact path="/" component={Mainpage} />
               <Route exact path="/resetpass" component={Mainpage} />
-              
 
               <Route exact path="/mainpage" component={Mainpage} />
               <Route exact path="/myaccount/edit" component={EditProfile} />
