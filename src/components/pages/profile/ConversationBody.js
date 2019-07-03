@@ -59,7 +59,7 @@ class ConversationBody extends Component {
           {this.props.conversationUsers ? (
             this.props.conversationUsers ? (
               <div>
-                <div className="deactivated">
+                
                   <img
                     src={
                       '/images/' + this.props.conversationUsers.itemId.imageUrl
@@ -72,7 +72,7 @@ class ConversationBody extends Component {
                       borderRadius: '50%'
                     }}
                   />
-                </div>
+               
                 {this.props.conversationUsers.itemId.name}
               </div>
             ) : null

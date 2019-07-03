@@ -15,6 +15,9 @@ class ConversationItem extends Component {
 
     return (
       <a href="#send-message-body-id" className="no-underline">
+        <div
+          className={this.props.item.item[0].active ? 'active' : 'deactivated'}
+        />
         <div className="row p-3">
           <div className="col-6 no-underline">
             <h5 className="no-underline">{displayUserSender}</h5>
