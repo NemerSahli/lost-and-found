@@ -87,13 +87,20 @@ class ConversationBody extends Component {
                 : this.props.conversationUsers.fromUserId.firstName
               : '...'}
           </Label>
+
           <Input
             onKeyPress={this.onKeyPressHandler}
             id="message-input"
             onChange={this.onChangeHandler}
             type="textarea"
             name="messageText"
-            disabled={this.props.dialogueMessages ? false : true}
+            disabled={
+              this.props.dialogueMessages &&
+              this.props.conversationUsers &&
+              this.props.conversationUsers.itemId.active
+                ? false
+                : true
+            }
           />
         </FormGroup>
         <button

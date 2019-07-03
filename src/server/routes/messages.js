@@ -144,7 +144,6 @@ router.get('/conversationitems/:id', auth, async (req, res) => {
     }
   ]).exec((error, docs) => {
     if (error) throw error;
-    // console.log(JSON.stringify(docs, null, '\t'));
     return res.send({ error: 0, documents: docs });
   });
 });
@@ -156,7 +155,7 @@ router.get('/load/dialogue/:port', auth, async (req, res) => {
   await Message.findOne({ conversationPort: req.params.port })
     .populate('fromUserId', 'firstName')
     .populate('toUserId', 'firstName')
-    .populate('itemId', 'name imageUrl')
+    .populate('itemId', 'name imageUrl active')
     .exec((error, usersNames) => {
       if (error) throw error;
       // console.log(JSON.stringify(usersNames, null, '\t'));
