@@ -13,6 +13,7 @@ class ConversationBody extends Component {
       this.sendMessageHandler(e);
     }
   };
+
   onChangeHandler = event => {
     this.setState({
       messageText: event.target.value
@@ -21,11 +22,9 @@ class ConversationBody extends Component {
 
   sendMessageHandler = () => {
     if (this.props.dialogueMessages) {
-      // console.log('condition if dialogue has messages');
       if (this.state.messageText !== '') {
-        // console.log(this.props.dialogueMessages[0]);
         var toUserId = '';
-        // to find userId sender and userId reciever the message
+        
         if (
           this.props.loggedInUser._id ===
           this.props.dialogueMessages[0].toUserId

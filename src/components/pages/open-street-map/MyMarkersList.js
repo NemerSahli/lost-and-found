@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MyPopupMarker from './MyPopupMarker';
 
 const MyMarkersList = ({ markers }) => {
@@ -14,7 +13,4 @@ const MyMarkersList = ({ markers }) => {
   }
 };
 
-MyMarkersList.propTypes = {
-  markers: PropTypes.array.isRequired
-};
 export default MyMarkersList;

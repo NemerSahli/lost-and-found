@@ -27,7 +27,7 @@ router.get('/', [auth, admin], (req, res) => {
 
 // to get all items list
 router.get('/itemList', (req, res) => {
-  Item.find({}, (err, items) => {
+  Item.find({ active: true }, (err, items) => {
     if (err)
       res.status(400).send({ message: 'could not get items from database...' });
     res.send({ error: 0, items: items });
