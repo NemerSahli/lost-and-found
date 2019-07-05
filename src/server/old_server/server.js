@@ -1,10 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('express-async-errors');
-const Item = require('./schemaModel/itemModel');
-const Message = require('./schemaModel/messageModel');
-const User = require('./schemaModel/userModel');
-const error = require('./error');
+const Item = require('../schemaModel/itemModel');
+const Message = require('../schemaModel/messageModel');
+const User = require('../schemaModel/userModel');
+const error = require('../error');
 const passport = require('passport');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
