@@ -102,7 +102,6 @@ export default function(state = intialState, action) {
       };
 
     case 'RESET_PASS_FAILED':
-      alert(action.error);
       return {
         ...state,
         loadingSpinner: false,

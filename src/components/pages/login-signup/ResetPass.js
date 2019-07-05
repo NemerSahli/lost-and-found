@@ -38,23 +38,19 @@ class ResetPass extends Component {
       });
       return;
     }
-    if (password === '' || confirmPass === '') {
-      alert('something wrong');
-      return;
-    } else {
-      if (this.state.password === this.state.confirmPass) {
-        let resetPassEmail = {
-          resetPasswordKey: this.props.resetPasswordKey,
-          password: this.state.password
-        };
 
-        this.props.startLoadingSpinner();
-        setTimeout(() => {
-          this.props.resetPassword(resetPassEmail);
-        }, 1000);
-      } else {
-        this.setState({ errors: { confirmPass: 'wrong confirmation' } });
-      }
+    if (this.state.password === this.state.confirmPass) {
+      let resetPassEmail = {
+        resetPasswordKey: this.props.resetPasswordKey,
+        password: this.state.password
+      };
+
+      this.props.startLoadingSpinner();
+      setTimeout(() => {
+        this.props.resetPassword(resetPassEmail);
+      }, 1000);
+    } else {
+      this.setState({ errors: { confirmPass: 'wrong confirmation' } });
     }
   };
 

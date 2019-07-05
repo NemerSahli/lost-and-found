@@ -9,7 +9,7 @@ const MyMarkersList = ({ markers }) => {
 
     return <div style={{ display: 'none' }}>{items}</div>;
   } else {
-    return <div style={{ display: 'none' }} />;
+    return null;
   }
 };
 

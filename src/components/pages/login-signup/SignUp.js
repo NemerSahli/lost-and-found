@@ -3,7 +3,6 @@ import Spinner from '../../layout/Spinner';
 import {
   Col,
   Button,
-  Alert,
   Form,
   FormGroup,
   FormFeedback,
@@ -125,13 +124,6 @@ class SignUp extends Component {
               <Spinner />
             ) : (
               <Form onSubmit={this.submitSignUp} className="p-4">
-                {!this.props.signUpFailedMessage === '' ? (
-                  <Row>
-                    <Alert color="danger" className="col-12">
-                      {this.props.signUpFailedMessage}
-                    </Alert>
-                  </Row>
-                ) : null}
                 <Row form>
                   <Col md={6}>
                     <FormGroup>
@@ -218,11 +210,14 @@ class SignUp extends Component {
                     </FormGroup>
                   </Col>
                 </Row>
+                {!this.props.signUpFailedMessage === '' ? (
+                  <div className="invalid-feedback d-block">
+                    {this.props.signUpFailedMessage}
+                  </div>
+                ) : null}
 
                 <FormGroup>
                   <span>
-                    {/* added file for testing the download 
-              and later will be replace with pdf file, its content all the terms and conditions of the app and the data policy inside EU */}
                     <a
                       href="/terms-and-conditions/Fuburo-terms-and-conditions.pdf"
                       download

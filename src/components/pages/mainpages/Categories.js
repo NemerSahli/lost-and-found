@@ -4,7 +4,6 @@ import { filterItems } from '../../../actions/search-filter';
 
 class Categories extends Component {
   filterItemsHandler = filterKeys => {
-    // alert(filterKeys);
     this.props.filterItems(filterKeys);
   };
 
