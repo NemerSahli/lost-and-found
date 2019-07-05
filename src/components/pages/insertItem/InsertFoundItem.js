@@ -90,8 +90,6 @@ class InsertFoundItem extends Component {
       this.setState({ invalidTime: true });
       return;
     }
-
-    // console.log(newItem);
     this.props.addItem(newItem, this.props.history);
   };
 
@@ -131,7 +129,6 @@ class InsertFoundItem extends Component {
     if (suggestion.country) {
       location += ', ' + suggestion.country;
     }
-    // console.log(location);
     this.setState({
       location: location,
       lnglat: [suggestion.latlng.lat, suggestion.latlng.lng]
@@ -179,13 +176,7 @@ class InsertFoundItem extends Component {
                       Location:
                     </Label>
                     <Col sm={10}>
-                      {/* <Input
-                      invalid={this.state.invalidLocation}
-                      type="text"
-                      name="location"
-                      placeholder="Where was it found?"
-                      onChange={this.onChangeHandler}
-                    /> */}
+                     
                       {/* this part is to get location address by selecting one of the suggestions */}
                       <AlgoliaPlaces
                         placeholder="Write an address here"

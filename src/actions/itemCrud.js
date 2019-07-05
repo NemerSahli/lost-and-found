@@ -59,7 +59,7 @@ export const addItem = (newItem, routeTo) => dispatch => {
   })
     .then(response => {
       if (response.data.error === 0) {
-        dispatch({ type: 'ADD_ITEM_DEMO' });
+        dispatch({ type: 'DEFAULT' });
         routeTo.push('/');
       }
     })

@@ -158,8 +158,6 @@ router.get('/load/dialogue/:port', auth, async (req, res) => {
     .populate('itemId', 'name imageUrl active')
     .exec((error, usersNames) => {
       if (error) throw error;
-      // console.log(JSON.stringify(usersNames, null, '\t'));
-
       Message.find({ conversationPort: req.params.port }, (err, docs) => {
         res.send({ error: 0, documents: docs, users: usersNames });
       });

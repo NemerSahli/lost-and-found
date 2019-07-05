@@ -12,12 +12,10 @@ export default function(state = intialState, action) {
         dialogueMessages: [...state.dialogueMessages, action.payload]
       };
     case 'LOAD_CONVERSATION_ITEMS':
-      // console.log(JSON.stringify(action.payload, null, '\n'));
       return {
         conversationItems: action.payload
       };
     case 'LOAD_DIALOGUE_MESSAGES':
-      // console.log(action.users);
       return {
         ...state,
         dialogueMessages: action.payload,

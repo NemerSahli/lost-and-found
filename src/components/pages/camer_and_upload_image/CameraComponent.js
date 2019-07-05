@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { loadImage } from '../../../actions/itemCrud';
 class CameraComponent extends Component {
   onTakePhoto(imgDataUri) {
-    // console.log(imgDataUri.length);
     this.props.onTakePhotoHandler(imgDataUri);
   }
   componentDidMount() {

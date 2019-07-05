@@ -120,7 +120,7 @@ router.get('/search', async (req, res) => {
 
   if (location && !keyWord) {
     var query = { location: new RegExp(location, 'i') };
-    // console.log('only location=', location);
+    
   } else if (!location && keyWord) {
     var query = {
       $or: [
@@ -130,9 +130,9 @@ router.get('/search', async (req, res) => {
         { category: new RegExp(keyWord, 'i') }
       ]
     };
-    // console.log('only keyWord=', keyWord);
+   
   } else if (location && keyWord) {
-    // console.log('location=', location, '\n', 'keyWord', keyWord);
+  
     var query = {
       $and: [
         { location: new RegExp(req.query.p, 'i') },

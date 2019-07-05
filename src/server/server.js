@@ -66,11 +66,7 @@ app.use(error);
 
 // authentication function
 const auth = (req, res, next) => {
-  console.log(req.session.user);
-  console.log(req.session.admin);
-
   if (req.session && req.session.user === loggedInUser && req.session.admin) {
-    console.log('wowww....');
     return next();
   } else {
     return res.sendStatus(401);
@@ -181,10 +177,7 @@ app.post('/addItem', auth, async (req, res) => {
   // to check the image if there is url or its data base64
   if (imageData && imageData.length > 50) {
     const fileName = randomstring.generate(10) + '.png';
-    // console.log('Path', path);
-    // console.log('fileName', fileName);
     ImageDataURI.outputFile(imageData, path + fileName);
-    // console.log('image decoding ... ...');
     newItem.imageUrl = fileName;
   } else {
     newItem.imageUrl = imageData;
@@ -196,13 +189,9 @@ app.post('/addItem', auth, async (req, res) => {
 });
 
 app.post('/add/lost/item', async (req, res) => {
-  // console.log(req.files);
-  // console.log(req.body);
-
   var imageUrl = '';
   if (Object.keys(req.files).length == 0) {
     imageUrl = 'No_Image_Available.jpg';
-    // console.log('if default', imageUrl);
   } else {
     let newImage = req.files.imageFile;
     if (
@@ -224,7 +213,6 @@ app.post('/add/lost/item', async (req, res) => {
   var newItem = new Item(JSON.parse(req.body.newItem));
 
   newItem.imageUrl = imageUrl;
-  // console.log('imageUrl', newItem.imageUrl);
   await newItem.save(err => {
     if (err) return res.send(err);
     return res.send({ error: 0, item: newItem });
@@ -267,9 +255,8 @@ app.put('/updateuser/:id', auth, async (req, res) => {
     user.city = newData.city;
     user.zip = newData.zip;
     user.phone = newData.phone;
-    // console.log(user);
+
     user.save((err, doc) => {
-      // console.log('updated user', doc);
       if (err) throw err;
       res.send({ error: 0, message: 'successfuly update', newData: doc });
     });
@@ -304,11 +291,8 @@ app.post('/message', auth, async (req, res) => {
   // here to find if there is conversationPort exist
   await Message.find(query, (err, messages) => {
     if (messages.length !== 0) {
-      // console.log('conversationPort exist');
       var conversationPort = messages[0].conversationPort;
     } else {
-      // here to create conversationPort
-      // console.log('no conversationPort, creation one ...');
       var conversationPort = randomstring.generate(10);
     }
     let newMessage = new Message({
@@ -416,7 +400,6 @@ app.get('/conversationitems/:id', auth, async (req, res) => {
     }
   ]).exec((error, docs) => {
     if (error) throw error;
-    // console.log(JSON.stringify(docs, null, '\t'));
     return res.send({ error: 0, documents: docs });
   });
 });
@@ -431,7 +414,6 @@ app.get('/load/dialogue/messages/:port', auth, async (req, res) => {
     .populate('itemId', 'name imageUrl')
     .exec((error, usersNames) => {
       if (error) throw error;
-      // console.log(JSON.stringify(usersNames, null, '\t'));
 
       Message.find({ conversationPort: req.params.port }, (err, docs) => {
         res.send({ error: 0, documents: docs, users: usersNames });
@@ -439,7 +421,7 @@ app.get('/load/dialogue/messages/:port', auth, async (req, res) => {
     });
 });
 
-//==============================================
+//=================================================
 // search for either place, keywords or together
 // defined queries to path them into
 // mongoose schema find method
@@ -458,7 +440,6 @@ app.get('/search', async (req, res) => {
 
   if (location && !keyWord) {
     var query = { location: new RegExp(location, 'i') };
-    // console.log('only location=', location);
   } else if (!location && keyWord) {
     var query = {
       $or: [
@@ -468,9 +449,7 @@ app.get('/search', async (req, res) => {
         { category: new RegExp(keyWord, 'i') }
       ]
     };
-    // console.log('only keyWord=', keyWord);
   } else if (location && keyWord) {
-    // console.log('location=', location, '\n', 'keyWord', keyWord);
     var query = {
       $and: [
         { location: new RegExp(req.query.p, 'i') },

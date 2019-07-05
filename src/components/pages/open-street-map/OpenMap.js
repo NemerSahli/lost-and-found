@@ -20,37 +20,6 @@ class OpenMap extends Component {
       this.props.generateMarkers();
     });
   };
-  // constructor(props) {
-  //   super(props);
-  //   this.props.loadItems().then(() => {
-  //     if (this.props.items) {
-  //       var averageLat = 0;
-  //       var averageLng = 0;
-  //       var markers = this.props.items.map(item => {
-  //         let lnglat = item.lnglat.split(',');
-  //         var color = '';
-  //         item.type === 'lost' ? (color = 'red') : (color = 'green');
-  //         averageLat += Number(lnglat[0]);
-  //         averageLng += Number(lnglat[1]);
-
-  //         return {
-  //           key: item._id,
-  //           id: item._id,
-  //           position: [Number(lnglat[0]), Number(lnglat[1])],
-  //           children: item.name,
-  //           color: color,
-  //           itemType: item.type
-  //         };
-  //       });
-  //       this.setState({
-  //         markers: markers,
-  //         center: [averageLat / markers.length, averageLng / markers.length]
-  //       });
-  //       console.log(this.state.center, '\n', markers.length);
-  //       console.log(markers);
-  //     }
-  //   });
-  // }
 
   render() {
     return (

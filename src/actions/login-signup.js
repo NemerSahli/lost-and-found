@@ -16,7 +16,6 @@ export const logIn = loginUser => async dispatch => {
       withCredentials: true
     });
 
-    // console.log(response);
     if (response.data.error === 0) {
       dispatch({ type: 'LOGIN', payload: response.data.loggedInUser });
       localStorage.setItem('token', response.data.tokenId);
@@ -79,7 +78,6 @@ export const signUp = (signUpUser, routeTo) => async dispatch => {
       data: signUpUser,
       withCredentials: true
     });
-    // console.log(result);
     if (result.data.error === 0) {
       dispatch({ type: 'SIGNUP' });
     } else {

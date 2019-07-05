@@ -36,17 +36,6 @@ export default function(state = intialState, action) {
         myItems: action.payload
       };
     case 'DEACTIVATE_ITEM':
-      // let items = state.items.map(item => {
-      //   if (item._id === action.itemId) {
-      //     item.active = false;
-      //     return item;
-      //   } else {
-      //     return item;
-      //   }
-      // });
-      // let myItems = state.myItems.map(item=>{
-      // })
-      // console.log(items);
       return {
         ...state,
         items: deactivateItem(state.items, action.itemId),
@@ -147,7 +136,6 @@ function deactivateItem(items, id) {
   let newItems = items.map(item => {
     if (item._id === id) {
       item.active = false;
-      console.log(item);
       return item;
     } else {
       return item;

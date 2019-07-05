@@ -24,7 +24,7 @@ class ConversationBody extends Component {
     if (this.props.dialogueMessages) {
       if (this.state.messageText !== '') {
         var toUserId = '';
-        
+
         if (
           this.props.loggedInUser._id ===
           this.props.dialogueMessages[0].toUserId
@@ -41,7 +41,6 @@ class ConversationBody extends Component {
           toUserId: toUserId,
           date: new Date()
         };
-        // console.log(newMessage);
         this.props.sendMessage(newMessage, 'dialogue');
         this.setState({
           messageText: ''
@@ -58,20 +57,19 @@ class ConversationBody extends Component {
           {this.props.conversationUsers ? (
             this.props.conversationUsers ? (
               <div>
-                
-                  <img
-                    src={
-                      '/images/' + this.props.conversationUsers.itemId.imageUrl
-                    }
-                    className="image-fit"
-                    alt="..."
-                    style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '50%'
-                    }}
-                  />
-               
+                <img
+                  src={
+                    '/images/' + this.props.conversationUsers.itemId.imageUrl
+                  }
+                  className="image-fit"
+                  alt="..."
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%'
+                  }}
+                />
+
                 {this.props.conversationUsers.itemId.name}
               </div>
             ) : null

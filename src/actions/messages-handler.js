@@ -56,7 +56,6 @@ export const loadConversationItems = loggedInUserId => async dispatch => {
         type: 'LOAD_CONVERSATION_ITEMS',
         payload: response.data.documents
       });
-      // console.log('response', response.data);
     }
   } catch (e) {
     console.log('error in loading conversation items:' + e);
@@ -77,7 +76,6 @@ export const loadDialogueMessages = conversationPort => async dispatch => {
       }
     });
     if (response.data) {
-      // console.log('response', response.data);
       dispatch({
         type: 'LOAD_DIALOGUE_MESSAGES',
         payload: response.data.documents,

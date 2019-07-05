@@ -18,7 +18,6 @@ export const searchForItems = searchingKeys => async dispatch => {
         type: 'SEARCH_FOR_ITEMS',
         payload: response.data.documents
       });
-      // console.log('response', response.data);
     }
   } catch (e) {
     console.log('error in loading items:' + e);

@@ -110,7 +110,7 @@ class InsertLostItem extends Component {
       })
         .then(result => {
           if (result.data) {
-            // console.log('items', result.data);
+            
             this.props.history.push('/');
           }
         })
@@ -134,8 +134,7 @@ class InsertLostItem extends Component {
   };
 
   onDropPicture = picture => {
-    // console.log(picture);
-
+  
     if (picture.length > 0) {
       let pictures = [picture[picture.length - 1]];
       this.setState({
@@ -159,8 +158,7 @@ class InsertLostItem extends Component {
     if (suggestion.country) {
       location += ', ' + suggestion.country;
     }
-    // console.log(location);
-
+  
     this.setState({
       location: location,
       lnglat: [suggestion.latlng.lat, suggestion.latlng.lng]

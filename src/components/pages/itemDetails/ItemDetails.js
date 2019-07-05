@@ -8,7 +8,6 @@ import ItemImageModal from './ItemImageModal';
 import { sendMessage } from '../../../actions/messages-handler';
 class ItemDetails extends Component {
   state = {
-   
     currentItem: null,
     markers: null,
     modalIsOpen: false,
@@ -70,15 +69,14 @@ class ItemDetails extends Component {
 
       let date = new Date();
 
-      let message = {
+      let newMessage = {
         fromUserId: loggedInUser._id,
         toUserId: this.state.currentItem.userId,
         messageContent: this.state.messageContent,
         itemId: this.state.currentItem._id,
         date: date
       };
-      console.log(message);
-      this.props.sendMessage(message, 'itemDetails', this.props.history);
+      this.props.sendMessage(newMessage, 'itemDetails', this.props.history);
     }
   };
 
@@ -97,9 +95,6 @@ class ItemDetails extends Component {
           <strong>{' ' + currentItem.type.toUpperCase() + ': '}</strong>
           <h4 className="ml-2  d-inline">{currentItem.name}</h4>
         </div>
-        {/* <div className="row justify-content-between">
-         
-        </div> */}
 
         <hr className="my-2" />
         <div className="row item-details mt-4">
@@ -163,7 +158,6 @@ class ItemDetails extends Component {
                 </FormGroup>
                 <div className=" col-12">
                   <Button
-                    // onClick={this.sendMessageHandler}
                     color="danger"
                     style={{
                       borderRadius: '25px',

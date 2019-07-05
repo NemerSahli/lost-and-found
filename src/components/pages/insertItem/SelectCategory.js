@@ -7,7 +7,6 @@ class SelectCategory extends Component {
     selectOptions: this.props.categoryList
   };
   handleInputChange = newValue => {
-    // console.log('inputvalue:', newValue);
     const inputValue = newValue.replace(/\W/g, '');
     this.setState({ inputValue });
     return inputValue;
@@ -25,7 +24,6 @@ class SelectCategory extends Component {
     }, 1000);
   };
   handleChange = (newValue, actionMeta) => {
-    console.log(newValue.value);
     this.props.selectCategoryHandler(newValue.value);
     console.groupEnd();
   };
