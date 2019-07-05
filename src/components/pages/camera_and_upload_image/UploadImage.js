@@ -1,7 +1,6 @@
 import React from 'react';
 import ImageUploader from 'react-images-upload';
 
-
 class UploadImage extends React.Component {
   constructor(props) {
     super(props);
@@ -30,10 +29,7 @@ class UploadImage extends React.Component {
             boxShadow: 'none'
           }}
         />
-        {/* {this.state.pictures &&
-          [...this.state.pictures].map(file => (
-            <img src={URL.createObjectURL(file)} />
-          ))} */}
+
         {this.state.pictures &&
           this.state.pictures.map(file => (
             <img
@@ -42,7 +38,6 @@ class UploadImage extends React.Component {
                 borderRadius: '50%',
                 height: '200px',
                 width: '200px'
-                // marginBottom: '120px'
               }}
               alt=""
             />

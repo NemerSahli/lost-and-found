@@ -13,7 +13,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from './../../../actions/itemCrud';
-import CameraComponent from '../camer_and_upload_image/CameraComponent';
+import CameraComponent from '../camera_and_upload_image/CameraComponent';
 
 class InsertFoundItem extends Component {
   state = {
@@ -176,7 +176,6 @@ class InsertFoundItem extends Component {
                       Location:
                     </Label>
                     <Col sm={10}>
-                     
                       {/* this part is to get location address by selecting one of the suggestions */}
                       <AlgoliaPlaces
                         placeholder="Write an address here"
