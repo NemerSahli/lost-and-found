@@ -166,7 +166,7 @@ router.get('/search', async (req, res) => {
 // stop item from the dashboard list view also
 // stop messages for this item and my items list
 
-router.put('/deactivate/:id', async (req, res) => {
+router.put('/deactivate/:id',auth, async (req, res) => {
   let item = await Item.findById(req.params.id);
   if (!item)
     return res.status(400).send({ message: 'no item found by this id' });

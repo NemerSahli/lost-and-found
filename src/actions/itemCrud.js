@@ -69,10 +69,15 @@ export const addItem = (newItem, routeTo) => dispatch => {
 };
 
 export const deactivateItem = id => dispatch => {
+  let token = localStorage.getItem('token');
   axios({
     method: 'put',
-    url: window.lofoBackend + '/api/items/deactivate/' + id
-    // withCredentials: true
+    url: window.lofoBackend + '/api/items/deactivate/' + id,
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+      'x-auth-token': token
+    }
   })
     .then(response => {
       if (response.status === 200) {
