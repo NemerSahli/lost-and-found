@@ -119,14 +119,21 @@ router.get('/search', async (req, res) => {
   }
 
   if (location && !keyWord) {
-    var query = { location: new RegExp(location, 'i') };
+    var query = {
+      $and: [{ location: new RegExp(location, 'i') }, { active: true }]
+    };
   } else if (!location && keyWord) {
     var query = {
-      $or: [
-        { name: new RegExp(keyWord, 'i') },
-        { tags: new RegExp(keyWord, 'i') },
-        { comment: new RegExp(keyWord, 'i') },
-        { category: new RegExp(keyWord, 'i') }
+      $and: [
+        {
+          $or: [
+            { name: new RegExp(keyWord, 'i') },
+            { tags: new RegExp(keyWord, 'i') },
+            { comment: new RegExp(keyWord, 'i') },
+            { category: new RegExp(keyWord, 'i') }
+          ]
+        },
+        { active: true }
       ]
     };
   } else if (location && keyWord) {
@@ -139,7 +146,8 @@ router.get('/search', async (req, res) => {
             { comment: new RegExp(keyWord, 'i') },
             { category: new RegExp(keyWord, 'i') }
           ]
-        }
+        },
+        { active: true }
       ]
     };
   }
