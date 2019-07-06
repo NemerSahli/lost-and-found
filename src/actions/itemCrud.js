@@ -76,6 +76,7 @@ export const deactivateItem = id => dispatch => {
   })
     .then(response => {
       if (response.status === 200) {
+        dispatch({ type: 'DEACTIVATE_CONVERSATION_ITEM', itemId: id });
         dispatch({ type: 'DEACTIVATE_ITEM', itemId: id });
       }
     })
@@ -87,43 +88,6 @@ export const deactivateItem = id => dispatch => {
 export const loadImage = (imgDataUri, route) => dispatch => {
   dispatch({ type: 'LOAD_IMAGE', payload: imgDataUri });
   route.push('/insertFoundItem');
-};
-
-export const updateUser = newUser => dispatch => {
-  axios({
-    method: 'put',
-    url: window.lofoBackend + '/api/user/updateuser',
-    data: newUser,
-    withCredentials: true
-  })
-    .then(response => {
-      if (response.data.error === 0) {
-        dispatch({ type: 'UPDATE_USER', newUser: newUser });
-        dispatch({ type: 'CLOSE_UPDATE_MODAL' });
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-export const deleteUser = userId => dispatch => {
-  axios(window.lofoBackend + '/api/user/deleteuser/' + userId, {
-    method: 'delete',
-    withCredentials: true
-  })
-    .then(response => {
-      if (response.data.error === 0) {
-        dispatch({ type: 'DELETE_USER', userId: userId });
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-export const openUpdateModal = userId => dispatch => {
-  dispatch({ type: 'OPEN_UPDATE_MODAL', userId: userId });
 };
 
 export const generateMarkers = () => dispatch => {

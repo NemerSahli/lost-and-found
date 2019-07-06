@@ -54,7 +54,7 @@ class ConversationBody extends Component {
     return (
       <div id="send-message-body-id" className="mt-4">
         <h5>
-          {this.props.conversationUsers ? (
+          {this.props.conversationUsers && this.props.dialogueMessages ? (
             this.props.conversationUsers ? (
               <div>
                 <img
@@ -79,7 +79,7 @@ class ConversationBody extends Component {
         <FormGroup className="mt-3">
           <Label for="exampleText">
             Message to
-            {this.props.conversationUsers
+            {this.props.conversationUsers && this.props.dialogueMessages
               ? this.props.conversationUsers.fromUserId._id ===
                 this.props.loggedInUser._id
                 ? this.props.conversationUsers.toUserId.firstName

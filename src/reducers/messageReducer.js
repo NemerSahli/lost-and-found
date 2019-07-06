@@ -13,7 +13,18 @@ export default function(state = intialState, action) {
       };
     case 'LOAD_CONVERSATION_ITEMS':
       return {
+        ...state,
         conversationItems: action.payload
+      };
+    case 'DEACTIVATE_CONVERSATION_ITEM':
+      return {
+        ...state,
+        conversationItems: deactivateConversationItem(
+          state.conversationItems,
+          action.itemId
+        ),
+        dialogueMessages: null,
+        conversationUsers: null
       };
     case 'LOAD_DIALOGUE_MESSAGES':
       return {
@@ -24,4 +35,16 @@ export default function(state = intialState, action) {
     default:
       return state;
   }
+}
+
+function deactivateConversationItem(items, id) {
+  let newItems = items.map(item => {
+    if (item.itemId === id) {
+      item.item[0].active = false;
+      return item;
+    } else {
+      return item;
+    }
+  });
+  return newItems;
 }

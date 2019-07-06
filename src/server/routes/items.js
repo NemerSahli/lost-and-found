@@ -120,7 +120,6 @@ router.get('/search', async (req, res) => {
 
   if (location && !keyWord) {
     var query = { location: new RegExp(location, 'i') };
-    
   } else if (!location && keyWord) {
     var query = {
       $or: [
@@ -130,9 +129,7 @@ router.get('/search', async (req, res) => {
         { category: new RegExp(keyWord, 'i') }
       ]
     };
-   
   } else if (location && keyWord) {
-  
     var query = {
       $and: [
         { location: new RegExp(req.query.p, 'i') },
@@ -168,6 +165,12 @@ router.put('/deactivate/:id', async (req, res) => {
   item.active = false;
   await item.save();
   res.status(200).send({ message: 'your item has been deactivated!' });
+});
+
+// to activate all items just for testing purpose
+router.put('/activate', async (req, res) => {
+  await Item.updateMany({}, { active: true });
+  res.send({ message: 'items has been activated!' });
 });
 
 module.exports = router;
