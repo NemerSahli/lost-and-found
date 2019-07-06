@@ -1,8 +1,7 @@
 <div align="center">
   <img height="100"
     src="public/images/fuburo.png">
-  <h1>Fuburo</h1>
-  <h3>lost and found office online</h3>
+  <h1>lost and found office online</h1>
 </div>
 
 
