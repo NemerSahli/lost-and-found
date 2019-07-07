@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Jumbotron } from 'reactstrap';
 
-const Authorization = (WrappedComponent, allowedRoles, userType) => {
+const Authorization = (WrappedComponent, allowedRoles, loggedIn) => {
   return class WithAuthorization extends React.Component {
     render() {
-      if (allowedRoles.includes(userType)) {
+      if (loggedIn) {
         return <WrappedComponent {...this.props} />;
       } else {
         return (
@@ -15,7 +15,7 @@ const Authorization = (WrappedComponent, allowedRoles, userType) => {
               Dashboard!
             </h4>
             <div className="text-center mt-5">
-              <Link to="/mainpage">Go Back</Link>
+              <Link to="/mainpage">Go Home</Link>
             </div>
           </Jumbotron>
         );

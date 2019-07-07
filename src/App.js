@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,9 +15,11 @@ import MyAccount from './components/pages/profile/MyAccount';
 import ItemDetails from './components/pages/itemDetails/ItemDetails';
 import OpenMap from './components/pages/open-street-map/OpenMap';
 import LoginSingUpModal from './components/pages/login-signup/LoginSingUpModal';
+import Authorization from './middleware/Authorization';
+import history from './BrowserHistory/history';
+import config from './config.json';
 import { connect } from 'react-redux';
 import { checkUserAuthenticated } from './actions/login-signup';
-import config from './config.json';
 
 class App extends Component {
   constructor(props) {
@@ -36,7 +38,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className="app-container" id="app-body-id">
           <Header />
 
@@ -51,17 +53,40 @@ class App extends Component {
               <Route exact path="/itemdetails/:id" component={ItemDetails} />
               <Route path="/showmap" component={OpenMap} />
               <Route path="/about" component={About} />
-              {this.props.loggedIn ? (
-                <Fragment>
-                  <Route
-                    path="/insert/found/item"
-                    component={InsertFoundItem}
-                  />
-                  <Route path="/insert/lost/item" component={InsertLostItem} />
-                  <Route path="/profile/edit" component={EditProfile} />
-                  <Route path="/myaccount" component={MyAccount} />
-                </Fragment>
-              ) : null}
+
+              <Route
+                path="/insert/found/item"
+                component={Authorization(
+                  InsertFoundItem,
+                  ['user'],
+                  this.props.loggedIn
+                )}
+              />
+              <Route
+                path="/insert/lost/item"
+                component={Authorization(
+                  InsertLostItem,
+                  ['user'],
+                  this.props.loggedIn
+                )}
+              />
+              <Route
+                path="/profile/edit"
+                component={Authorization(
+                  EditProfile,
+                  ['user'],
+                  this.props.loggedIn
+                )}
+              />
+              <Route
+                path="/myaccount"
+                component={Authorization(
+                  MyAccount,
+                  ['user'],
+                  this.props.loggedIn
+                )}
+              />
+
               <Route component={NotFound} />
             </Switch>
           </div>
