@@ -22,7 +22,7 @@ class MyItems extends Component {
         <h5 className="text-center">My Items History:</h5>
         <hr className="mb-3" />
 
-        <Table striped>
+        <Table striped responsive>
           <thead className="mb-3">
             <tr>
               <th>
