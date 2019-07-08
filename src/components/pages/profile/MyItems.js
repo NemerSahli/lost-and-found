@@ -61,6 +61,8 @@ class MyItems extends Component {
                         active={item.active}
                       />
                     );
+                  } else {
+                    return null;
                   }
                 })}
             </tbody>

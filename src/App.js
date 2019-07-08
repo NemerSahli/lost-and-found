@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -47,7 +47,6 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Mainpage} />
               <Route exact path="/resetpass" component={Mainpage} />
-
               <Route exact path="/mainpage" component={Mainpage} />
               <Route exact path="/myaccount/edit" component={EditProfile} />
               <Route exact path="/itemdetails/:id" component={ItemDetails} />
