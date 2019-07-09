@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AlgoliaPlaces from 'algolia-places-react';
+import config from('../../../config.json');
 
 import axios from 'axios';
 import { Col, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
