@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AlgoliaPlaces from 'algolia-places-react';
 import SelectCategory from './SelectCategory';
+import config from('../../../config.json');
 
 import {
   Col,
@@ -180,8 +181,8 @@ class InsertFoundItem extends Component {
                       <AlgoliaPlaces
                         placeholder="Write an address here"
                         options={{
-                          appId: 'plV7FOH0L4TX',
-                          apiKey: '5f07d771e38fc7ec02c89334c69d8fa1'
+                          appId: config.algoliaAppId,
+                          apiKey: config.algoliaApiKey
                         }}
                         onChange={({
                           query,

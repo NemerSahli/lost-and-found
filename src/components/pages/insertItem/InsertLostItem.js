@@ -110,7 +110,6 @@ class InsertLostItem extends Component {
       })
         .then(result => {
           if (result.data) {
-            
             this.props.history.push('/');
           }
         })
@@ -134,7 +133,6 @@ class InsertLostItem extends Component {
   };
 
   onDropPicture = picture => {
-  
     if (picture.length > 0) {
       let pictures = [picture[picture.length - 1]];
       this.setState({
@@ -158,7 +156,7 @@ class InsertLostItem extends Component {
     if (suggestion.country) {
       location += ', ' + suggestion.country;
     }
-  
+
     this.setState({
       location: location,
       lnglat: [suggestion.latlng.lat, suggestion.latlng.lng]
@@ -205,8 +203,8 @@ class InsertLostItem extends Component {
                   <AlgoliaPlaces
                     placeholder="Write an address here"
                     options={{
-                      appId: 'plV7FOH0L4TX',
-                      apiKey: '5f07d771e38fc7ec02c89334c69d8fa1'
+                      appId: config.algoliaAppId,
+                      apiKey: config.algoliaApiKey
                     }}
                     onChange={({
                       query,
