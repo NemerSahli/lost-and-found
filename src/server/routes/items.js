@@ -37,6 +37,8 @@ router.get('/itemList', (req, res) => {
 // add found item or lost if no image
 router.post('/add/item', auth, async (req, res) => {
   var newItem = new Item(req.body);
+  newItem.active = true;
+
   var imageData = req.body.image;
 
   // to check the image if there is url or its data base64
@@ -77,7 +79,7 @@ router.post('/add/lost/item', auth, async (req, res) => {
   }
 
   var newItem = new Item(JSON.parse(req.body.newItem));
-
+  newItem.active = true;
   newItem.imageUrl = imageUrl;
   await newItem.save(err => {
     if (err) return res.send(err);
@@ -166,7 +168,7 @@ router.get('/search', async (req, res) => {
 // stop item from the dashboard list view also
 // stop messages for this item and my items list
 
-router.put('/deactivate/:id',auth, async (req, res) => {
+router.put('/deactivate/:id', auth, async (req, res) => {
   let item = await Item.findById(req.params.id);
   if (!item)
     return res.status(400).send({ message: 'no item found by this id' });
