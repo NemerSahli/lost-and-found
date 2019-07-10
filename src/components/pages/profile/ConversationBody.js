@@ -106,7 +106,7 @@ class ConversationBody extends Component {
           className="btn btn-danger float-right"
           style={{ borderRadius: '25px' }}
           onClick={this.sendMessageHandler}
-          disabled={this.props.dialogueMessages ? false : true}
+          disabled={this.props.dialogueMessages  ? false : true}
         >
           <i
             className="fas fa-send text-light mr-2"

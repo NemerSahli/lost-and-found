@@ -4,7 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
+import Footer from './components/layout/Footer2';
 import About from './components/layout/About';
 import NotFound from './components/layout/NotFound';
 import InsertFoundItem from './components/pages/insertItem/InsertFoundItem';
@@ -20,6 +20,9 @@ import history from './BrowserHistory/history';
 import config from './config.json';
 import { connect } from 'react-redux';
 import { checkUserAuthenticated } from './actions/login-signup';
+
+import 'react-mdl/extra/material.css';
+import 'react-mdl/extra/material.js';
 
 class App extends Component {
   constructor(props) {

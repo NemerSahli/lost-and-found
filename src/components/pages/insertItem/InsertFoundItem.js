@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AlgoliaPlaces from 'algolia-places-react';
 import SelectCategory from './SelectCategory';
-import config from('../../../config.json');
+import config from '../../../config.json';
 
 import {
   Col,
