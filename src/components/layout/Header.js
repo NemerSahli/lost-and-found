@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   Collapse,
   Navbar,
@@ -41,11 +41,7 @@ class Header extends React.Component {
           className="navbar-brand text-dark no-underline"
         >
           {/* <i className="fas fa-home fa-2x" /> */}
-          <img className="fuburo-logo"
-            src="/images/fuburo.png"
-            alt=""
-            
-          />
+          <img className="fuburo-logo" src="/images/fuburo.png" alt="" />
         </Link>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -95,29 +91,30 @@ class Header extends React.Component {
                   Insert
                 </span>
               </DropdownToggle>
-              <DropdownMenu className="row ">
+              <DropdownMenu>
                 {this.props.loggedIn ? (
-                  <div>
-                    <DropdownItem>
+                  <Fragment>
+                    <div className="text-center">
                       <Link
                         onClick={this.toggle}
                         to="/insert/found/item"
                         className="no-underline"
                       >
-                        <span>Found</span>
+                        Found
                       </Link>
-                    </DropdownItem>
+                    </div>
+
                     <DropdownItem divider />
-                    <DropdownItem>
+                    <div className="text-center">
                       <Link
                         onClick={this.toggle}
                         to="/insert/lost/item"
                         className="no-underline"
                       >
-                        <span>Lost</span>
+                        Lost
                       </Link>
-                    </DropdownItem>
-                  </div>
+                    </div>
+                  </Fragment>
                 ) : (
                   <DropdownItem>
                     <div className="text-center">
