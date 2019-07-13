@@ -28,13 +28,8 @@ class InsertFoundItem extends Component {
     lnglat: [52.5065133, 13.1445545],
     image: 'No_Image_Available.jpg',
     imageDataUri: '',
-    invalidName: false,
-    invalidLocation: false,
-    invalidDate: false,
-    invalidTime: false,
-    invalidComment: false,
     showCamera: false,
-    submited: true
+    submited: false
   };
 
   componentDidMount() {
@@ -58,6 +53,14 @@ class InsertFoundItem extends Component {
       lnglat,
       image
     } = this.state;
+
+    let errors = validate(name, location, date, time, comment);
+
+    let inputsIsValid = Object.keys(errors).every(k => !errors[k]);
+    console.log('result', inputsIsValid);
+
+    if (!inputsIsValid) return;
+
     let loggedInUser = this.props.loggedInUser;
 
     const newItem = {
@@ -74,29 +77,6 @@ class InsertFoundItem extends Component {
       date: ''
     };
 
-    /* image should have a default placeholder.  */
-    if (name === '') {
-      this.setState({ invalidName: true });
-      return;
-    }
-    if (location === '') {
-      this.setState({ invalidLocation: true });
-      return;
-    }
-
-    if (event.target.date === '') {
-      this.setState({ invalidDate: true });
-      return;
-    }
-
-    if (date === '') {
-      this.setState({ invalidDate: true });
-      return;
-    }
-    if (time === '') {
-      this.setState({ invalidTime: true });
-      return;
-    }
     this.props.addItem(newItem, this.props.history);
   };
 
@@ -113,12 +93,7 @@ class InsertFoundItem extends Component {
 
   onChangeHandler = e => {
     this.setState({
-      [e.target.name]: e.target.value,
-      invalidLocation: false,
-      invalidName: false,
-      invalidDate: false,
-      invalidTime: false,
-      invalidComment: false
+      [e.target.name]: e.target.value
     });
   };
 
@@ -144,7 +119,10 @@ class InsertFoundItem extends Component {
   render() {
     var curr = new Date();
     curr.setDate(curr.getDate());
-    var date = curr.toISOString().substr(0, 10);
+    var newDate = curr.toISOString().substr(0, 10);
+
+    const { name, location, date, time, comment, submited } = this.state;
+    const errors = submited && validate(name, location, date, time, comment);
 
     return (
       <div>
@@ -168,7 +146,7 @@ class InsertFoundItem extends Component {
                     </Label>
                     <Col sm={10}>
                       <Input
-                        invalid={this.state.invalidName}
+                        invalid={errors.name}
                         type="text"
                         name="name"
                         defaultValue={this.state.name}
@@ -184,6 +162,7 @@ class InsertFoundItem extends Component {
                     </Label>
                     <Col sm={10}>
                       {/* this part is to get location address by selecting one of the suggestions */}
+
                       <AlgoliaPlaces
                         placeholder="Write an address here"
                         options={{
@@ -202,7 +181,11 @@ class InsertFoundItem extends Component {
                           )
                         }
                       />
-                      <FormFeedback>This is a required field!</FormFeedback>
+                      {errors.location && (
+                        <div className="text-danger">
+                          This is a required field!
+                        </div>
+                      )}
                     </Col>
                   </FormGroup>
 
@@ -212,11 +195,11 @@ class InsertFoundItem extends Component {
                     </Label>
                     <Col sm={10}>
                       <Input
-                        invalid={this.state.invalidDate}
+                        invalid={errors.date}
                         type="date"
                         name="date"
                         onChange={this.onChangeHandler}
-                        defaultValue={date}
+                        defaultValue={newDate}
                       />
                       <FormFeedback>This is a required field!</FormFeedback>
                     </Col>
@@ -227,7 +210,7 @@ class InsertFoundItem extends Component {
                     </Label>
                     <Col sm={10}>
                       <Input
-                        invalid={this.state.invalidTime}
+                        invalid={errors.time}
                         type="time"
                         name="time"
                         defaultValue={this.state.time}
@@ -255,7 +238,7 @@ class InsertFoundItem extends Component {
                     </Label>
                     <Col sm={10}>
                       <Input
-                        invalid={this.state.invalidComment}
+                        invalid={errors.comment}
                         type="textarea"
                         name="comment"
                         placeholder="comment?"
