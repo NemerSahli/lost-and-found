@@ -15,6 +15,7 @@ import {
 import { connect } from 'react-redux';
 import { addItem } from './../../../actions/itemCrud';
 import CameraComponent from '../camera_and_upload_image/CameraComponent';
+import validate from './../../../actions/validateFormData';
 
 class InsertFoundItem extends Component {
   state = {
@@ -32,7 +33,8 @@ class InsertFoundItem extends Component {
     invalidDate: false,
     invalidTime: false,
     invalidComment: false,
-    showCamera: false
+    showCamera: false,
+    submited: true
   };
 
   componentDidMount() {
@@ -40,6 +42,10 @@ class InsertFoundItem extends Component {
   }
   submitNewItem = event => {
     event.preventDefault();
+
+    this.setState({
+      submited: true
+    });
 
     const {
       name,
