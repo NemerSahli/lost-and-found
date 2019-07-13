@@ -46,6 +46,15 @@ class InsertLostItem extends Component {
       lnglat,
       image
     } = this.state;
+
+
+    let errors = validate(name, location, date, time, comment);
+
+    let inputsIsValid = Object.keys(errors).every(k => !errors[k]);
+    console.log('result', inputsIsValid);
+
+    if (!inputsIsValid) return;
+
     let loggedInUser = this.props.loggedInUser;
 
     const newItem = {
