@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { addItem } from '../../../actions/itemCrud';
 import ImageUploader from 'react-images-upload';
 import SelectCategory from './SelectCategory';
+import validate from './../../../actions/validateFormData';
 
 class InsertLostItem extends Component {
   state = {
@@ -18,15 +19,11 @@ class InsertLostItem extends Component {
     category: 'other',
     comment: '', //required
     tags: ['others'],
-    lnglat: [52.5065133, 13.1445545], //required
+    lnglat: [52.5065133, 13.1445545], //set default to Berlin
     image: 'No_Image_Available.jpg',
     imageDataUri: '',
-    invalidName: false,
-    invalidLocation: false,
-    invalidDate: false,
-    invalidTime: false,
-    invalidComment: false,
-    pictures: []
+    pictures: [],
+    submited: false
   };
 
   componentDidMount() {
@@ -35,6 +32,8 @@ class InsertLostItem extends Component {
 
   submitNewItem = event => {
     event.preventDefault();
+    this.setState({ submited: true });
+
     const {
       name,
       date,
@@ -47,17 +46,15 @@ class InsertLostItem extends Component {
       image
     } = this.state;
 
-
     let errors = validate(name, location, date, time, comment);
 
     let inputsIsValid = Object.keys(errors).every(k => !errors[k]);
-    console.log('result', inputsIsValid);
-
+    //console.log('result', inputsIsValid);
     if (!inputsIsValid) return;
 
     let loggedInUser = this.props.loggedInUser;
 
-    const newItem = {
+    let newItem = {
       userId: loggedInUser._id,
       name: name,
       time: time,
@@ -70,33 +67,6 @@ class InsertLostItem extends Component {
       type: 'lost',
       date: ''
     };
-
-    if (name === '') {
-      this.setState({ invalidName: true });
-      return;
-    }
-    if (location === '') {
-      this.setState({ invalidLocation: true });
-      return;
-    }
-
-    if (event.target.date === '') {
-      this.setState({ invalidDate: true });
-      return;
-    }
-
-    if (date === '') {
-      this.setState({ invalidDate: true });
-      return;
-    }
-    if (time === '') {
-      this.setState({ invalidTime: true });
-      return;
-    }
-    if (comment === '') {
-      this.setState({ invalidComment: true });
-      return;
-    }
 
     if (this.state.pictures.length > 0) {
       const data = new FormData();
@@ -133,12 +103,7 @@ class InsertLostItem extends Component {
 
   onChangeHandler = e => {
     this.setState({
-      [e.target.name]: e.target.value,
-      invalidLocation: false,
-      invalidName: false,
-      invalidDate: false,
-      invalidTime: false,
-      invalidComment: false
+      [e.target.name]: e.target.value
     });
   };
 
@@ -175,8 +140,10 @@ class InsertLostItem extends Component {
   render() {
     var curr = new Date();
     curr.setDate(curr.getDate());
-    var date = curr.toISOString().substr(0, 10);
+    var newDate = curr.toISOString().substr(0, 10);
 
+    const { name, location, date, time, comment, submited } = this.state;
+    const errors = submited && validate(name, location, date, time, comment);
     return (
       <div>
         <div className="pt-3">
@@ -195,7 +162,7 @@ class InsertLostItem extends Component {
                 </Label>
                 <Col sm={10}>
                   <Input
-                    invalid={this.state.invalidName}
+                    invalid={errors.name}
                     type="text"
                     name="name"
                     defaultValue={this.state.name}
@@ -226,7 +193,9 @@ class InsertLostItem extends Component {
                       console.log('You will receive the array of suggestions.')
                     }
                   />
-                  <FormFeedback>This is a required field!</FormFeedback>
+                  {errors.location && (
+                    <div className="text-danger">This is a required field!</div>
+                  )}
                 </Col>
               </FormGroup>
 
@@ -236,11 +205,11 @@ class InsertLostItem extends Component {
                 </Label>
                 <Col sm={10}>
                   <Input
-                    invalid={this.state.invalidDate}
+                    invalid={errors.date}
                     type="date"
                     name="date"
                     onChange={this.onChangeHandler}
-                    defaultValue={date}
+                    defaultValue={newDate}
                   />
                   <FormFeedback>This is a required field!</FormFeedback>
                 </Col>
@@ -251,7 +220,7 @@ class InsertLostItem extends Component {
                 </Label>
                 <Col sm={10}>
                   <Input
-                    invalid={this.state.invalidTime}
+                    invalid={errors.time}
                     type="time"
                     name="time"
                     defaultValue={this.state.time}
@@ -281,7 +250,7 @@ class InsertLostItem extends Component {
                 </Label>
                 <Col sm={10}>
                   <Input
-                    invalid={this.state.invalidComment}
+                    invalid={errors.comment}
                     type="textarea"
                     name="comment"
                     placeholder="comment?"
