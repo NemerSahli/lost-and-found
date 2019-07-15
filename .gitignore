@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /public/images
+
 /.pnp
 .pnp.js
 .vscode/settings.json
@@ -26,5 +27,3 @@ yarn-debug.log*
 yarn-error.log*
 
 config.json
-#public/images
-
