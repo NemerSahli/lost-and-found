@@ -6,7 +6,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
 import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
+import Footer from './components/layout/Footer2';
 import About from './components/layout/About';
 import NotFound from './components/layout/NotFound';
 import InsertFoundItem from './components/pages/insertItem/InsertFoundItem';
