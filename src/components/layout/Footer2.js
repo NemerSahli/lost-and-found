@@ -12,10 +12,13 @@ export default function Footer2() {
       <FooterSection type="middle">
         <FooterDropDownSection title="Features">
           <FooterLinkList>
-            <a href="#">About</a>
-            <a href="#">Terms</a>
-            <a href="#">Partners</a>
-            <a href="#">Updates</a>
+            <h5>Address:</h5>
+            <p>
+              <strong>DCI Digital Career Institute, Berlin</strong>
+            </p>
+            <p>Vulkanstraße 1, 10367 Berlin</p>
+            <p>030 364286190</p>
+            <p>info@devugees.org</p>
           </FooterLinkList>
         </FooterDropDownSection>
         <FooterDropDownSection title="Details">
