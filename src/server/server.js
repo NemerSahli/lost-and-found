@@ -1,6 +1,5 @@
 const express = require('express');
 const appConfig = require('../config');
-const config = require('config');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -12,12 +11,13 @@ const error = require('./error');
 const app = express();
 
 // check if jwtPrivateKey exported
-if (!config.get('jwtPrivateKey')) {
+if (!appConfig.jwtPrivateKey || appConfig.jwtPrivateKey === '') {
   console.error('FATAL ERROR: jwtPrivateKey is not defined.');
   process.exit(1);
 }
+
 // check if passwordMailSender exported
-if (!config.get('passwordMailSender')) {
+if (!appConfig.passwordMailSender || appConfig.passwordMailSender === '') {
   console.error('FATAL ERROR: passwordMailSender is not defined.');
   process.exit(1);
 }
@@ -54,7 +54,7 @@ app.use('/api/user', users);
 app.use('/api/items', items);
 app.use('/api/messages', messages);
 
-const port = config.PORT || 8000;
+const port = appConfig.PORT || 8000;
 app.listen(port, () => {
   console.log(`server running on port ${port}...`);
 });

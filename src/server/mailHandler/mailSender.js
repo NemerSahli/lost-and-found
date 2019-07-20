@@ -1,8 +1,9 @@
 var nodemailer = require('nodemailer');
-const config = require('config');
+const config = require('./../../config.json');
 
 function sendMail(recipientAddress, subject, htmlBody, res) {
-  let passwordMailSender = config.get('passwordMailSender');
+  // let passwordMailSender = config.get('passwordMailSender');
+  let passwordMailSender = config.passwordMailSender;
   var smtpConfig = {
     host: 'smtp.gmail.com',
     port: 465,
@@ -16,7 +17,7 @@ function sendMail(recipientAddress, subject, htmlBody, res) {
   var transporter = nodemailer.createTransport(smtpConfig);
 
   var mailOptions = {
-    from: ' "fuburo online" <mieter.engel24@gmail.com>',
+    from: ' "Fuburo online" <mieter.engel24@gmail.com>',
     to: recipientAddress,
     subject: subject,
     text: 'Hello World',
