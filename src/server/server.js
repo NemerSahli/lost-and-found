@@ -54,7 +54,7 @@ app.use('/api/user', users);
 app.use('/api/items', items);
 app.use('/api/messages', messages);
 
-const port = appConfig.PORT || 8000;
+const port = appConfig.PORT || 8080;
 app.listen(port, () => {
   console.log(`server running on port ${port}...`);
 });
