@@ -1,5 +1,5 @@
 var nodemailer = require('nodemailer');
-const config = require('./../../config.json');
+const config = require('../../config.json');
 
 function sendMail(recipientAddress, subject, htmlBody, res) {
   // let passwordMailSender = config.get('passwordMailSender');
