@@ -804,9 +804,9 @@ footer .fa:hover {
 /* end of login spiner */
 
 .deactivated {
-  background-image: url('/images/deactivated.png');
-  background-size: contain;
-  background-repeat: no-repeat;
+  /* background-image: url('/images/deactivated.png'); */
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
   width: 100%;
   height: 114px;
   float: right;

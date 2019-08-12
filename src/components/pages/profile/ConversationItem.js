@@ -17,7 +17,11 @@ class ConversationItem extends Component {
       <a href="#send-message-body-id" className="no-underline">
         <div
           className={this.props.item.item[0].active ? 'active' : 'deactivated'}
-        />
+        >
+          {!this.props.item.item[0].active ? (
+            <img src="/images/deactivated.png" alt="" srcset="" />
+          ) : null}
+        </div>
         <div className="row p-3">
           <div className="col-6 no-underline">
             <h5 className="no-underline">{displayUserSender}</h5>
