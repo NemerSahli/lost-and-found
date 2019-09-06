@@ -3,14 +3,14 @@ const config = require('../../config.json');
 
 function sendMail(recipientAddress, subject, htmlBody, res) {
   // let passwordMailSender = config.get('passwordMailSender');
-  let passwordMailSender = config.passwordMailSender;
+  ;
   var smtpConfig = {
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
       user: 'mieter.engel24@gmail.com',
-      pass: passwordMailSender
+      pass: config.passwordMailSender
     }
   };
 
@@ -25,11 +25,9 @@ function sendMail(recipientAddress, subject, htmlBody, res) {
   };
 
   transporter.sendMail(mailOptions, (err, info) => {
-    if (err)
-      res.send({
-        error: 500,
-        message: 'Error: not able to send you email!'
-      });
+
+    if (err) return res.send({ error: 500,message: 'Error: not able to send you email!'});
+
     res.status(200).send({
       message: 'Please check your email! Thank you!'
     });
