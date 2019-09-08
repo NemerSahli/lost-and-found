@@ -33,4 +33,5 @@ function sendMail(recipientAddress, subject, htmlBody, res) {
     });
   });
 }
+
 module.exports.sendMail = sendMail;
