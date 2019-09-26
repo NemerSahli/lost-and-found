@@ -8,7 +8,7 @@ export default function About() {
       <Team />
       <div className="lead mt-4 p-3">
         <div>
-          <h3>Fubaro - Das Online Fundbüro</h3>
+          <h3>Fuburo - Das Online Fundbüro</h3>
           <hr className="my-2" />
           <p>
             Fuburo - Das Online Fundbüro is a web application which gives you
