@@ -4,9 +4,6 @@
   <h1>lost and found office online</h1>
 </div>
 
-
-[https://fuburo.de](https://fuburo.de)
-
 - Web app to report lost or found items and locate them on map.
 - Designed and implemented web views used ReactJS components, HTML5, CSS3, leaflet.
 - Designed and implemented map view using OpenStreetMap and Leaflet.
