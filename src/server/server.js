@@ -26,13 +26,26 @@ if (!appConfig.passwordMailSender || appConfig.passwordMailSender === '') {
 const corsOptions = {
   origin: appConfig.host,
   optionsSuccessStatus: 200,
-  credentials: true
+  credentials: true,
 };
 
 mongoose
-  .connect('mongodb://localhost/item_list', { useNewUrlParser: true })
-  .then(() => console.log('Connected to MongoDB...'))
-  .catch(err => console.error('Could not connect to MongoDB...'));
+  .connect(
+    'mongodb://localhost/item_list',
+    {
+      // useUnifiedTopology: true,
+      useNewUrlParser: true,
+      user: 'username',
+      pass: 'password',
+    }
+  )
+  .then(() => {
+    console.log('Successfuly connected to MongoDB...');
+  })
+  .catch((err) => {
+    console.log('Could not connect to MongoDB...');
+    process.exit();
+  });
 
 // cors middleware
 app.use(cors(corsOptions));
