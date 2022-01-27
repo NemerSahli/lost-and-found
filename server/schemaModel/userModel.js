@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const config = require('./../../config.json');
+const config = require('../config.json');
 
 const UserSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
@@ -13,10 +13,10 @@ const UserSchema = new mongoose.Schema({
   city: String,
   zip: String,
   phone: String,
-  registrationDate: Date
+  registrationDate: Date,
 });
 
-UserSchema.methods.generateAuthToken = function() {
+UserSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     { _id: this._id, isAdmin: this.isAdmin },
     config.jwtPrivateKey

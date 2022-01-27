@@ -23,14 +23,14 @@ class InsertLostItem extends Component {
     image: 'No_Image_Available.jpg',
     imageDataUri: '',
     pictures: [],
-    submited: false
+    submited: false,
   };
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
-  submitNewItem = event => {
+  submitNewItem = (event) => {
     event.preventDefault();
     this.setState({ submited: true });
 
@@ -43,12 +43,12 @@ class InsertLostItem extends Component {
       tags,
       location,
       lnglat,
-      image
+      image,
     } = this.state;
 
     let errors = validate(name, location, date, time, comment);
 
-    let inputsIsValid = Object.keys(errors).every(k => !errors[k]);
+    let inputsIsValid = Object.keys(errors).every((k) => !errors[k]);
     //console.log('result', inputsIsValid);
     if (!inputsIsValid) return;
 
@@ -65,7 +65,7 @@ class InsertLostItem extends Component {
       lnglat: [lnglat[0], lnglat[1]],
       image: image,
       type: 'lost',
-      date: ''
+      date: '',
     };
 
     if (this.state.pictures.length > 0) {
@@ -85,15 +85,15 @@ class InsertLostItem extends Component {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
-          'x-auth-token': token
-        }
+          'x-auth-token': token,
+        },
       })
-        .then(result => {
+        .then((result) => {
           if (result.data) {
             this.props.history.push('/');
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log('error to post this item:', err);
         });
     } else {
@@ -101,18 +101,18 @@ class InsertLostItem extends Component {
     }
   };
 
-  onChangeHandler = e => {
+  onChangeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  onDropPicture = picture => {
+  onDropPicture = (picture) => {
     if (picture.length > 0) {
       let pictures = [picture[picture.length - 1]];
       this.setState({
         pictures: pictures,
-        invalidImageSize: ''
+        invalidImageSize: '',
       });
     }
   };
@@ -134,7 +134,7 @@ class InsertLostItem extends Component {
 
     this.setState({
       location: location,
-      lnglat: [suggestion.latlng.lat, suggestion.latlng.lng]
+      lnglat: [suggestion.latlng.lat, suggestion.latlng.lng],
     });
   };
   render() {
@@ -177,7 +177,7 @@ class InsertLostItem extends Component {
                   Location:
                 </Label>
                 <Col sm={10}>
-                  <AlgoliaPlaces
+                  {/* <AlgoliaPlaces
                     placeholder="Write an address here"
                     options={{
                       appId: config.algoliaAppId,
@@ -192,7 +192,7 @@ class InsertLostItem extends Component {
                     onSuggestions={({ rawAnswer, query, suggestions }) =>
                       console.log('You will receive the array of suggestions.')
                     }
-                  />
+                  /> */}
                   {errors.location && (
                     <div className="text-danger">This is a required field!</div>
                   )}
@@ -236,7 +236,7 @@ class InsertLostItem extends Component {
                 </Label>
                 <Col sm={10}>
                   <SelectCategory
-                    selectCategoryHandler={inputValue => {
+                    selectCategoryHandler={(inputValue) => {
                       this.setState({ category: inputValue });
                     }}
                   />
@@ -268,7 +268,7 @@ class InsertLostItem extends Component {
                   style={{
                     borderRadius: '25px',
                     minWidth: '100px',
-                    maxWidth: '200px'
+                    maxWidth: '200px',
                   }}
                 >
                   submit
@@ -287,7 +287,7 @@ class InsertLostItem extends Component {
                   style={{
                     borderRadius: '50%',
                     height: '200px',
-                    width: '200px'
+                    width: '200px',
                   }}
                   src={
                     this.state.pictures.length > 0
@@ -308,7 +308,7 @@ class InsertLostItem extends Component {
                   maxFileSize={5242880}
                   fileContainerStyle={{
                     border: 'none',
-                    boxShadow: 'none'
+                    boxShadow: 'none',
                   }}
                 />
               </FormGroup>
@@ -320,11 +320,8 @@ class InsertLostItem extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   imgDataUri: state.itemsReducer.imgDataUri,
-  loggedInUser: state.userReducer.loggedInUser
+  loggedInUser: state.userReducer.loggedInUser,
 });
-export default connect(
-  mapStateToProps,
-  { addItem }
-)(InsertLostItem);
+export default connect(mapStateToProps, { addItem })(InsertLostItem);

@@ -6,11 +6,11 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const randomString = require('randomstring');
 const mailSender = require('./../mailHandler/mailSender');
-const config = require('../../config.json');
+const config = require('../config.json');
 
 router.get('/', (req, res) => {
   res.send({
-    message: 'Users API success in Registick App'
+    message: 'Users API success in Registick App',
   });
 });
 
@@ -20,21 +20,21 @@ router.post('/register', (req, res) => {
   // Check required fields
   if (!firstName || !lastName || !email || !password) {
     res.status(400).send({
-      message: 'All information are requiered'
+      message: 'All information are requiered',
     });
   }
 
   // Check password length
   if (password.length < 6) {
     res.status(400).send({
-      message: 'Password should be at least 6 characters'
+      message: 'Password should be at least 6 characters',
     });
   } else {
-    User.findOne({ email: email }).then(user => {
+    User.findOne({ email: email }).then((user) => {
       if (user) {
         // User exists
         res.status(400).send({
-          message: 'Email is already registered'
+          message: 'Email is already registered',
         });
       } else {
         let registrationDate = new Date();
@@ -48,7 +48,7 @@ router.post('/register', (req, res) => {
           city: '',
           zip: '',
           phone: '',
-          registrationDate: registrationDate
+          registrationDate: registrationDate,
         });
 
         // Hash Password
@@ -58,11 +58,11 @@ router.post('/register', (req, res) => {
             // Set password to hashed
             newUser.password = hash;
             // Save user
-            newUser.save().then(user => {
+            newUser.save().then((user) => {
               res.status(200).send({
                 error: 0,
                 loggedInUser: user,
-                message: 'You are now registered and can log in'
+                message: 'You are now registered and can log in',
               });
             });
           })
@@ -76,7 +76,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
 
-  User.findOne({ email: email }).then(user => {
+  User.findOne({ email: email }).then((user) => {
     if (!user) {
       return res.status(400).send({ message: 'Email is not registered' });
     }
@@ -99,12 +99,12 @@ router.post('/login', (req, res) => {
 
 // Login by token
 router.post('/login/auth', auth, (req, res) => {
-  User.findById(req.body.userId).then(user => {
+  User.findById(req.body.userId).then((user) => {
     if (!user) return res.statas(400).send({ message: 'No user logged In!' });
     res.send({
       error: 0,
       loggedInUser: user,
-      message: 'this user authenticated'
+      message: 'this user authenticated',
     });
   });
 });
@@ -164,7 +164,7 @@ router.post('/resetpass', async (req, res) => {
     return res.send({
       error: 400,
       message:
-        'password and the password key from the link in your email are required!'
+        'password and the password key from the link in your email are required!',
     });
 
   if (req.body.password.length < 6)
@@ -173,12 +173,12 @@ router.post('/resetpass', async (req, res) => {
       .send({ message: 'The password should be at least 6 characters' });
 
   let user = await User.findOne({
-    resetPasswordKey: req.body.resetPasswordKey
+    resetPasswordKey: req.body.resetPasswordKey,
   });
 
   if (!user)
     return res.status(400).send({
-      message: 'not able to get this user wrong link from your email!'
+      message: 'not able to get this user wrong link from your email!',
     });
 
   // Hash Password
@@ -188,10 +188,10 @@ router.post('/resetpass', async (req, res) => {
       // Set password to hashed
       user.password = hash;
       // Save user
-      user.save().then(user => {
+      user.save().then((user) => {
         res.status(200).send({
           error: 0,
-          message: 'Your password has been reseted successfuly!'
+          message: 'Your password has been reseted successfuly!',
         });
       });
     })

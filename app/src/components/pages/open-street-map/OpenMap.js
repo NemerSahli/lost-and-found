@@ -8,7 +8,7 @@ import { loadItems, generateMarkers } from '../../../actions/itemCrud';
 class OpenMap extends Component {
   state = {
     markers: [],
-    center: null
+    center: null,
   };
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -16,7 +16,7 @@ class OpenMap extends Component {
   }
 
   loadItemsHandler = () => {
-    this.props.loadItems().then(err => {
+    this.props.loadItems().then((err) => {
       this.props.generateMarkers();
     });
   };
@@ -52,13 +52,12 @@ class OpenMap extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   items: state.itemsReducer.items,
   markers: state.itemsReducer.markers,
-  center: state.itemsReducer.center
+  center: state.itemsReducer.center,
 });
 
-export default connect(
-  mapStateToProps,
-  { loadItems, generateMarkers }
-)(OpenMap);
+export default connect(mapStateToProps, { loadItems, generateMarkers })(
+  OpenMap
+);

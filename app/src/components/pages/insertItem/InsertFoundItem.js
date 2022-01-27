@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AlgoliaPlaces from 'algolia-places-react';
 import SelectCategory from './SelectCategory';
 import config from '../../../config.json';
 
@@ -10,7 +9,7 @@ import {
   Label,
   Input,
   FormText,
-  FormFeedback
+  FormFeedback,
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from './../../../actions/itemCrud';
@@ -29,17 +28,17 @@ class InsertFoundItem extends Component {
     image: 'No_Image_Available.jpg',
     imageDataUri: '',
     showCamera: false,
-    submited: false
+    submited: false,
   };
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-  submitNewItem = event => {
+  submitNewItem = (event) => {
     event.preventDefault();
 
     this.setState({
-      submited: true
+      submited: true,
     });
 
     const {
@@ -51,12 +50,12 @@ class InsertFoundItem extends Component {
       tags,
       location,
       lnglat,
-      image
+      image,
     } = this.state;
 
     let errors = validate(name, location, date, time, comment);
 
-    let inputsIsValid = Object.keys(errors).every(k => !errors[k]);
+    let inputsIsValid = Object.keys(errors).every((k) => !errors[k]);
     console.log('result', inputsIsValid);
 
     if (!inputsIsValid) return;
@@ -74,7 +73,7 @@ class InsertFoundItem extends Component {
       lnglat: [lnglat[0], lnglat[1]],
       image: image,
       type: 'found',
-      date: ''
+      date: '',
     };
 
     this.props.addItem(newItem, this.props.history);
@@ -84,16 +83,16 @@ class InsertFoundItem extends Component {
     this.setState({ showCamera: !this.state.showCamera });
   };
 
-  onTakePhoto = imgDataUri => {
+  onTakePhoto = (imgDataUri) => {
     this.setState({
       image: imgDataUri,
-      showCamera: false
+      showCamera: false,
     });
   };
 
-  onChangeHandler = e => {
+  onChangeHandler = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -113,7 +112,7 @@ class InsertFoundItem extends Component {
     }
     this.setState({
       location: location,
-      lnglat: [suggestion.latlng.lat, suggestion.latlng.lng]
+      lnglat: [suggestion.latlng.lat, suggestion.latlng.lng],
     });
   };
   render() {
@@ -163,24 +162,24 @@ class InsertFoundItem extends Component {
                     <Col sm={10}>
                       {/* this part is to get location address by selecting one of the suggestions */}
 
-                      <AlgoliaPlaces
+                      {/* <AlgoliaPlaces
                         placeholder="Write an address here"
                         options={{
                           appId: config.algoliaAppId,
-                          apiKey: config.algoliaApiKey
+                          apiKey: config.algoliaApiKey,
                         }}
                         onChange={({
                           query,
                           rawAnswer,
                           suggestion,
-                          suggestionIndex
+                          suggestionIndex,
                         }) => this.selectAddressHandler(rawAnswer, suggestion)}
                         onSuggestions={({ rawAnswer, query, suggestions }) =>
                           console.log(
                             'You will receive the array of suggestions that are displayed.'
                           )
                         }
-                      />
+                      /> */}
                       {errors.location && (
                         <div className="text-danger">
                           This is a required field!
@@ -225,7 +224,7 @@ class InsertFoundItem extends Component {
                     </Label>
                     <Col sm={10}>
                       <SelectCategory
-                        selectCategoryHandler={inputValue => {
+                        selectCategoryHandler={(inputValue) => {
                           this.setState({ category: inputValue });
                         }}
                       />
@@ -256,7 +255,7 @@ class InsertFoundItem extends Component {
                       style={{
                         borderRadius: '25px',
                         minWidth: '100px',
-                        maxWidth: '200px'
+                        maxWidth: '200px',
                       }}
                     >
                       submit
@@ -272,7 +271,7 @@ class InsertFoundItem extends Component {
                       style={{
                         borderRadius: '50%',
                         height: '200px',
-                        width: '200px'
+                        width: '200px',
                       }}
                       src={
                         this.state.image === 'No_Image_Available.jpg'
@@ -292,7 +291,7 @@ class InsertFoundItem extends Component {
                       style={{
                         borderRadius: '25px',
                         minWidth: '100px',
-                        maxWidth: '200px'
+                        maxWidth: '200px',
                       }}
                     >
                       <i
@@ -311,11 +310,8 @@ class InsertFoundItem extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   imgDataUri: state.itemsReducer.imgDataUri,
-  loggedInUser: state.userReducer.loggedInUser
+  loggedInUser: state.userReducer.loggedInUser,
 });
-export default connect(
-  mapStateToProps,
-  { addItem }
-)(InsertFoundItem);
+export default connect(mapStateToProps, { addItem })(InsertFoundItem);

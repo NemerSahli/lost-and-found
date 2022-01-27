@@ -7,7 +7,7 @@ const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const router = express.Router();
 
-const config = require('../../config');
+const config = require('../config.json');
 
 // to define the proper path of the images
 // will be either in develpment or production
@@ -21,7 +21,7 @@ if (config.mode === 'production') {
 // this end point only to test auth and admin
 router.get('/', [auth, admin], (req, res) => {
   res.send({
-    message: 'Items API success in Fuburo App'
+    message: 'Items API success in Fuburo App',
   });
 });
 
@@ -49,7 +49,7 @@ router.post('/add/item', auth, async (req, res) => {
   } else {
     newItem.imageUrl = imageData;
   }
-  await newItem.save(err => {
+  await newItem.save((err) => {
     if (err) return res.send(err);
     res.send({ error: 0, item: newItem });
   });
@@ -73,7 +73,7 @@ router.post('/add/lost/item', auth, async (req, res) => {
     let imageExtention = imageName[imageName.length - 1];
     imageUrl = randomstring.generate(10) + '.' + imageExtention;
 
-    fs.writeFileSync(path + imageUrl, newImage.data, err => {
+    fs.writeFileSync(path + imageUrl, newImage.data, (err) => {
       if (err) return res.status(500).send(err);
     });
   }
@@ -81,7 +81,7 @@ router.post('/add/lost/item', auth, async (req, res) => {
   var newItem = new Item(JSON.parse(req.body.newItem));
   newItem.active = true;
   newItem.imageUrl = imageUrl;
-  await newItem.save(err => {
+  await newItem.save((err) => {
     if (err) return res.send(err);
     return res.send({ error: 0, item: newItem });
   });
@@ -122,7 +122,7 @@ router.get('/search', async (req, res) => {
 
   if (location && !keyWord) {
     var query = {
-      $and: [{ location: new RegExp(location, 'i') }, { active: true }]
+      $and: [{ location: new RegExp(location, 'i') }, { active: true }],
     };
   } else if (!location && keyWord) {
     var query = {
@@ -132,11 +132,11 @@ router.get('/search', async (req, res) => {
             { name: new RegExp(keyWord, 'i') },
             { tags: new RegExp(keyWord, 'i') },
             { comment: new RegExp(keyWord, 'i') },
-            { category: new RegExp(keyWord, 'i') }
-          ]
+            { category: new RegExp(keyWord, 'i') },
+          ],
         },
-        { active: true }
-      ]
+        { active: true },
+      ],
     };
   } else if (location && keyWord) {
     var query = {
@@ -146,11 +146,11 @@ router.get('/search', async (req, res) => {
           $or: [
             { name: new RegExp(keyWord, 'i') },
             { comment: new RegExp(keyWord, 'i') },
-            { category: new RegExp(keyWord, 'i') }
-          ]
+            { category: new RegExp(keyWord, 'i') },
+          ],
         },
-        { active: true }
-      ]
+        { active: true },
+      ],
     };
   }
 

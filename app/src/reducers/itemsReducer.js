@@ -13,11 +13,11 @@ const intialState = {
     { value: 'jewellery', label: 'Jewellery', color: 'btn-yellow' },
     { value: 'toy', label: 'Toys', color: 'btn-indigo' },
     { value: 'ticket', label: 'Tickets', color: 'btn-danger' },
-    { value: 'other', label: 'Others', color: 'btn-default' }
+    { value: 'other', label: 'Others', color: 'btn-default' },
   ],
   imgDataUri: null,
   markers: null,
-  center: [52.5, 13.4]
+  center: [52.5, 13.4],
 };
 var averageLat = 0;
 var averageLng = 0;
@@ -28,25 +28,25 @@ export default function(state = intialState, action) {
     case 'LOAD_ITEMS':
       return {
         ...state,
-        items: action.payload
+        items: action.payload,
       };
     case 'LOAD_My_ITEMS':
       return {
         ...state,
-        myItems: action.payload
+        myItems: action.payload,
       };
     case 'DEACTIVATE_ITEM':
       return {
         ...state,
         items: deactivateItem(state.items, action.itemId),
-        myItems: deactivateItem(state.myItems, action.itemId)
+        myItems: deactivateItem(state.myItems, action.itemId),
       };
 
     case 'GENERATE_MARKERS':
       averageLat = 0;
       averageLng = 0;
-      if (state.items) {
-        markers = state.items.map(item => {
+      if (state.items && state.items.length > 0) {
+        markers = state.items.map((item) => {
           let lnglat = item.lnglat.split(',');
           var color = '';
           item.type === 'lost' ? (color = 'red') : (color = 'green');
@@ -60,25 +60,25 @@ export default function(state = intialState, action) {
             children: item.name,
             color: color,
             itemType: item.type,
-            imageUrl: item.imageUrl
+            imageUrl: item.imageUrl,
           };
         });
 
         return {
           ...state,
           markers: markers,
-          center: [averageLat / markers.length, averageLng / markers.length]
+          center: [averageLat / markers.length, averageLng / markers.length],
         };
       } else {
         return {
-          ...state
+          ...state,
         };
       }
 
     case 'LOAD_IMAGE':
       return {
         ...state,
-        imgDataUri: action.payload
+        imgDataUri: action.payload,
       };
     case 'SEARCH_FOR_ITEMS':
       if (!action.payload) {
@@ -87,12 +87,12 @@ export default function(state = intialState, action) {
           items: null,
 
           searchNoResult:
-            'Your search result: 0, Please try with other keywords ...'
+            'Your search result: 0, Please try with other keywords ...',
         };
       }
       averageLat = 0;
       averageLng = 0;
-      markers = action.payload.map(item => {
+      markers = action.payload.map((item) => {
         let lnglat = item.lnglat.split(',');
         var color = '';
         item.type === 'lost' ? (color = 'red') : (color = 'green');
@@ -106,7 +106,7 @@ export default function(state = intialState, action) {
           children: item.name,
           color: color,
           itemType: item.type,
-          imageUrl: item.imageUrl
+          imageUrl: item.imageUrl,
         };
       });
 
@@ -114,17 +114,17 @@ export default function(state = intialState, action) {
         ...state,
         items: action.payload.reverse(),
         markers: markers,
-        center: [averageLat / markers.length, averageLng / markers.length]
+        center: [averageLat / markers.length, averageLng / markers.length],
       };
 
     case 'FILTER_ITEMS':
       var filteredItems = state.items.filter(
-        item => item.category === action.payload
+        (item) => item.category === action.payload
       );
 
       return {
         ...state,
-        items: filteredItems
+        items: filteredItems,
       };
 
     default:
@@ -133,7 +133,7 @@ export default function(state = intialState, action) {
 }
 
 function deactivateItem(items, id) {
-  let newItems = items.map(item => {
+  let newItems = items.map((item) => {
     if (item._id === id) {
       item.active = false;
       return item;

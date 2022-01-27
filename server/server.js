@@ -1,5 +1,5 @@
 const express = require('express');
-const appConfig = require('../config');
+const appConfig = require('./config');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -30,15 +30,12 @@ const corsOptions = {
 };
 
 mongoose
-  .connect(
-    'mongodb://localhost/item_list',
-    {
-      // useUnifiedTopology: true,
-      useNewUrlParser: true,
-      user: 'username',
-      pass: 'password',
-    }
-  )
+  .connect('mongodb://localhost/lost_and_found', {
+    // useUnifiedTopology: true,
+    useNewUrlParser: true,
+    // user: 'username',
+    // pass: 'password',
+  })
   .then(() => {
     console.log('Successfuly connected to MongoDB...');
   })
