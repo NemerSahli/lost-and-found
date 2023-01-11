@@ -21,7 +21,7 @@
     "fs": "0.0.1-security",
     "history": "^4.9.0",
     "image-data-uri": "^2.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "leaflet": "^1.4.0",
     "lodash": "^4.17.11",
     "mdbreact": "^4.8.7",
